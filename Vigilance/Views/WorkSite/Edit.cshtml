@@ -1,0 +1,49 @@
+﻿@model ICollection<Vigilance.Models.WorkSite>
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section header{
+    @Html.Partial("_LeafletHeader")
+}
+<h2>Edit Work Sites</h2>
+<div id="mapid" style="height: 400px;"></div>
+
+<p><button onclick="geoFindMe()">Show my location</button></p>
+<div id="out"></div>
+
+<script>
+    function geoFindMe() {
+        var output = document.getElementById("out");
+
+        if (!navigator.geolocation) {
+            output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+            return;
+        }
+
+        function success(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+
+            var siteMap = L.map('mapid').setView([latitude, longitude], 13);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGVtcGxhcml0IiwiYSI6ImNpeGlzZzBnOTAwMWgycXBwY3B2bXpmMmYifQ._PR4hh8x3p9boZ3AUvVdSw',
+                {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets'
+                }).addTo(siteMap);
+
+            output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+        }
+
+        function error() {
+            output.innerHTML = "Unable to retrieve your location";
+        }
+
+        output.innerHTML = "<p>Locating…</p>";
+
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+</script>
