@@ -172,6 +172,10 @@
     <Compile Include="Migrations\201701180357249_AddWorkSites.Designer.cs">
       <DependentUpon>201701180357249_AddWorkSites.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701180411051_ApplyRequirementsToWorkSite.cs" />
+    <Compile Include="Migrations\201701180411051_ApplyRequirementsToWorkSite.Designer.cs">
+      <DependentUpon>201701180411051_ApplyRequirementsToWorkSite.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -255,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701180357249_AddWorkSites.resx">
       <DependentUpon>201701180357249_AddWorkSites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701180411051_ApplyRequirementsToWorkSite.resx">
+      <DependentUpon>201701180411051_ApplyRequirementsToWorkSite.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
