@@ -86,10 +86,11 @@
             // Focus map on current location
             geoFindMe(siteMap);
 
-            //L.Control.Geocoder
-            //    .Mapbox("pk.eyJ1IjoidGVtcGxhcml0IiwiYSI6ImNpeGlzZzBnOTAwMWgycXBwY3B2bXpmMmYifQ._PR4hh8x3p9boZ3AUvVdSw")
-            //    .addTo(siteMap);
-            //L.Control.geocoder().addTo(siteMap);
+            var geocoder = L.Control.Geocoder.google("AIzaSyAruk8JN7nsmslgDvDMqC6BcqkBKUZ7KEA");
+            L.Control.geocoder({
+                collapsed: false,
+                geocoder: geocoder
+            }).addTo(siteMap);
 
             siteMap.on('click', onMapClick);
         });
