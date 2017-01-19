@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
+using Vigilance.DTOs;
 using Vigilance.Models;
 
 namespace Vigilance.Controllers.Api
@@ -18,38 +20,42 @@ namespace Vigilance.Controllers.Api
         }
 
         // GET /api/worksites
-        public IEnumerable<WorkSite> GetWorkSites()
+        public IEnumerable<WorkSiteDTO> GetWorkSites()
         {
-            return _context.WorkSites.ToList();
+            return _context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>);
         }
 
         // GET /api/worksites/1
-        public WorkSite GetWorkSite(int id)
+        public WorkSiteDTO GetWorkSite(int id)
         {
             var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
 
             if (worksite == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            return worksite;
+            return Mapper.Map<WorkSite, WorkSiteDTO>(worksite);
         }
 
         // POST /api/worksites
         [HttpPost]
-        public WorkSite CreateWorkSite(WorkSite worksite)
+        public WorkSiteDTO CreateWorkSite(WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
 
-            _context.WorkSites.Add(worksite);
+            var workSite = Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
+
+            _context.WorkSites.Add(workSite);
             _context.SaveChanges();
 
-            return worksite;
+            workSiteDto.Id = workSite.Id;
+
+            return workSiteDto;
         }
 
         // PUT /api/worksites/1
         [HttpPut]
-        public void UpdateWorkSite(int id, WorkSite worksite)
+        public void UpdateWorkSite(int id, WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
@@ -59,12 +65,7 @@ namespace Vigilance.Controllers.Api
             if (siteInDb == null)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
 
-            // TODO (Jeff): B. Use mapper here
-            siteInDb.Name = worksite.Name;
-            siteInDb.Description = worksite.Description;
-            siteInDb.Lat = worksite.Lat;
-            siteInDb.Lng = worksite.Lng;
-            siteInDb.Radius = worksite.Radius;
+            Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto, siteInDb);
 
             _context.SaveChanges();
         }
