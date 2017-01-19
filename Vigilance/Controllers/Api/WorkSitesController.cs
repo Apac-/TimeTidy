@@ -20,28 +20,28 @@ namespace Vigilance.Controllers.Api
         }
 
         // GET /api/worksites
-        public IEnumerable<WorkSiteDTO> GetWorkSites()
+        public IHttpActionResult GetWorkSites()
         {
-            return _context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>);
+            return Ok(_context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>));
         }
 
         // GET /api/worksites/1
-        public WorkSiteDTO GetWorkSite(int id)
+        public IHttpActionResult GetWorkSite(int id)
         {
             var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
 
             if (worksite == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
-            return Mapper.Map<WorkSite, WorkSiteDTO>(worksite);
+            return Ok(Mapper.Map<WorkSite, WorkSiteDTO>(worksite));
         }
 
         // POST /api/worksites
         [HttpPost]
-        public WorkSiteDTO CreateWorkSite(WorkSiteDTO workSiteDto)
+        public IHttpActionResult CreateWorkSite(WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var workSite = Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
 
@@ -50,37 +50,41 @@ namespace Vigilance.Controllers.Api
 
             workSiteDto.Id = workSite.Id;
 
-            return workSiteDto;
+            return Created(new Uri(Request.RequestUri + "/" + workSite.Id), workSiteDto);
         }
 
         // PUT /api/worksites/1
         [HttpPut]
-        public void UpdateWorkSite(int id, WorkSiteDTO workSiteDto)
+        public IHttpActionResult UpdateWorkSite(int id, WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                return BadRequest();
 
             var siteInDb = _context.WorkSites.SingleOrDefault(w => w.Id == id);
 
             if (siteInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto, siteInDb);
 
             _context.SaveChanges();
+
+            return Ok();
         }
 
         // DELET /api/worksites/1
         [HttpDelete]
-        public void DeleteWorkSite(int id)
+        public IHttpActionResult DeleteWorkSite(int id)
         {
             var siteInDb = _context.WorkSites.SingleOrDefault(w => w.Id == id);
 
             if (siteInDb == null)
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                return NotFound();
 
             _context.WorkSites.Remove(siteInDb);
             _context.SaveChanges();
+
+            return Ok();
         }
     }
 }
