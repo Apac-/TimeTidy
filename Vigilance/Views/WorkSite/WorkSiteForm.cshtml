@@ -3,8 +3,16 @@
     ViewBag.Title = "WorkSiteForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section header{
+    @Html.Partial("_LeafletHeader")
+    <link rel="stylesheet" href="~/Content/Control.Geocoder.css"/>
+    <script src="~/Scripts/LeafletGeoCoder/Control.Geocoder.js"></script>
+}
 
 <h2>Work Site</h2>
+
+<div id="out"></div>
+<div id="mapid" style="height: 400px;"></div>
 
 @using (Html.BeginForm("Save", "WorkSite")) {
     <div class="form-group">
@@ -17,5 +25,74 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts{
+    <script>
+        function geoFindMe(map) {
+            var output = document.getElementById("out");
+
+            if (!navigator.geolocation) {
+                output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+                return;
+            }
+
+            function success(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                map.setView([latitude, longitude], 13);
+
+                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
+            }
+
+            function error() {
+                output.innerHTML = "Unable to retrieve your location";
+            }
+
+            output.innerHTML = "<p>Locating…</p>";
+
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+        function setUpMap() {
+            var siteMap = L.map('mapid');
+            L
+                .tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGVtcGxhcml0IiwiYSI6ImNpeGlzZzBnOTAwMWgycXBwY3B2bXpmMmYifQ._PR4hh8x3p9boZ3AUvVdSw',
+                {
+                    attribution:
+                        'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                            '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                            'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets'
+                }).addTo(siteMap);
+
+            return siteMap;
+        }
+
+        function onMapClick(e) {
+            var popup = L.popup();
+            popup
+                .setLatLng(e.latlng)
+                .setContent("Clicked on map at: " + e.latlng.toString())
+                .openOn(e.target);
+        }
+
+        $(document).ready(function() {
+            // Set up map
+            var siteMap = setUpMap();
+
+            // Focus map on current location
+            geoFindMe(siteMap);
+
+            //L.Control.Geocoder
+            //    .Mapbox("pk.eyJ1IjoidGVtcGxhcml0IiwiYSI6ImNpeGlzZzBnOTAwMWgycXBwY3B2bXpmMmYifQ._PR4hh8x3p9boZ3AUvVdSw")
+            //    .addTo(siteMap);
+            //L.Control.geocoder().addTo(siteMap);
+
+            siteMap.on('click', onMapClick);
+        });
+    </script>
 }
 

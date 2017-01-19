@@ -354,12 +354,15 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\images\geocoder.png" />
     <Content Include="Content\images\layers-2x.png" />
     <Content Include="Content\images\layers.png" />
     <Content Include="Content\images\marker-icon-2x.png" />
     <Content Include="Content\images\marker-icon.png" />
     <Content Include="Content\images\marker-shadow.png" />
+    <Content Include="Content\images\throbber.gif" />
     <Content Include="Content\leaflet.css" />
+    <Content Include="Content\Control.Geocoder.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -453,6 +456,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\leaflet-0.7.3.js" />
     <Content Include="Scripts\leaflet-0.7.3.min.js" />
+    <Content Include="Scripts\LeafletGeoCoder\Control.Geocoder.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
