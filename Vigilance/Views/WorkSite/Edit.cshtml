@@ -1,4 +1,4 @@
-﻿@model ICollection<Vigilance.Models.WorkSite>
+﻿@model IEnumerable<Vigilance.Models.WorkSite>
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,12 +7,25 @@
     @Html.Partial("_LeafletHeader")
 }
 <h2>Edit Work Sites</h2>
+<div id="out"></div>
 <div id="mapid" style="height: 400px;"></div>
 
-<p><button onclick="geoFindMe()">Show my location</button></p>
-<div id="out"></div>
+@if (!Model.Any())
+{
+    <div>Currently there are no Work Sites. Click on map to Add one.</div>
+}
+else
+{
+    <div>
+        @Html.DropDownList("Work Sites", new SelectList(Model, "Id", "Name"), "", new {@class = "form-control"})
+    </div>
+}
 
-<script>
+
+@section scripts{
+    @Scripts.Render("~/bundle/jqueryval")
+
+    <script>
     function geoFindMe() {
         var output = document.getElementById("out");
 
@@ -46,4 +59,9 @@
 
         navigator.geolocation.getCurrentPosition(success, error);
     }
-</script>
+
+    //window.onload = function () {
+    //    geoFindMe();
+    //};
+    </script>
+}
