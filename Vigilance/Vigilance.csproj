@@ -495,6 +495,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\WorkSite\Edit.cshtml" />
     <Content Include="Views\Shared\_LeafletHeader.cshtml" />
+    <Content Include="Views\WorkSite\WorkSiteForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,21 @@
+﻿@model Vigilance.Models.WorkSite
+@{
+    ViewBag.Title = "WorkSiteForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Work Site</h2>
+
+@using (Html.BeginForm("Save", "WorkSite")) {
+    <div class="form-group">
+        @Html.LabelFor(w => w.Name)
+        @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(w => w.Description)
+        @Html.TextBoxFor(w => w.Description, new { @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+

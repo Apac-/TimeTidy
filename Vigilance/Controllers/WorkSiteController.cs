@@ -26,6 +26,12 @@ namespace Vigilance.Controllers
             return View(sites);
         }
 
+        public ActionResult New() {
+            var workSite = new WorkSite();
+
+            return View("WorkSiteForm", workSite);
+        }
+
         [HttpPost]
         public ActionResult Save(WorkSite worksite) {
             // TODO (Jeff): B. Add vailidation

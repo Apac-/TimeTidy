@@ -7,8 +7,11 @@
     @Html.Partial("_LeafletHeader")
 }
 <h2>Edit Work Sites</h2>
-<div id="out"></div>
+<p>
+    @Html.ActionLink("New Site", "New", "WorkSite", null, new { @class = "btn btn-primary" })
+</p>
 <div id="mapid" style="height: 400px;"></div>
+<div id="out"></div>
 
 
 @section scripts{
@@ -65,7 +68,7 @@
                 .openOn(e.target);
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Set up map
             var siteMap = setUpMap();
 
