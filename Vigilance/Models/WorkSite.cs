@@ -14,6 +14,9 @@ namespace Vigilance.Models {
         public string Description { get; set; }
 
         [Required]
+        public string StreetAddress { get; set; }
+
+        [Required]
         public float Lat { get; set; }
         [Required]
         public float Lng { get; set; }

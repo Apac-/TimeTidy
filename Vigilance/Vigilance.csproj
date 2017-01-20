@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201701180411051_ApplyRequirementsToWorkSite.Designer.cs">
       <DependentUpon>201701180411051_ApplyRequirementsToWorkSite.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701200425151_AddStreetAddressToWorkSite.cs" />
+    <Compile Include="Migrations\201701200425151_AddStreetAddressToWorkSite.Designer.cs">
+      <DependentUpon>201701200425151_AddStreetAddressToWorkSite.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -520,6 +524,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701180411051_ApplyRequirementsToWorkSite.resx">
       <DependentUpon>201701180411051_ApplyRequirementsToWorkSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701200425151_AddStreetAddressToWorkSite.resx">
+      <DependentUpon>201701200425151_AddStreetAddressToWorkSite.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
