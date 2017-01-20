@@ -54,8 +54,9 @@
                         },
                         {
                             data: "id",
-                            render: function(data) {
-                                return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
+                            render: function(data, type, worksite) {
+                                return "<button class='btn-link js-delete' data-worksite-id=" + data 
+                                    + " data-worksite-name='" + worksite.name + "'>Delete</button>";
                             }
                         }
                     ]
@@ -70,6 +71,13 @@
                             .addTo(siteMap);
                     });
             });
+
+            $("#sites").on('click', '.js-delete', function () {
+                var button = $(this);
+
+                bootbox.confirm("Are you sure you want to delete this work site: " + button.attr("data-worksite-name"));
+            });
+
         });
     </script>
 }
