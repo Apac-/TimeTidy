@@ -22,11 +22,9 @@
     </thead>
     <tbody></tbody>
 </table>
-
+<div id="testjax"></div>
 
 @section scripts{
-    @Scripts.Render("~/bundle/jqueryval")
-
     <script>
         function geoFindMe(map) {
             var output = document.getElementById("out");
@@ -41,15 +39,11 @@
                 var longitude = position.coords.longitude;
 
                 map.setView([latitude, longitude], 13);
-
-                output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
             }
 
             function error() {
                 output.innerHTML = "Unable to retrieve your location";
             }
-
-            output.innerHTML = "<p>Locating…</p>";
 
             navigator.geolocation.getCurrentPosition(success, error);
         }
@@ -71,34 +65,47 @@
         }
 
         $(document).ready(function () {
-            // Set up map
             var siteMap = setUpMap();
 
-            // Focus map on current location
-            geoFindMe(siteMap);
+            var table = null;
 
-            var table = $('#sites').DataTable({
-                ajax: {
-                    url: "/api/worksites",
-                    dataSrc: ""
-                },
-                columns: [
-                    {
-                        data: "name",
-                        render: function(data, type, worksite) {
-                            return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
+            $.getJSON("/api/worksites", { get_param: 'value'}, function(jsonData) {
+                if (jsonData.length != 0) {
+                    siteMap.setView([jsonData[0].lat, jsonData[0].lng], 13);
+                } else {
+                    geoFindMe(siteMap);
+                }
+
+
+                table = $('#sites').DataTable({
+                    data: jsonData,
+                    columns: [
+                        {
+                            data: "name",
+                            render: function(data, type, worksite) {
+                                return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
+                            }
+                        },
+                        {
+                            data: "streetAddress"
+                        },
+                        {
+                            data: "id",
+                            render: function(data) {
+                                return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
+                            }
                         }
-                    },
-                    {
-                        data: "streetAddress"
-                    },
-                    {
-                        data: "id",
-                        render: function (data) {
-                            return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
-                        }
-                    }
-                ]
+                    ]
+                });
+
+                $.each(jsonData,
+                    function (index, element) {
+                        L.marker([element.lat, element.lng],
+                            {
+                                title: element.name
+                            }).bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress)
+                            .addTo(siteMap);
+                    });
             });
         });
     </script>
