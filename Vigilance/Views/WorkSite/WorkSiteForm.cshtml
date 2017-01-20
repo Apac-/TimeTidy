@@ -18,6 +18,7 @@
     <div class="form-group">
         @Html.LabelFor(w => w.Name)
         @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(w =>w.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(w => w.Description)
@@ -26,6 +27,7 @@
     <div class="form-group">
         @Html.LabelFor(w => w.StreetAddress)
         @Html.TextBoxFor(w => w.StreetAddress, new { @class = "form-control", @readonly = "readonly" })
+        @Html.ValidationMessageFor(w => w.StreetAddress)
     </div>
 
     @Html.HiddenFor(w => w.Id)
