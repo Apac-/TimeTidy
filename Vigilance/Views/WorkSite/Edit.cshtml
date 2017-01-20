@@ -6,12 +6,23 @@
 @section header{
     @Html.Partial("_LeafletHeader")
 }
-<h2>Edit Work Sites</h2>
+<h2>Work Sites</h2>
 <p>
     @Html.ActionLink("New Site", "New", "WorkSite", null, new { @class = "btn btn-primary" })
 </p>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out"></div>
+
+<table id="sites" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
 
 
 @section scripts{
@@ -76,6 +87,30 @@
             geoFindMe(siteMap);
 
             siteMap.on('click', onMapClick);
+
+            var table = $("#sites").DataTable({
+                ajax: {
+                    url: "/api/WorkSites",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function(data, type, worksite) {
+                            return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "worksite.streetaddress"
+                    },
+                    {
+                        data: "id",
+                        render: function(data) {
+                            return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
         });
     </script>
 }

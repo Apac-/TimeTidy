@@ -181,7 +181,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WorkSiteController.cs" />
-    <Compile Include="DTOs\WorkSiteDTO.cs" />
+    <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

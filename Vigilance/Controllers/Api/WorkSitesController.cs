@@ -22,7 +22,8 @@ namespace Vigilance.Controllers.Api
         // GET /api/worksites
         public IHttpActionResult GetWorkSites()
         {
-            return Ok(_context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>));
+            //return Ok(_context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>));
+            return Ok(_context.WorkSites.ToList());
         }
 
         // GET /api/worksites/1
@@ -33,7 +34,8 @@ namespace Vigilance.Controllers.Api
             if (worksite == null)
                 return NotFound();
 
-            return Ok(Mapper.Map<WorkSite, WorkSiteDTO>(worksite));
+            //return Ok(Mapper.Map<WorkSite, WorkSiteDTO>(worksite));
+            return Ok(worksite);
         }
 
         // POST /api/worksites
