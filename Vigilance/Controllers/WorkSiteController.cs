@@ -34,23 +34,27 @@ namespace Vigilance.Controllers
 
         [HttpPost]
         public ActionResult Save(WorkSite worksite) {
-            // TODO (Jeff): B. Add vailidation
+            if (!ModelState.IsValid)
+                return View("WorkSiteForm", worksite);
+
             if (worksite.Id == 0)
             {
                 _context.WorkSites.Add(worksite);
             }
             else
             {
-                // TODO (Jeff): B. Change this to DTO and mapper
-                var worksiteInDB = _context.WorkSites.Single(w => w.Id == worksite.Id);
-                worksiteInDB.Name = worksite.Name;
-                worksiteInDB.Description = worksite.Description;
-                worksiteInDB.Lat = worksite.Lat;
-                worksiteInDB.Lng = worksite.Lng;
-                worksiteInDB.Radius = worksite.Radius;
+                var worksiteInDb = _context.WorkSites.Single(w => w.Id == worksite.Id);
+                worksiteInDb.Name = worksite.Name;
+                worksiteInDb.Description = worksite.Description;
+                worksiteInDb.StreetAddress = worksite.StreetAddress;
+                worksiteInDb.Lat = worksite.Lat;
+                worksiteInDb.Lng = worksite.Lng;
+                worksiteInDb.Radius = worksite.Radius;
             }
 
-            return RedirectToAction("Index", "WorkSite");
+            // _context.save 
+
+            return RedirectToAction("Edit", "WorkSite");
         }
 
         // GET: WorkSite
