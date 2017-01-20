@@ -71,22 +71,12 @@
             return siteMap;
         }
 
-        function onMapClick(e) {
-            var popup = L.popup();
-            popup
-                .setLatLng(e.latlng)
-                .setContent("Clicked on map at: " + e.latlng.toString())
-                .openOn(e.target);
-        }
-
         $(document).ready(function () {
             // Set up map
             var siteMap = setUpMap();
 
             // Focus map on current location
             geoFindMe(siteMap);
-
-            siteMap.on('click', onMapClick);
 
             var table = $("#sites").DataTable({
                 ajax: {

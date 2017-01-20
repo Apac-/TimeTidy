@@ -52,7 +52,7 @@ namespace Vigilance.Controllers
                 worksiteInDb.Radius = worksite.Radius;
             }
 
-            // _context.save 
+            _context.SaveChanges();
 
             return RedirectToAction("Edit", "WorkSite");
         }
