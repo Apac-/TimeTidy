@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Vigilance.Models.WorkSite>
-@{
+﻿@{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -85,19 +84,19 @@
                 },
                 columns: [
                     {
-                        data: "name"
-                        //render: function(data, type, worksite) {
-                        //    return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
-                        //}
+                        data: "name",
+                        render: function(data, type, worksite) {
+                            return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
+                        }
                     },
                     {
                         data: "streetAddress"
                     },
                     {
-                        data: "id"
-                        //render: function(data) {
-                        //    return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
-                        //}
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
+                        }
                     }
                 ]
             });
