@@ -78,26 +78,26 @@
             // Focus map on current location
             geoFindMe(siteMap);
 
-            var table = $("#sites").DataTable({
+            var table = $('#sites').DataTable({
                 ajax: {
-                    url: "/api/WorkSites",
+                    url: "/api/worksites",
                     dataSrc: ""
                 },
                 columns: [
                     {
-                        data: "name",
-                        render: function(data, type, worksite) {
-                            return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
-                        }
+                        data: "name"
+                        //render: function(data, type, worksite) {
+                        //    return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
+                        //}
                     },
                     {
-                        data: "worksite.streetaddress"
+                        data: "streetAddress"
                     },
                     {
-                        data: "id",
-                        render: function(data) {
-                            return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
-                        }
+                        data: "id"
+                        //render: function(data) {
+                        //    return "<button class='btn-link js-delete' data-worksite-id=" + data + ">Delete</button>";
+                        //}
                     }
                 ]
             });
