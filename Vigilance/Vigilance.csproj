@@ -513,10 +513,10 @@
     <Content Include="Views\WorkSites\List.cshtml" />
     <Content Include="Views\Shared\_LeafletHeader.cshtml" />
     <Content Include="Views\WorkSites\WorkSiteForm.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
