@@ -66,7 +66,7 @@ namespace Vigilance.Controllers
         {
             var sites = _context.WorkSites.ToList();
 
-            return View(sites);
+            return View("List", sites);
         }
     }
 }
