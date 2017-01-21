@@ -20,10 +20,14 @@ namespace Vigilance.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Edit() {
-            var sites = _context.WorkSites.ToList();
+        public ActionResult Edit(int id)
+        {
+            var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
 
-            return View(sites);
+            if (worksite == null)
+                return HttpNotFound();
+
+            return View("WorkSiteForm", worksite);
         }
 
         public ActionResult New() {
