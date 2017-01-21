@@ -58,7 +58,8 @@ namespace Vigilance.Controllers
 
             _context.SaveChanges();
 
-            return RedirectToAction("Edit", "WorkSite");
+
+            return RedirectToAction("Index", "WorkSite");
         }
 
         // GET: WorkSite
