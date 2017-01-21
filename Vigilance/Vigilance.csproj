@@ -181,6 +181,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\WorkSitesController.cs" />
+    <Compile Include="Migrations\201701210452474_SeedUsers.cs" />
+    <Compile Include="Migrations\201701210452474_SeedUsers.Designer.cs">
+      <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -530,6 +534,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701200425151_AddStreetAddressToWorkSite.resx">
       <DependentUpon>201701200425151_AddStreetAddressToWorkSite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701210452474_SeedUsers.resx">
+      <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
