@@ -49,12 +49,17 @@
         }
 
         $(document).ready(function () {
-            // Set up map
             var siteMap = setUpMap();
             siteMap.on('click', onMapClick);
 
-            // Focus map on current location
-            geoFindMe(siteMap);
+            if ($("#Id").val() == 0) {
+                geoFindMe(siteMap);
+            } else {
+                var lat = $('#latitude').val();
+                var lng = $('#longitude').val();
+                siteMap.setView([lat, lng], 13);
+                L.marker([lat, lng]).addTo(siteMap);
+            }
 
             var googleGeocoder = L.Control.Geocoder.google("AIzaSyAruk8JN7nsmslgDvDMqC6BcqkBKUZ7KEA");
             var geocoder = L.Control.geocoder({
