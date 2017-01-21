@@ -7,11 +7,11 @@ using Vigilance.Models;
 
 namespace Vigilance.Controllers
 {
-    public class WorkSiteController : Controller
+    public class WorkSitesController : Controller
     {
         private ApplicationDbContext _context;
 
-        public WorkSiteController() {
+        public WorkSitesController() {
             _context = new ApplicationDbContext();
         }
 
@@ -59,7 +59,7 @@ namespace Vigilance.Controllers
             _context.SaveChanges();
 
 
-            return RedirectToAction("Index", "WorkSite");
+            return RedirectToAction("Index", "WorkSites");
         }
 
         // GET: WorkSite

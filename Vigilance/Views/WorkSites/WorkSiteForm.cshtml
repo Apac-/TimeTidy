@@ -14,7 +14,7 @@
 <div id="out"></div>
 <div id="mapid" style="height: 400px;"></div>
 
-@using (Html.BeginForm("Save", "WorkSite")) {
+@using (Html.BeginForm("Save", "WorkSites")) {
     <div class="form-group">
         @Html.LabelFor(w => w.Name)
         @Html.TextBoxFor(w => w.Name, new { @class = "form-control" })
