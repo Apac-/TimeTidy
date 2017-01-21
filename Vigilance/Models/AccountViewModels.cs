@@ -65,6 +65,11 @@ namespace Vigilance.Models
     public class RegisterViewModel
     {
         [Required]
+        [Phone]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
