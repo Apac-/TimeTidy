@@ -504,7 +504,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
-    <Content Include="Views\WorkSite\Edit.cshtml" />
+    <Content Include="Views\WorkSite\List.cshtml" />
     <Content Include="Views\Shared\_LeafletHeader.cshtml" />
     <Content Include="Views\WorkSite\WorkSiteForm.cshtml" />
   </ItemGroup>
