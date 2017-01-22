@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using Vigilance.Models;
 
 namespace Vigilance.Controllers
@@ -65,7 +66,11 @@ namespace Vigilance.Controllers
         // GET: WorkSite
         public ActionResult Index()
         {
-            return View();
+            var viewModel = new UserIdViewModel()
+            {
+                Id = User.Identity.GetUserId()
+            };
+            return View(viewModel);
         }
 
         public ActionResult List()

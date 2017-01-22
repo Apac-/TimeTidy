@@ -1,4 +1,4 @@
-﻿
+﻿@model string
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +8,7 @@
     @Html.Partial("_LeafletHeader")
 }
 <h2 id="nearestSite">Loading worksites...</h2>
+<h2>@Model</h2>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out"></div>
 
@@ -22,7 +23,7 @@
     </thead>
     <tbody></tbody>
 </table>
-@Html.Hidden("selectedWorkSite", "");
+@Html.Hidden("selectedWorkSite", "")
 
 @section scripts{
     @Scripts.Render("~/Scripts/leaflet-basics.js");
