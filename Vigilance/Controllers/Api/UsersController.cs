@@ -40,6 +40,8 @@ namespace Vigilance.Controllers.Api
         // Get /api/users/id
         public IHttpActionResult GetUsers(string id)
         {
+            // TODO (Jeff): A. Add in db call once TimeSheets are created.
+            //  Send TimeSheets with a BasicUsersDto, or equivilant
             var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
 
             if (user == null)
@@ -47,5 +49,7 @@ namespace Vigilance.Controllers.Api
 
             return Ok(user);
         }
+
+        // TODO (Jeff): B. Create Delete and Update
     }
 }
