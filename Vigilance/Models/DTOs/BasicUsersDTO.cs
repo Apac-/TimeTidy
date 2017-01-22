@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace Vigilance.Models.DTOs {
-    public class UsersDTO {
+    public class BasicUsersDTO {
         public string Id { get; set; }
         public string UserName { get; set; }
     }
