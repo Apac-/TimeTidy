@@ -36,5 +36,16 @@ namespace Vigilance.Controllers.Api
 
             return Ok(usersDto);
         }
+
+        // Get /api/users/id
+        public IHttpActionResult GetUsers(string id)
+        {
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
     }
 }
