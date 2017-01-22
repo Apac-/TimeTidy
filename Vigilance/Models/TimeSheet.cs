@@ -19,10 +19,10 @@ namespace Vigilance.Models {
         [Required]
         public DateTime LogOnTime { get; set; }
 
-        [Required]
-        public Tuple<float,float> LogOnLatLng { get; set; }
+        public LatLng LogOnLatLng { get; set; }
 
         public DateTime? LogOffTime { get; set; }
-        public Tuple<float,float> LogOffLatLng { get; set; }
+
+        public LatLng LogOffLatLng { get; set; }
     }
 }
