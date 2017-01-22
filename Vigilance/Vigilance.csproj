@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201701220535153_AddTimeSheet.Designer.cs">
       <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.cs" />
+    <Compile Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.Designer.cs">
+      <DependentUpon>201701221320232_ChangeUserIdToStringInTimeSheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -553,6 +557,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701220535153_AddTimeSheet.resx">
       <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.resx">
+      <DependentUpon>201701221320232_ChangeUserIdToStringInTimeSheet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

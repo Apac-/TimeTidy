@@ -8,10 +8,8 @@ namespace Vigilance.Models {
     public class TimeSheet {
         public int Id { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
-
         [Required]
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         [Required]
         public WorkSite WorkSite { get; set; }
