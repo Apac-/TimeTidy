@@ -7,7 +7,7 @@
 @section header{
     @Html.Partial("_LeafletHeader")
 }
-<h2>Work Sites</h2>
+<h2 id="nearestSite">Work Sites</h2>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out"></div>
 
@@ -28,14 +28,22 @@
         $(document).ready(function () {
             var siteMap = setUpMap();
             geoFindMe(siteMap);
-                    //siteMap.setView([jsonData[0].lat, jsonData[0].lng], 13);
+
+            var currentCenter = null;
+
+            var mapLoaded = $.Deferred();
+            siteMap.on('load', function (e) {
+                currentCenter = e.target.getCenter();
+                mapLoaded.resolve();
+            });
 
             var mapLayerGroup = L.layerGroup().addTo(siteMap);
 
-            var table = null;
+            var workSites = null;
 
-            $.getJSON("/api/worksites", { get_param: 'value'}, function(jsonData) {
-                table = $('#sites').DataTable({
+            var tableLoaded = $.getJSON("/api/worksites", { get_param: 'value' }, function (jsonData) {
+                workSites = jsonData;
+                $('#sites').DataTable({
                     data: jsonData,
                     columns: [
                         {
@@ -47,14 +55,33 @@
                     ]
                 });
 
-                $.each(jsonData,
-                    function (index, element) {
-                        var marker = L.marker([element.lat, element.lng],
+                $.each(jsonData, function (index, element) {
+                    var marker = L.marker([element.lat, element.lng],
                             { title: element.name })
-                            .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress);
-                        marker.id = element.name;
-                        mapLayerGroup.addLayer(marker);
-                    });
+                        .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress);
+                    marker.id = element.name;
+                    mapLayerGroup.addLayer(marker);
+                });
+            });
+
+            $.when(mapLoaded, tableLoaded).done(function (e) {
+                var shortestDistance = 0;
+                var closeSite = null;
+                $.each(workSites, function(index, element) {
+                    var siteLoc = L.latLng(element.lat, element.lng);
+                    var dist = currentCenter.distanceTo(siteLoc);
+                    if (shortestDistance == 0) {
+                        shortestDistance = dist;
+                        closeSite = element;
+                    } else {
+                        if (dist < shortestDistance) {
+                            shortestDistance = dist;
+                            closeSite = element;
+                        }
+                    }
+                });
+
+                console.log($('#nearestSite').text(closeSite.name));
             });
 
         });
