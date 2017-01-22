@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201701210452474_SeedUsers.Designer.cs">
       <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701220535153_AddTimeSheet.cs" />
+    <Compile Include="Migrations\201701220535153_AddTimeSheet.Designer.cs">
+      <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
@@ -544,6 +548,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701210452474_SeedUsers.resx">
       <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701220535153_AddTimeSheet.resx">
+      <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
