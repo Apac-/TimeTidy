@@ -30,6 +30,13 @@
         function setSelectedSite(site) {
             $('#nearestSite').text("Selected: " + site);
             $('#selectedWorkSite').val(site);
+            // Ajax request to get user id, or send user id in modelview
+            // query server for if user is currently logged onto worksite
+            // if logged on
+            //      show log off button
+            // else
+            //      show log on button
+            // Buttons send info to api to log on/off worker from site
         }
 
         function onMarkerClick(e) {
