@@ -7,13 +7,13 @@ namespace Vigilance.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class ChangeUserIdToStringInTimeSheet : IMigrationMetadata
+    public sealed partial class SeedUsers : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangeUserIdToStringInTimeSheet));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedUsers));
         
         string IMigrationMetadata.Id
         {
-            get { return "201701221320232_ChangeUserIdToStringInTimeSheet"; }
+            get { return "201701221353347_SeedUsers"; }
         }
         
         string IMigrationMetadata.Source

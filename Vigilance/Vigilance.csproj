@@ -183,17 +183,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WorkSitesController.cs" />
-    <Compile Include="Migrations\201701210452474_SeedUsers.cs" />
-    <Compile Include="Migrations\201701210452474_SeedUsers.Designer.cs">
-      <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701220535153_AddTimeSheet.cs" />
-    <Compile Include="Migrations\201701220535153_AddTimeSheet.Designer.cs">
-      <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.cs" />
-    <Compile Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.Designer.cs">
-      <DependentUpon>201701221320232_ChangeUserIdToStringInTimeSheet.cs</DependentUpon>
+    <Compile Include="Migrations\201701221353347_SeedUsers.cs" />
+    <Compile Include="Migrations\201701221353347_SeedUsers.Designer.cs">
+      <DependentUpon>201701221353347_SeedUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
@@ -552,14 +544,8 @@
     <EmbeddedResource Include="Migrations\201701200425151_AddStreetAddressToWorkSite.resx">
       <DependentUpon>201701200425151_AddStreetAddressToWorkSite.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701210452474_SeedUsers.resx">
-      <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701220535153_AddTimeSheet.resx">
-      <DependentUpon>201701220535153_AddTimeSheet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701221320232_ChangeUserIdToStringInTimeSheet.resx">
-      <DependentUpon>201701221320232_ChangeUserIdToStringInTimeSheet.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701221353347_SeedUsers.resx">
+      <DependentUpon>201701221353347_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
