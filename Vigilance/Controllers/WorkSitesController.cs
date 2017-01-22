@@ -66,11 +66,7 @@ namespace Vigilance.Controllers
         // GET: WorkSite
         public ActionResult Index()
         {
-            var viewModel = new UserIdViewModel()
-            {
-                Id = User.Identity.GetUserId()
-            };
-            return View(viewModel);
+            return View();
         }
 
         public ActionResult List()

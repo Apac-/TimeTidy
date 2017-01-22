@@ -1,5 +1,4 @@
-﻿@model Vigilance.Models.UserIdViewModel 
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -30,7 +29,6 @@
         function setSelectedSite(site) {
             $('#nearestSite').text("Selected: " + site);
             $('#selectedWorkSite').val(site);
-            // Ajax request to get user id, or send user id in modelview
             // query server for if user is currently logged onto worksite
             // if logged on
             //      show log off button
