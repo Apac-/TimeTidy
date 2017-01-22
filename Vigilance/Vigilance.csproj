@@ -187,6 +187,7 @@
     <Compile Include="Migrations\201701210452474_SeedUsers.Designer.cs">
       <DependentUpon>201701210452474_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTOs\UsersDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
