@@ -59,15 +59,20 @@ namespace Vigilance.Controllers
             _context.SaveChanges();
 
 
-            return RedirectToAction("Index", "WorkSites");
+            return RedirectToAction("List", "WorkSites");
         }
 
         // GET: WorkSite
         public ActionResult Index()
         {
+            return View();
+        }
+
+        public ActionResult List()
+        {
             var sites = _context.WorkSites.ToList();
 
-            return View("List", sites);
+            return View(sites);
         }
     }
 }
