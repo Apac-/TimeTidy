@@ -7,7 +7,7 @@
 @section header{
     @Html.Partial("_LeafletHeader")
 }
-<h2 id="nearestSite">Work Sites</h2>
+<h2 id="nearestSite">Loading worksites...</h2>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out"></div>
 
@@ -21,10 +21,20 @@
     <tbody></tbody>
 </table>
 <div id="testjax"></div>
+@Html.Hidden("selectedWorkSite", "");
 
 @section scripts{
     @Scripts.Render("~/Scripts/leaflet-basics.js");
     <script>
+        function setSelectedSite(site) {
+            $('#nearestSite').text("Selected: " + site);
+            $('#selectedWorkSite').val(site);
+        }
+
+        function onMarkerClick(e) {
+            setSelectedSite(e.target.id);
+        }
+
         $(document).ready(function () {
             var siteMap = setUpMap();
             geoFindMe(siteMap);
@@ -47,7 +57,7 @@
                     data: jsonData,
                     columns: [
                         {
-                            data: "name"
+                            data: "name",
                         },
                         {
                             data: "streetAddress"
@@ -58,11 +68,14 @@
                 $.each(jsonData, function (index, element) {
                     var marker = L.marker([element.lat, element.lng],
                             { title: element.name })
-                        .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress);
+                        .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress)
+                        .on('click', onMarkerClick);
                     marker.id = element.name;
                     mapLayerGroup.addLayer(marker);
                 });
             });
+
+            var selectedSite = null;
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
                 var shortestDistance = 0;
@@ -81,9 +94,10 @@
                     }
                 });
 
-                console.log($('#nearestSite').text(closeSite.name));
+                selectedSite = closeSite;
+                siteMap.setView([selectedSite.lat, selectedSite.lng], 13);
+                setSelectedSite(selectedSite.name);
             });
-
         });
     </script>
 }
