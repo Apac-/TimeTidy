@@ -6,3 +6,20 @@
 
 <h2>Index</h2>
 
+<table id="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(m => m.UserName)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.UserName)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+</table>
