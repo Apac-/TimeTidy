@@ -26,9 +26,8 @@
 @section scripts{
     @Scripts.Render("~/Scripts/leaflet-basics.js");
     <script>
-        function setSelectedSite(site) {
-            $('#nearestSite').text("Selected: " + site);
-            $('#selectedWorkSite').val(site);
+        function setSelectedSite(siteName, siteId) {
+            $('#nearestSite').text("Selected: " + siteName);
             // query server for if user is currently logged onto worksite
             // if logged on
             //      show log off button
@@ -38,7 +37,7 @@
         }
 
         function onMarkerClick(e) {
-            setSelectedSite(e.target.id);
+            setSelectedSite(e.target.title, e.target.id);
         }
 
         $(document).ready(function () {
@@ -66,7 +65,7 @@
                         {
                             data: "name",
                             render: function (data, type, workSite) {
-                                return "<button class='btn-link js-select' data-lat=" + workSite.lat + " data-lng=" + workSite.lng +">" + data + "</button>";
+                                return "<button class='btn-link js-select' data-lat=" + workSite.lat + " data-lng=" + workSite.lng +" data-siteId=" + workSite.id + ">" + data + "</button>";
                             }
                         },
                         {
@@ -80,7 +79,7 @@
                             { title: element.name })
                         .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress)
                         .on('click', onMarkerClick);
-                    marker.id = element.name;
+                    marker.id = element.id;
                     mapLayerGroup.addLayer(marker);
                 });
             });
@@ -89,7 +88,7 @@
                 var button = $(this);
 
                 siteMap.setView([button.attr("data-lat"), button.attr("data-lng")], 13);
-                setSelectedSite(button.text());
+                setSelectedSite(button.text(), button.attr("data-siteId"));
             });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
@@ -111,7 +110,7 @@
 
                 selectedSite = closeSite;
                 siteMap.setView([selectedSite.lat, selectedSite.lng], 13);
-                setSelectedSite(selectedSite.name);
+                setSelectedSite(selectedSite.name, selectedSite.id);
             });
         });
     </script>
