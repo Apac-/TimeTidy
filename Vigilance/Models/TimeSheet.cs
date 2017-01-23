@@ -22,12 +22,8 @@ namespace Vigilance.Models {
         public string SiteAddress { get; set; }
 
         [Required]
-        public DateTime LogOnTime { get; set; }
+        public TimeLog LogOn { get; set; }
 
-        public LatLng LogOnLocation { get; set; }
-
-        public DateTime? LogOffTime { get; set; }
-
-        public LatLng LogOffLocation { get; set; }
+        public TimeLog LogOff { get; set; }
     }
 }
