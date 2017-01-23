@@ -193,6 +193,7 @@
       <DependentUpon>201701231057581_AddTimeSheets.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
+    <Compile Include="Models\DTOs\LogOnTimeDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
