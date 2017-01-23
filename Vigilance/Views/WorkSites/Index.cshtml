@@ -28,12 +28,14 @@
     <script>
         function setSelectedSite(siteName, siteId) {
             $('#nearestSite').text("Selected: " + siteName);
-            // query server for if user is currently logged onto worksite
-            // if logged on
-            //      show log off button
-            // else
-            //      show log on button
-            // Buttons send info to api to log on/off worker from site
+
+            $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
+                if (jsonData.dateTime == null) {
+                    $('#logbtns').append('<button class="btn btn-success" value=' + siteId + '>Logon</button>');
+                } else {
+                    $('#logbtns').append('<button class="btn btn-warning" value=' + siteId + '>Logoff</button>');
+                }
+            });
         }
 
         function onMarkerClick(e) {
