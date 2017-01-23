@@ -20,7 +20,7 @@ namespace Vigilance.Controllers.Api
         }
 
         // GET /api/timesheets/1
-        public IHttpActionResult GetTimeSheets(int siteId)
+        public IHttpActionResult GetTimeSheets(int id)
         {
             // Get all timeSheets that have to do with siteId
             // Filter sheets by userId associated
@@ -29,9 +29,10 @@ namespace Vigilance.Controllers.Api
             // return dto with no logon time
             // else
             // return dto with logon time
+            string userId = User.Identity.GetUserId();
             var sheets = _context.TimeSheets
-                .Where(s => s.ApplicationUserId == User.Identity.GetUserId())
-                .Where(s => s.WorkSiteId == siteId)
+                .Where(s => s.ApplicationUserId == userId)
+                .Where(s => s.WorkSiteId == id)
                 .Where(s => s.LogOffTime == null)
                 .ToList();
 
@@ -39,10 +40,8 @@ namespace Vigilance.Controllers.Api
 
             // Find most recent time sheet;
             TimeSheet returnSheet = null;
-            if (sheets.Count > 1)
-            {
-                foreach (TimeSheet timeSheet in sheets)
-                {
+            if (sheets.Count > 1) {
+                foreach (TimeSheet timeSheet in sheets) {
                     if (returnSheet == null)
                         returnSheet = timeSheet;
                     else if (returnSheet.LogOnTime < timeSheet.LogOnTime)
@@ -53,9 +52,8 @@ namespace Vigilance.Controllers.Api
             DateTime? logonTime = null;
             if (returnSheet != null)
                 logonTime = returnSheet.LogOnTime;
-            
-            var dto = new LogOnTimeDTO()
-            {
+
+            var dto = new LogOnTimeDTO() {
                 DateTime = logonTime
             };
 
