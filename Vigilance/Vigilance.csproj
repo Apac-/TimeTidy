@@ -192,6 +192,10 @@
     <Compile Include="Migrations\201701231057581_AddTimeSheets.Designer.cs">
       <DependentUpon>201701231057581_AddTimeSheets.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701231328467_AddWorkSiteIdToTimeSheet.cs" />
+    <Compile Include="Migrations\201701231328467_AddWorkSiteIdToTimeSheet.Designer.cs">
+      <DependentUpon>201701231328467_AddWorkSiteIdToTimeSheet.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\LogOnTimeDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
@@ -556,6 +560,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701231057581_AddTimeSheets.resx">
       <DependentUpon>201701231057581_AddTimeSheets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701231328467_AddWorkSiteIdToTimeSheet.resx">
+      <DependentUpon>201701231328467_AddWorkSiteIdToTimeSheet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

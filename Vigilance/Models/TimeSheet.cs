@@ -14,6 +14,9 @@ namespace Vigilance.Models {
         public string ApplicationUserId { get; set; }
 
         [Required]
+        public int WorkSiteId { get; set; }
+
+        [Required]
         public string SiteName { get; set; }
 
         public LatLng SiteLocation { get; set; }
