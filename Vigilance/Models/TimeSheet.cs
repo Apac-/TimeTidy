@@ -16,12 +16,10 @@ namespace Vigilance.Models {
         [Required]
         public string SiteName { get; set; }
 
-        [Required]
         public LatLng SiteLocation { get; set; }
 
         public string SiteAddress { get; set; }
 
-        [Required]
         public DateTime LogOnTime { get; set; }
 
         public LatLng LogOnLocation { get; set; }
