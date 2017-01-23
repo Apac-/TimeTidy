@@ -214,6 +214,7 @@
     <Compile Include="Models\LatLng.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleName.cs" />
+    <Compile Include="Models\TimeLog.cs" />
     <Compile Include="Models\TimeSheet.cs" />
     <Compile Include="Models\UserIdViewModel.cs" />
     <Compile Include="Models\WorkSite.cs" />
