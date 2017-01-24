@@ -26,16 +26,7 @@ namespace Vigilance.Controllers
 
         public ActionResult List(string userId)
         {
-            var timeSheets = _context.TimeSheets.Where(s => s.ApplicationUserId == userId);
-
-            List<UserTimeSheetViewModel> vm = new List<UserTimeSheetViewModel>();
-
-            foreach (var timeSheet in timeSheets)
-            {
-                vm.Add(new UserTimeSheetViewModel(timeSheet));
-
-
-            return View(vm);
+            return View(userId);
         }
     }
 }
