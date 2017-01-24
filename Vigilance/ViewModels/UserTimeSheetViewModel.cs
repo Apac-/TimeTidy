@@ -6,7 +6,7 @@ using System.Web;
 using Vigilance.Models;
 
 namespace Vigilance.ViewModels {
-    public class UserTimeSheetsViewModel {
+    public class UserTimeSheetViewModel {
 
         public string SiteName { get; set; }
 
