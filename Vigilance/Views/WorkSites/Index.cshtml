@@ -31,15 +31,26 @@
 
             $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
                 if (jsonData.dateTime == null) {
-                    $('#logbtns').append('<button class="btn btn-success" value=' + siteId + '>Logon</button>');
+                    $('#logbtns').append('<button class="btn btn-success js-logon" data-siteId=' + siteId + '>Logon</button>');
                 } else {
-                    $('#logbtns').append('<button class="btn btn-warning" value=' + siteId + '>Logoff</button>');
+                    $('#logbtns').append('<button class="btn btn-warning js-logoff" data-siteId=' + siteId + '>Logoff</button>');
                 }
             });
         }
 
         function onMarkerClick(e) {
             setSelectedSite(e.target.title, e.target.id);
+        }
+
+        function getWorkSite(sites, siteId) {
+            var matchedSite = null;
+            $.each(sites, function(index, element) {
+                if (element.id == siteId) {
+                    matchedSite = element;
+                }
+            });
+
+            return matchedSite;
         }
 
         $(document).ready(function () {
@@ -91,6 +102,10 @@
 
                 siteMap.setView([button.attr("data-lat"), button.attr("data-lng")], 13);
                 setSelectedSite(button.text(), button.attr("data-siteId"));
+            });
+
+            $("#logbtns").on("click", ".js-logon", function() {
+                var site = getWorkSite(workSites, $(this).attr("data-siteId"));
             });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
