@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vigilance.Models;
+using Vigilance.ViewModels;
 
 namespace Vigilance.Controllers
 {
@@ -23,9 +24,14 @@ namespace Vigilance.Controllers
             return View();
         }
 
-        public ActionResult List(string userId)
+        public ActionResult List(string id)
         {
-            return View(userId);
+            var vm = new TimeSheetsListViewModel
+            {
+                UserId = id
+            };
+
+            return View(vm);
         }
     }
 }
