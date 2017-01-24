@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vigilance.Models;
-using Vigilance.ViewModels;
 
 namespace Vigilance.Controllers
 {
