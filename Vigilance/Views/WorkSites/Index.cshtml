@@ -11,7 +11,7 @@
 <div id="out" userLat="0" userLng="0"></div>
 
 <div id="logbtns">
-    <input type="button" style="display: none" value="Logon" id="logbtn" />
+    <input type="button" style="display: none" value="Logon" id="logbtn" data-siteId="null" data-sheetId="null"/>
 </div>
 
 <table id="sites" class="table table-bordered table-hover">
@@ -35,14 +35,18 @@
                 if (jsonData.dateTime == null) {
                     $('#logbtn').prop({
                         'value': 'Logon',
-                        'class': 'btn btn-success js-logon',
-                        'data-siteId': siteId
+                        'class': 'btn btn-success js-logon'
+                    }).attr({
+                        'data-siteId': siteId,
+                        'data-sheetId': null
                     }).show();
                 } else {
                     $('#logbtn').prop({
                         'value': 'Logoff',
-                        'class': 'btn btn-warning js-logoff',
-                        'data-siteId': siteId
+                        'class': 'btn btn-warning js-logoff'
+                    }).attr({
+                        'data-siteId': siteId,
+                        'data-sheetId': jsonData.timeSheetId
                     }).show();
                 }
             });
@@ -136,6 +140,7 @@
                     alert("FAILLLLL");
                 });
             });
+
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
                 var shortestDistance = 0;
