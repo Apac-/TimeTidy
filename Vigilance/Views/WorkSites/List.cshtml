@@ -6,11 +6,12 @@
     @Html.Partial("_LeafletHeader")
 }
 <h2>Work Sites</h2>
+
+<div id="mapid" style="height: 400px;"></div>
+<div id="out"></div>
 <p>
     @Html.ActionLink("New Site", "New", "WorkSites", null, new { @class = "btn btn-primary" })
 </p>
-<div id="mapid" style="height: 400px;"></div>
-<div id="out"></div>
 
 <table id="sites" class="table table-bordered table-hover">
     <thead>
