@@ -72,7 +72,7 @@ namespace Vigilance.Controllers.Api
                 SiteName = logonDto.SiteName,
                 SiteLocation = new LatLng(logonDto.SiteLat, logonDto.SiteLng),
                 SiteAddress = logonDto.SiteAddress,
-                LogOnTime = logonDto.LogOnTime,
+                LogOnTime = DateTime.Now,
                 LogOnLocation = new LatLng(logonDto.UserLat, logonDto.UserLng)
             };
 
