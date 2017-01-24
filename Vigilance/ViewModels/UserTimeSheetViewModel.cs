@@ -21,5 +21,16 @@ namespace Vigilance.ViewModels {
         public DateTime? LogOffTime { get; set; }
 
         public LatLng LogOffLocation { get; set; }
+
+        public UserTimeSheetViewModel(TimeSheet sheet)
+        {
+            SiteName = sheet.SiteName;
+            SiteLocation = sheet.SiteLocation;
+            SiteAddress = sheet.SiteAddress;
+            LogOnTime = sheet.LogOnTime;
+            LogOnLocation = sheet.LogOnLocation;
+            LogOffTime = sheet.LogOffTime;
+            LogOffLocation = sheet.LogOffLocation;
+        }
     }
 }
