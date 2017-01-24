@@ -391,6 +391,7 @@
     <Content Include="Content\images\throbber.gif" />
     <Content Include="Content\leaflet.css" />
     <Content Include="Content\Control.Geocoder.css" />
+    <Content Include="Content\WaitingOverlay.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
