@@ -61,6 +61,7 @@ namespace Vigilance.Controllers.Api
         }
 
         // POST /api/timesheets
+        [HttpPost]
         public IHttpActionResult CreateTimeSheet(TimeSheetLogonDTO logonDto)
         {
             string userId = User.Identity.GetUserId();
@@ -78,6 +79,14 @@ namespace Vigilance.Controllers.Api
 
             _context.TimeSheets.Add(timeSheet);
             _context.SaveChanges();
+
+            return Ok();
+        }
+
+        // PUT /api/timesheets/id
+        [HttpPut]
+        public IHttpActionResult UpdateTimeSheet(int id, TimeSheetLogoffDTO logoffDto)
+        {
 
             return Ok();
         }
