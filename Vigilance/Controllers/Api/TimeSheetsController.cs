@@ -40,8 +40,8 @@ namespace Vigilance.Controllers.Api
 
             // Find most recent time sheet;
             TimeSheet returnSheet = null;
-            if (sheets.Count > 1) {
-                foreach (TimeSheet timeSheet in sheets) {
+            if (sheets.Count > 0) {
+                foreach (var timeSheet in sheets) {
                     if (returnSheet == null)
                         returnSheet = timeSheet;
                     else if (returnSheet.LogOnTime < timeSheet.LogOnTime)
