@@ -13,5 +13,10 @@ namespace Vigilance.Controllers
         {
             return View();
         }
+
+        public ActionResult UserTimeSheets(string userId)
+        {
+
+        }
     }
 }
