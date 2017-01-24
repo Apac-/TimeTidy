@@ -198,6 +198,7 @@
     </Compile>
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\LogOnTimeDTO.cs" />
+    <Compile Include="Models\DTOs\TimeSheetLogoffDTO.cs" />
     <Compile Include="Models\DTOs\TimeSheetLogonDTO.cs" />
     <Compile Include="Models\DTOs\WorkSiteDTO.cs" />
     <Compile Include="Global.asax.cs">
