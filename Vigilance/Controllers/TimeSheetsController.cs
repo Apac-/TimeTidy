@@ -24,7 +24,7 @@ namespace Vigilance.Controllers
             return View();
         }
 
-        public ActionResult UserTimeSheets(string userId)
+        public ActionResult List(string userId)
         {
             var timeSheets = _context.TimeSheets.Where(s => s.ApplicationUserId == userId);
 
@@ -33,7 +33,7 @@ namespace Vigilance.Controllers
             foreach (var timeSheet in timeSheets)
             {
                 vm.Add(new UserTimeSheetViewModel(timeSheet));
-            }
+
 
             return View(vm);
         }
