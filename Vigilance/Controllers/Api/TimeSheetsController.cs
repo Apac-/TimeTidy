@@ -59,5 +59,12 @@ namespace Vigilance.Controllers.Api
 
             return Ok(dto);
         }
+
+        // POST /api/timesheets
+        public IHttpActionResult CreateTimeSheet(TimeSheetLogonDTO timeSheetDto)
+        {
+            
+        }
+
     }
 }
