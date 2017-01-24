@@ -93,6 +93,18 @@ namespace Vigilance.Controllers.Api
         [HttpPut]
         public IHttpActionResult UpdateTimeSheet(int id, TimeSheetLogoffDTO logoffDto)
         {
+            var timeSheet = _context.TimeSheets.SingleOrDefault(s => s.Id == id);
+
+            if (timeSheet == null)
+                return NotFound();
+
+            if (timeSheet.ApplicationUserId != User.Identity.GetUserId())
+                return BadRequest();
+
+            timeSheet.LogOffTime = DateTime.Now;
+            timeSheet.LogOffLocation = new LatLng(logoffDto.UserLat, logoffDto.UserLng);
+
+            _context.SaveChanges();
 
             return Ok();
         }
