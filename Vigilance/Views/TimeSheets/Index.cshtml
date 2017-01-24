@@ -10,20 +10,30 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th>Address</th>
-            <th>Delete</th>
         </tr>
     </thead>
     <tbody></tbody>
 </table>
-<div id="testjax"></div>
 
 @section scripts{
     @Scripts.Render("~/Scripts/leaflet-basics.js");
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-
+            var table = $("#workers").DataTable({
+                ajax: {
+                    url: "/api/users",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "userName",
+                        render: function (data, type, user) {
+                            return "<a href='/timeSheets/user/" + user.userId + "'>" + user.userName + "</a>";
+                        }
+                    }
+                ]
+            });
 
         });
     </script>
