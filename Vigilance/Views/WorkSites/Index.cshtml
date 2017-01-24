@@ -118,7 +118,7 @@
                 setSelectedSite(button.text(), button.attr("data-siteId"));
             });
 
-            $("#logbtn").on("click", ".js-logon", function() {
+            $("#logbtns").on("click", ".js-logon", function() {
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
                 var logonDto = {
                     workSiteId: site.id,
@@ -141,8 +141,23 @@
                 });
             });
 
-            $("#logbtn").on("click", ".js-logoff", function() {
+            $("#logbtns").on("click", ".js-logoff", function() {
+                console.log("Clicked");
+                var button = $(this);
+                var logoffDto = {
+                    userLat: $('#out').attr('userLat'),
+                    userLng: $('#out').attr('userLng')
+                };
 
+                $.ajax({
+                    url: "/api/timeSheets/" + button.attr("data-sheetId"),
+                    method: "put",
+                    data: logoffDto
+                }).done(function() {
+                    alert("Updated!");
+                }).fail(function() {
+                    alert("Failed to PUT");
+                });
             });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
