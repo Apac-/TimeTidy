@@ -66,9 +66,6 @@ namespace Vigilance.Controllers
         // GET: WorkSite
         public ActionResult Index()
         {
-            // Look up timeSheets assoc with UserID fkey.
-            // Find all currently Non-logged off sites
-            // Pack found sites into viewmodel
             return View();
         }
 
