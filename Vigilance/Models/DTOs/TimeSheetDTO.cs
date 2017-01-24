@@ -8,27 +8,33 @@ namespace Vigilance.Models.DTOs {
 
         public string SiteName { get; set; }
 
-        public LatLng SiteLocation { get; set; }
+        public float SiteLat { get; set; }
+        public float SiteLng { get; set; }
 
         public string SiteAddress { get; set; }
 
         public DateTime LogOnTime { get; set; }
 
-        public LatLng LogOnLocation { get; set; }
+        public float LogOnLat { get; set; }
+        public float LogOnLng { get; set; }
 
         public DateTime? LogOffTime { get; set; }
 
-        public LatLng LogOffLocation { get; set; }
+        public float LogOffLat { get; set; }
+        public float LogOffLng { get; set; }
 
         public TimeSheetDTO(TimeSheet sheet)
         {
             SiteName = sheet.SiteName;
-            SiteLocation = sheet.SiteLocation;
+            SiteLat = sheet.SiteLocation.Lat.Value;
+            SiteLng = sheet.SiteLocation.Lng.Value;
             SiteAddress = sheet.SiteAddress;
             LogOnTime = sheet.LogOnTime;
-            LogOnLocation = sheet.LogOnLocation;
+            LogOnLat = sheet.LogOnLocation.Lat.Value;
+            LogOnLng = sheet.LogOnLocation.Lng.Value;
             LogOffTime = sheet.LogOffTime;
-            LogOffLocation = sheet.LogOffLocation;
+            LogOffLat = sheet.LogOffLocation.Lat.Value;
+            LogOffLng = sheet.LogOffLocation.Lng.Value;
         }
     }
 }

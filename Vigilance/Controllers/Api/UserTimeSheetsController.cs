@@ -18,7 +18,7 @@ namespace Vigilance.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        // GET /api/timesheets/user_id
+        // GET /api/usertimesheets/user_id
         public IHttpActionResult GetUserTimeSheets(string id)
         {
             var timeSheets = _context.TimeSheets.Where(s => s.ApplicationUserId == id);
