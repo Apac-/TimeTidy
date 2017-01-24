@@ -10,7 +10,9 @@
 <div id="mapid" style="height: 400px;"></div>
 <div id="out" userLat="0" userLng="0"></div>
 
-<div id="logbtns"></div>
+<div id="logbtns">
+    <input type="button" style="display: none" value="Logon" id="logbtn" />
+</div>
 
 <table id="sites" class="table table-bordered table-hover">
     <thead>
@@ -31,9 +33,17 @@
 
             $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
                 if (jsonData.dateTime == null) {
-                    $('#logbtns').append('<button class="btn btn-success js-logon" data-siteId=' + siteId + '>Logon</button>');
+                    $('#logbtn').prop({
+                        'value': 'Logon',
+                        'class': 'btn btn-success js-logon',
+                        'data-siteId': siteId
+                    }).show();
                 } else {
-                    $('#logbtns').append('<button class="btn btn-warning js-logoff" data-siteId=' + siteId + '>Logoff</button>');
+                    $('#logbtn').prop({
+                        'value': 'Logoff',
+                        'class': 'btn btn-warning js-logoff',
+                        'data-siteId': siteId
+                    }).show();
                 }
             });
         }
@@ -106,7 +116,7 @@
 
             $("#logbtns").on("click", ".js-logon", function() {
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
-                var vm = {
+                var logonDto = {
                     workSiteId: site.id,
                     siteName: site.name,
                     siteLat: site.lat,
@@ -119,7 +129,7 @@
                 $.ajax({
                     url: "/api/timeSheets",
                     method: "post",
-                    data: vm
+                    data: logonDto 
                 }).done(function() {
                     alert("Working!");
                 }).fail(function() {
