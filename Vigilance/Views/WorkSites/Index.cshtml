@@ -7,8 +7,11 @@
     @Html.Partial("_LeafletHeader")
 }
 <div id="overlay" class="waitingOverlay">
-    <p>Please wait...</p>
+    <div class="waitingOverlay-content">
+        <p>Please wait...</p>
+    </div>
 </div>
+
 <h2 id="nearestSite">Loading worksites...</h2>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out" userlat="0" userlng="0"></div>

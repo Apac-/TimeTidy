@@ -10,3 +10,19 @@
     overflow-x: hidden;
     transition: 0.25s;
 }
+
+.waitingOverlay-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.waitingOverlay p {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+}
