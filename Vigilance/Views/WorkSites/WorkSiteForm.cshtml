@@ -9,7 +9,13 @@
     <script src="~/Scripts/LeafletGeoCoder/Control.Geocoder.js"></script>
 }
 
-<h2>Work Site</h2>
+@if (@Model.Name != null)
+{
+    <h2>EDIT: @Model.Name</h2>
+}
+else {
+    <h2>Create New Work Site</h2>
+}
 
 <div id="out"></div>
 <div id="mapid" style="height: 400px;"></div>
