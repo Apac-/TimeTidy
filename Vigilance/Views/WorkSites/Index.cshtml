@@ -118,7 +118,7 @@
                 setSelectedSite(button.text(), button.attr("data-siteId"));
             });
 
-            $("#logbtns").on("click", ".js-logon", function() {
+            $("#logbtn").on("click", ".js-logon", function() {
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
                 var logonDto = {
                     workSiteId: site.id,
@@ -141,6 +141,9 @@
                 });
             });
 
+            $("#logbtn").on("click", ".js-logoff", function() {
+
+            });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
                 var shortestDistance = 0;
