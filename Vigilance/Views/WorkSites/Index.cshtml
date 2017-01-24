@@ -111,9 +111,20 @@
                     siteName: site.name,
                     siteLat: site.lat,
                     siteLng: site.lng,
-                    siteAddress: site.streetAddress
+                    siteAddress: site.streetAddress,
+                    userLat: $('#out').attr('userLat'),
+                    userLng: $('#out').attr('userLng')
                 }
 
+                $.ajax({
+                    url: "/api/timeSheets",
+                    method: "post",
+                    data: vm
+                }).done(function() {
+                    alert("Working!");
+                }).fail(function() {
+                    alert("FAILLLLL");
+                });
             });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
