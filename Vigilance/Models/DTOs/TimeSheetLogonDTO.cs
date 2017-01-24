@@ -17,8 +17,6 @@ namespace Vigilance.Models.DTOs {
 
         public string SiteAddress { get; set; }
 
-        public DateTime LogOnTime { get; set; }
-
         public float UserLat { get; set; }
         public float UserLng { get; set; }
     }
