@@ -4,5 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.UserId</h2>
+<h2>Worker time sheet</h2>
 
+<table id="timeSheets" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+            <th>Site Name</th>
+            <th>Address</th>
+            <th>Logged on</th>
+            <th>Logged off</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+@Html.Hidden("userId", @Model.UserId)
+
+@section scripts{
+    @Scripts.Render("~/Scripts/leaflet-basics.js");
+
+    <script>
+        $(document).ready(function() {
+
+            var table = $("#timeSheets").DataTable({
+                ajax: {
+                    url: "/api/userTimeSheets/" + $("#userId").val(),
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "siteName"
+                    },
+                    {
+                        data: "siteAddress"
+                    },
+                    {
+                        data: "logOnTime"
+                    },
+                    {
+                        data: "logOffTime"
+                    }
+                ]
+            });
+
+        });
+    </script>
+}
