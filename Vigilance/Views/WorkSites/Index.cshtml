@@ -6,13 +6,15 @@
 @section header{
     @Html.Partial("_LeafletHeader")
 }
-<div id="overlay" class="waitingOverlay"></div>
+<div id="overlay" class="waitingOverlay">
+    <p>Please wait...</p>
+</div>
 <h2 id="nearestSite">Loading worksites...</h2>
 <div id="mapid" style="height: 400px;"></div>
-<div id="out" userLat="0" userLng="0"></div>
+<div id="out" userlat="0" userlng="0"></div>
 
 <div id="logbtns">
-    <input type="button" style="display: none" value="Logon" id="logbtn" data-siteId="null" data-sheetId="null"/>
+    <input type="button" style="display: none" value="Logon" id="logbtn" data-siteid="null" data-sheetid="null" />
 </div>
 
 <table id="sites" class="table table-bordered table-hover">
@@ -59,7 +61,7 @@
 
         function getWorkSite(sites, siteId) {
             var matchedSite = null;
-            $.each(sites, function(index, element) {
+            $.each(sites, function (index, element) {
                 if (element.id == siteId) {
                     matchedSite = element;
                 }
@@ -93,7 +95,7 @@
                         {
                             data: "name",
                             render: function (data, type, workSite) {
-                                return "<button class='btn-link js-select' data-lat=" + workSite.lat + " data-lng=" + workSite.lng +" data-siteId=" + workSite.id + ">" + data + "</button>";
+                                return "<button class='btn-link js-select' data-lat=" + workSite.lat + " data-lng=" + workSite.lng + " data-siteId=" + workSite.id + ">" + data + "</button>";
                             }
                         },
                         {
@@ -112,14 +114,14 @@
                 });
             });
 
-            $("#sites").on("click", ".js-select", function() {
+            $("#sites").on("click", ".js-select", function () {
                 var button = $(this);
 
                 siteMap.setView([button.attr("data-lat"), button.attr("data-lng")], 13);
                 setSelectedSite(button.text(), button.attr("data-siteId"));
             });
 
-            $("#logbtns").on("click", ".js-logon", function() {
+            $("#logbtns").on("click", ".js-logon", function () {
                 $(this).hide();
                 $('#overlay').css('width', '100%');
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
@@ -136,15 +138,15 @@
                 $.ajax({
                     url: "/api/timeSheets",
                     method: "post",
-                    data: logonDto 
+                    data: logonDto
                 }).done(function () {
-                    setTimeout(function() { location.reload(true);}, 2000);
-                }).fail(function() {
+                    setTimeout(function () { location.reload(true); }, 2000);
+                }).fail(function () {
                     alert("Failed to log on to site. Reload and try again.");
                 });
             });
 
-            $("#logbtns").on("click", ".js-logoff", function() {
+            $("#logbtns").on("click", ".js-logoff", function () {
                 $(this).hide();
                 $('#overlay').css('width', '100%');
                 var logoffDto = {
@@ -157,8 +159,8 @@
                     method: "put",
                     data: logoffDto
                 }).done(function () {
-                    setTimeout(function() { location.reload(true);}, 2000);
-                }).fail(function() {
+                    setTimeout(function () { location.reload(true); }, 2000);
+                }).fail(function () {
                     alert("Failed to log off from site. Reload and try again.");
                 });
             });
@@ -166,7 +168,7 @@
             $.when(mapLoaded, tableLoaded).done(function (e) {
                 var shortestDistance = 0;
                 var closeSite = null;
-                $.each(workSites, function(index, element) {
+                $.each(workSites, function (index, element) {
                     var siteLoc = L.latLng(element.lat, element.lng);
                     var dist = currentCenter.distanceTo(siteLoc);
                     if (shortestDistance == 0) {
