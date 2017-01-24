@@ -8,7 +8,7 @@
 }
 <h2 id="nearestSite">Loading worksites...</h2>
 <div id="mapid" style="height: 400px;"></div>
-<div id="out"></div>
+<div id="out" userLat="0" userLng="0"></div>
 
 <div id="logbtns"></div>
 
@@ -106,6 +106,14 @@
 
             $("#logbtns").on("click", ".js-logon", function() {
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
+                var vm = {
+                    workSiteId: site.id,
+                    siteName: site.name,
+                    siteLat: site.lat,
+                    siteLng: site.lng,
+                    siteAddress: site.streetAddress,
+                }
+
             });
 
             $.when(mapLoaded, tableLoaded).done(function (e) {
