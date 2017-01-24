@@ -536,6 +536,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\WorkSites\Index.cshtml" />
     <Content Include="Views\TimeSheets\Index.cshtml" />
+    <Content Include="Views\TimeSheets\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
