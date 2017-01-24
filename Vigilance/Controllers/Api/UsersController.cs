@@ -31,7 +31,7 @@ namespace Vigilance.Controllers.Api
 
             var usersDto = users.Select(user => new BasicUsersDTO
             {
-                UserName = user.UserName, Id = user.Id
+                UserName = user.UserName, UserId = user.Id
             }).ToList();
 
             return Ok(usersDto);
