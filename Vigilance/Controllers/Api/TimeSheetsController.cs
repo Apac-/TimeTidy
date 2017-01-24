@@ -50,11 +50,17 @@ namespace Vigilance.Controllers.Api
             }
 
             DateTime? logonTime = null;
+            int? timeSheetId = null;
             if (returnSheet != null)
+            {
                 logonTime = returnSheet.LogOnTime;
+                timeSheetId = returnSheet.Id;
+
+            }
 
             var dto = new LogOnTimeDTO() {
-                DateTime = logonTime
+                DateTime = logonTime,
+                TimeSheetId = timeSheetId
             };
 
             return Ok(dto);
