@@ -14,7 +14,7 @@
 
 <h2 id="nearestSite" style="text-align: center">Loading worksites...</h2>
 <div id="logbtns" style="text-align: center; padding-bottom: 10px">
-    <input type="button" style="display: none; width: 50%;" value="Logon" id="logbtn" data-siteid="null" data-sheetid="null" />
+    <input type="button" style="display: none; width: 50%;" value="Logon" id="logbtn" data-siteId="null" data-sheetid="null" />
 </div>
 
 <div id="mapid" style="height: 400px;"></div>
@@ -45,7 +45,7 @@
                         'class': 'btn btn-success js-logon'
                     }).attr({
                         'data-siteId': siteId,
-                        'data-sheetId': null
+                        'data-sheetid': null
                     }).show();
                 } else {
                     $('#logbtn').prop({
@@ -53,7 +53,7 @@
                         'class': 'btn btn-warning js-logoff'
                     }).attr({
                         'data-siteId': siteId,
-                        'data-sheetId': jsonData.timeSheetId
+                        'data-sheetid': jsonData.timeSheetId
                     }).show();
                 }
             });
@@ -152,7 +152,10 @@
             });
 
             $("#logbtns").on("click", ".js-logoff", function () {
-                $(this).hide();
+                //$(this).hide();
+                var button = $(this);
+                var sheetId = button.attr("data-sheetid");
+                button.hide();
                 $('#overlay').css('width', '100%');
                 var logoffDto = {
                     userLat: $('#out').attr('userLat'),
@@ -160,13 +163,13 @@
                 };
 
                 $.ajax({
-                    url: "/api/timeSheets/" + $(this).attr("data-sheetId"),
+                    url: "/api/timeSheets/" + sheetId,
                     method: "put",
                     data: logoffDto
                 }).done(function () {
                     setTimeout(function () { location.reload(true); }, 2000);
                 }).fail(function () {
-                    alert("Failed to log off from site. Reload and try again.");
+                    alert("Failed to log off from site. Reload and try again. sheetID: " + sheetId);
                 });
             });
 
