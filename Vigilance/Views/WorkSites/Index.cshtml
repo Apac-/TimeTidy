@@ -6,6 +6,7 @@
 @section header{
     @Html.Partial("_LeafletHeader")
 }
+<div id="overlay" class="waitingOverlay"></div>
 <h2 id="nearestSite">Loading worksites...</h2>
 <div id="mapid" style="height: 400px;"></div>
 <div id="out" userLat="0" userLng="0"></div>
@@ -119,6 +120,8 @@
             });
 
             $("#logbtns").on("click", ".js-logon", function() {
+                $(this).hide();
+                $('#overlay').css('width', '100%');
                 var site = getWorkSite(workSites, $(this).attr("data-siteId"));
                 var logonDto = {
                     workSiteId: site.id,
@@ -134,29 +137,29 @@
                     url: "/api/timeSheets",
                     method: "post",
                     data: logonDto 
-                }).done(function() {
-                    alert("Working!");
+                }).done(function () {
+                    setTimeout(function() { location.reload(true);}, 2000);
                 }).fail(function() {
-                    alert("FAILLLLL");
+                    alert("Failed to log on to site. Reload and try again.");
                 });
             });
 
             $("#logbtns").on("click", ".js-logoff", function() {
-                console.log("Clicked");
-                var button = $(this);
+                $(this).hide();
+                $('#overlay').css('width', '100%');
                 var logoffDto = {
                     userLat: $('#out').attr('userLat'),
                     userLng: $('#out').attr('userLng')
                 };
 
                 $.ajax({
-                    url: "/api/timeSheets/" + button.attr("data-sheetId"),
+                    url: "/api/timeSheets/" + $(this).attr("data-sheetId"),
                     method: "put",
                     data: logoffDto
-                }).done(function() {
-                    alert("Updated!");
+                }).done(function () {
+                    setTimeout(function() { location.reload(true);}, 2000);
                 }).fail(function() {
-                    alert("Failed to PUT");
+                    alert("Failed to log off from site. Reload and try again.");
                 });
             });
 
