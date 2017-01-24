@@ -61,10 +61,25 @@ namespace Vigilance.Controllers.Api
         }
 
         // POST /api/timesheets
-        public IHttpActionResult CreateTimeSheet(TimeSheetLogonDTO timeSheetDto)
+        public IHttpActionResult CreateTimeSheet(TimeSheetLogonDTO logonDto)
         {
-            
-        }
+            string userId = User.Identity.GetUserId();
 
+            var timeSheet = new TimeSheet()
+            {
+                ApplicationUserId = userId,
+                WorkSiteId = logonDto.WorkSiteId,
+                SiteName = logonDto.SiteName,
+                SiteLocation = new LatLng(logonDto.SiteLat, logonDto.SiteLng),
+                SiteAddress = logonDto.SiteAddress,
+                LogOnTime = logonDto.LogOnTime,
+                LogOnLocation = new LatLng(logonDto.UserLat, logonDto.UserLng)
+            };
+
+            _context.TimeSheets.Add(timeSheet);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
