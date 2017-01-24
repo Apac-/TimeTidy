@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace Vigilance.Models.DTOs {
-    public class TimeSheetDTO {
+    public class TimeSheetLogonDTO {
         [Required]
         public int WorkSiteId { get; set; }
 
