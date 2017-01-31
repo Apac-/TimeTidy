@@ -152,10 +152,8 @@
             });
 
             $("#logbtns").on("click", ".js-logoff", function () {
-                //$(this).hide();
-                var button = $(this);
-                var sheetId = button.attr("data-sheetid");
-                button.hide();
+                $(this).hide();
+                var sheetId = $(this).attr("data-sheetid");
                 $('#overlay').css('width', '100%');
                 var logoffDto = {
                     userLat: $('#out').attr('userLat'),
