@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNet.Identity.EntityFramework
+﻿@using Microsoft.Ajax.Utilities
+@using Microsoft.AspNet.Identity.EntityFramework
 @model Vigilance.Models.UserFormViewModel
 @{
     ViewBag.Title = "UserForm";
@@ -31,12 +32,18 @@
 
     <div class="row">
         <div class="col-md-4 col-sm-4">
+            <label>User authentication roles</label>
             <ul id="userRoles" class="list-group">
                 @foreach (var uRole in Model.UserRoles) {
-                    <li class="list-group-item">@uRole.Name</li>
+                    <li class="list-group-item" id='@uRole.Name' name="userRoles">@uRole.Name</li>
                 }
             </ul>
+
         </div>
+    </div>
+    <div>
+        @Html.DropDownListFor(m => m.AvilableRoles, new SelectList(Model.AvilableRoles, "Id", "Name"),
+            "Roles", new { @class = "form-control" })
     </div>
 
     @Html.HiddenFor(m => m.UserId)
@@ -46,4 +53,22 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function () {
+
+            $("#AvilableRoles").change(function () {
+                var selectedRole = $('option:selected', $(this)).text();
+                if ($("#" + selectedRole).length == 0) {
+                    $("#userRoles").append("<li class='list-group-item' id='" +
+                        selectedRole +
+                        "' name='userRoles'>" +
+                        selectedRole +
+                        "</li>");
+                } else {
+                    $('#' + selectedRole).remove();
+                }
+            });
+        });
+    </script>
 }
