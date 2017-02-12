@@ -6,6 +6,8 @@ using System.Web;
 namespace Vigilance.Models.DTOs {
     public class TimeSheetDTO {
 
+        public int Id { get; set; }
+
         public string SiteName { get; set; }
 
         public LatLng SiteLocation { get; set; }
@@ -22,6 +24,7 @@ namespace Vigilance.Models.DTOs {
 
         public TimeSheetDTO(TimeSheet sheet)
         {
+            Id = sheet.Id;
             SiteName = sheet.SiteName;
             SiteLocation = sheet.SiteLocation;
             SiteAddress = sheet.SiteAddress;
