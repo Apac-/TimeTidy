@@ -13,20 +13,22 @@ namespace Vigilance.Models {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public ICollection<IdentityUserRole> UserRoles { get; set; }
+        public ICollection<IdentityRole> UserRoles { get; set; }
         public ICollection<IdentityRole> AvilableRoles { get; set; }
 
-        public UserFormViewModel(ApplicationUser user, List<IdentityRole> roles) 
+        public UserFormViewModel(ApplicationUser user, List<IdentityRole> roles, List<IdentityRole> userRoles) 
         {
             UserId = user.Id;
             PhoneNumber = user.PhoneNumber;
             Email = user.Email;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            UserRoles = user.Roles;
+
+            UserRoles = userRoles;
 
             AvilableRoles = roles;
         }
+
 
     }
 }

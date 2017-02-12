@@ -33,12 +33,15 @@ namespace Vigilance.Controllers
         public ActionResult Edit(string id)
         {
             var userInDb = _userManager.Users.SingleOrDefault(u => u.Id == id);
-            var roles = _context.Roles.ToList();
 
             if (userInDb == null)
                 return HttpNotFound();
 
-            var viewModel = new UserFormViewModel(userInDb, roles);
+            var roles = _context.Roles.ToList();
+
+            var userRoles = roles.Where(r => userInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
+
+            var viewModel = new UserFormViewModel(userInDb, roles, userRoles);
 
             return View("UserForm", viewModel);
         }
