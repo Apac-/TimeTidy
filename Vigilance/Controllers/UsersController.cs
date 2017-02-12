@@ -52,7 +52,7 @@ namespace Vigilance.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var uInDb = _userManager.Users.SingleOrDefault(u => u.Id == user.Id);
+                var uInDb = _userManager.Users.SingleOrDefault(u => u.Id == user.UserId);
                 if (uInDb == null)
                     return HttpNotFound();
 
@@ -64,7 +64,7 @@ namespace Vigilance.Controllers
 
             // Get user from DB
             // Update with new information
-            var userInDb = _userManager.Users.Single(u => u.Id == user.Id);
+            var userInDb = _userManager.Users.Single(u => u.Id == user.UserId);
             userInDb.FirstName = user.FirstName;
             userInDb.LastName = user.LastName;
             userInDb.PhoneNumber = user.PhoneNumber;
@@ -72,10 +72,12 @@ namespace Vigilance.Controllers
             userInDb.Email = user.Email;
 
             // Remove all roles then add new ones
-            var userInManager = await _userManager.FindByIdAsync(user.Id);
-            await _userManager.RemoveFromRolesAsync(user.Id, _userManager.GetRoles(user.Id).ToArray());
-            await _userManager.AddToRolesAsync(user.Id, user.UserRoles.ToArray());
+            var userInManager = await _userManager.FindByIdAsync(user.UserId);
+            await _userManager.RemoveFromRolesAsync(user.UserId, _userManager.GetRoles(user.UserId).ToArray());
+            await _userManager.AddToRolesAsync(user.UserId, user.UserRoles.ToArray());
             await _userManager.UpdateAsync(userInManager);
+
+            _context.SaveChanges();
 
             return RedirectToAction("Index", "Users");
         }
