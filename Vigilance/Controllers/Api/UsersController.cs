@@ -29,6 +29,10 @@ namespace Vigilance.Controllers.Api
         {
             var users = _userManager.Users.ToList();
 
+            var admin = users.First(u => u.UserName.Contains("admin"));
+            if (admin != null)
+                users.Remove(admin);
+
             var usersDto = users.Select(user => new BasicUsersDTO
             {
                 UserName = user.UserName, 
