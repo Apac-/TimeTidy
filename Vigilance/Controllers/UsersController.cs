@@ -28,6 +28,10 @@ namespace Vigilance.Controllers
         {
             var users = _userManager.Users.ToList();
 
+            var admin = users.First(u => u.UserName.Contains("admin"));
+            if (admin != null)
+                users.Remove(admin);
+
             return View("Index", users);
         }
 
