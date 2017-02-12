@@ -10,6 +10,7 @@ using Vigilance.Models.DTOs;
 
 namespace Vigilance.Controllers.Api
 {
+    [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class UserTimeSheetsController : ApiController
     {
         private ApplicationDbContext _context;

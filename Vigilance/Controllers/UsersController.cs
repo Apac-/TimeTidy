@@ -10,6 +10,7 @@ using Vigilance.Models;
 
 namespace Vigilance.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : Controller
     {
         private ApplicationDbContext _context;

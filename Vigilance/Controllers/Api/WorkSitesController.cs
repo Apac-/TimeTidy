@@ -22,7 +22,6 @@ namespace Vigilance.Controllers.Api
         // GET /api/worksites
         public IHttpActionResult GetWorkSites()
         {
-            //return Ok(_context.WorkSites.ToList().Select(Mapper.Map<WorkSite, WorkSiteDTO>));
             return Ok(_context.WorkSites.ToList());
         }
 
@@ -40,6 +39,7 @@ namespace Vigilance.Controllers.Api
 
         // POST /api/worksites
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public IHttpActionResult CreateWorkSite(WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
@@ -57,6 +57,7 @@ namespace Vigilance.Controllers.Api
 
         // PUT /api/worksites/1
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public IHttpActionResult UpdateWorkSite(int id, WorkSiteDTO workSiteDto)
         {
             if (!ModelState.IsValid)
@@ -76,6 +77,7 @@ namespace Vigilance.Controllers.Api
 
         // DELET /api/worksites/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public IHttpActionResult DeleteWorkSite(int id)
         {
             var siteInDb = _context.WorkSites.SingleOrDefault(w => w.Id == id);

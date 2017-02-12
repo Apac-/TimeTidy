@@ -21,6 +21,7 @@ namespace Vigilance.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Edit(int id)
         {
             var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
@@ -31,6 +32,7 @@ namespace Vigilance.Controllers
             return View("WorkSiteForm", worksite);
         }
 
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult New() {
             var workSite = new WorkSite();
 
@@ -38,6 +40,7 @@ namespace Vigilance.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Save(WorkSite worksite) {
             if (!ModelState.IsValid)
                 return View("WorkSiteForm", worksite);

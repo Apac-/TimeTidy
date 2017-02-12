@@ -10,6 +10,7 @@ using Vigilance.ViewModels;
 
 namespace Vigilance.Controllers
 {
+    [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class TimeSheetsController : Controller
     {
         private ApplicationDbContext _context;
