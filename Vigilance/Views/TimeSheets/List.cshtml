@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.UserName time sheet</h2>
+<h2>@Model.UserName Time Sheets</h2>
 
 <table id="timeSheets" class="table table-bordered table-hover">
     <thead>
@@ -21,6 +21,8 @@
 
 @section scripts{
     @Scripts.Render("~/Scripts/leaflet-basics.js");
+    @Scripts.Render("~/Scripts/Moment.js");
+    <script src="//cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -38,10 +40,14 @@
                         data: "siteAddress"
                     },
                     {
-                        data: "logOnTime"
+                        render: function(data, type, user) {
+                            return moment(user.logOnTime).utcOffset(+10).format('MMMM Do YYYY, h:mm:ss a');
+                        }
                     },
                     {
-                        data: "logOffTime"
+                        render: function(data, type, user) {
+                            return moment(user.logOffTime).utcOffset(+10).format('MMMM Do YYYY, h:mm:ss a');
+                        }
                     }
                 ]
             });
