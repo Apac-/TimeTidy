@@ -29,5 +29,15 @@ namespace Vigilance.Controllers
 
             return View("Index", users);
         }
+
+        public ActionResult Edit(string id)
+        {
+            var userInDb = _userManager.Users.SingleOrDefault(u => u.Id == id);
+
+            if (userInDb == null)
+                return HttpNotFound();
+
+            return View("Edit", userInDb);
+        }
     }
 }
