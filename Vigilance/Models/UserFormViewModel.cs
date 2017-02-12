@@ -13,8 +13,8 @@ namespace Vigilance.Models {
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public ICollection<IdentityRole> UserRoles { get; set; }
-        public ICollection<IdentityRole> AvilableRoles { get; set; }
+        public List<IdentityRole> UserRoles { get; set; }
+        public List<IdentityRole> AvilableRoles { get; set; }
 
         public UserFormViewModel(ApplicationUser user, List<IdentityRole> roles, List<IdentityRole> userRoles) 
         {
