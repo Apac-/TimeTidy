@@ -550,7 +550,7 @@
     <Content Include="Views\WorkSites\Index.cshtml" />
     <Content Include="Views\TimeSheets\Index.cshtml" />
     <Content Include="Views\TimeSheets\List.cshtml" />
-    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\UserForm.cshtml" />
     <None Include="Web.Godaddy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

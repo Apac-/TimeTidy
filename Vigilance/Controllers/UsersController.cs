@@ -37,7 +37,7 @@ namespace Vigilance.Controllers
             if (userInDb == null)
                 return HttpNotFound();
 
-            return View("Edit", userInDb);
+            return View("UserForm", userInDb);
         }
     }
 }
