@@ -235,6 +235,7 @@
     <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\TimeLog.cs" />
     <Compile Include="Models\TimeSheet.cs" />
+    <Compile Include="Models\UserFormViewModel.cs" />
     <Compile Include="Models\UserIdViewModel.cs" />
     <Compile Include="Models\WorkSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
