@@ -34,14 +34,14 @@
         <div class="col-md-4 col-sm-4">
             <label>User authentication roles</label>
             <ul id="userRoles" class="list-group">
-                @foreach (var uRole in Model.UserRoles) {
-                    <li class="list-group-item" id='@uRole.Name' name="userRoles">@uRole.Name</li>
+                @for (int i = 0; i < Model.UserRoles.Count; i++) {
+                    <li class="list-group-item @Model.UserRoles[i].Name">@Model.UserRoles[i].Name</li>
+                    <input class="@Model.UserRoles[i].Name" type="hidden" name="UserRoles" value=@Model.UserRoles[i].Name />
                 }
             </ul>
-
         </div>
     </div>
-    <div>
+    <div class="form-group">
         @Html.DropDownListFor(m => m.AvilableRoles, new SelectList(Model.AvilableRoles, "Id", "Name"),
             "Roles", new { @class = "form-control" })
     </div>
@@ -55,18 +55,19 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
 
-            $("#AvilableRoles").change(function () {
+            $("#AvilableRoles").change(function() {
                 var selectedRole = $('option:selected', $(this)).text();
-                if ($("#" + selectedRole).length == 0) {
-                    $("#userRoles").append("<li class='list-group-item' id='" +
-                        selectedRole +
-                        "' name='userRoles'>" +
-                        selectedRole +
-                        "</li>");
-                } else {
-                    $('#' + selectedRole).remove();
+                if (selectedRole != "Roles") {
+                    if ($("." + selectedRole).length == 0) {
+                        $("#userRoles")
+                            .append("<li class='list-group-item " + selectedRole + "'>" + selectedRole + "</li>");
+                        $("#userRoles")
+                            .append("<input class='" + selectedRole + "' type='hidden' name='UserRoles' value='" + selectedRole + "' />");
+                    } else {
+                        $('.' + selectedRole).remove();
+                    }
                 }
             });
         });
