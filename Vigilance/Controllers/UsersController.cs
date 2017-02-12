@@ -42,5 +42,22 @@ namespace Vigilance.Controllers
 
             return View("UserForm", viewModel);
         }
+
+        [HttpPost]
+        public ActionResult Save()
+        {
+            if (!ModelState.IsValid)
+            {
+                // Recreate UserFOrmViewModel
+                // Direction to UserForm
+                throw new NotImplementedException();
+            }
+
+            // Get user from DB
+            // Update with new information
+
+            throw new NotImplementedException();
+            return RedirectToAction("Index", "Users");
+        }
     }
 }
