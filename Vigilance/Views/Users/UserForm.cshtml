@@ -1,18 +1,37 @@
 ﻿@model Vigilance.Models.UserFormViewModel
-
 @{
-    Layout = null;
+    ViewBag.Title = "UserForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<h2>Edit User Account</h2>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+@using (Html.BeginForm("Save", "Users"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNumber)
+        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control"})
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>
+    @Html.HiddenFor(m => m.UserId)
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
