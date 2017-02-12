@@ -58,12 +58,16 @@
                     },
                     {
                         render: function(data, type, timeSheet) {
-                            userLocation = L.latLng(timeSheet.logOffLocation.lat, timeSheet.logOffLocation.lng);
-                            siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
-                            return moment(timeSheet.logOffTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
-                                " | " +
-                                Math.floor(userLocation.distanceTo(siteLocation)) +
-                                " meters from site.";
+                            if (timeSheet.logOffLocation != null) {
+                                userLocation = L.latLng(timeSheet.logOffLocation.lat, timeSheet.logOffLocation.lng);
+                                siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
+                                return moment(timeSheet.logOffTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
+                                    " | " +
+                                    Math.floor(userLocation.distanceTo(siteLocation)) +
+                                    " meters from site.";
+                            } else {
+                                return "Has not logged off site.";
+                            }
                         }
                     },
                     {
@@ -71,31 +75,33 @@
                         render: function(data, type, sheet) {
                             return "<button class='btn-link js-delete' data-sheet-id=" +
                                 data +
-                                "'>Delete</button>";
+                                ">Delete</button>";
                         }
                     }
                 ]
             });
 
-            $("#sites").on('click', '.js-delete', function () {
-                var button = $(this);
+            $("#timeSheets").on('click',
+                '.js-delete',
+                function() {
+                    var button = $(this);
 
-                bootbox.confirm({
-                    title: "Delete entry?",
-                    message: "Are you sure you want to delete this sheet entry?",
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/userTimeSheets/" + button.attr("data-sheet-id"),
-                                method: "DELETE",
-                                success: function() {
-                                    table.row(button.parents("tr")).remove().draw();
-                                }
-                            });
+                    bootbox.confirm({
+                        title: "Delete entry?",
+                        message: "Are you sure you want to delete this sheet entry?",
+                        callback: function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/usertimesheets/" + button.attr("data-sheet-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        table.row(button.parents("tr")).remove().draw();
+                                    }
+                                });
+                            }
                         }
-                    }
+                    });
                 });
-            });
 
         });
     </script>
