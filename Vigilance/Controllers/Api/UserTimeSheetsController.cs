@@ -37,5 +37,20 @@ namespace Vigilance.Controllers.Api
 
             return Ok(dto);
         }
+
+        // DELET /api/userTimeSheets/sheet_id
+        [HttpDelete]
+        public IHttpActionResult DeleteTimeSheet(int id)
+        {
+            var sheetInDb = _context.TimeSheets.SingleOrDefault(s => s.Id == id);
+
+            if (sheetInDb == null)
+                return NotFound();
+
+            _context.TimeSheets.Remove(sheetInDb);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }
 }
