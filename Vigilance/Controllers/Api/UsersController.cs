@@ -11,6 +11,7 @@ using Vigilance.Models.DTOs;
 
 namespace Vigilance.Controllers.Api
 {
+    [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : ApiController
     {
         private ApplicationDbContext _context;
