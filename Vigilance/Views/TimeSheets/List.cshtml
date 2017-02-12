@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section header{
+    @Html.Partial("_LeafletHeader")
+}
+
 <h2>@Model.UserName Time Sheets</h2>
 
 <table id="timeSheets" class="table table-bordered table-hover">
@@ -27,6 +31,8 @@
     <script>
         $(document).ready(function() {
 
+            var userLocation = null;
+            var siteLocation = null;
             var table = $("#timeSheets").DataTable({
                 ajax: {
                     url: "/api/userTimeSheets/" + $("#userId").val(),
@@ -40,13 +46,23 @@
                         data: "siteAddress"
                     },
                     {
-                        render: function(data, type, user) {
-                            return moment(user.logOnTime).utcOffset(+10).format('MMMM Do YYYY, h:mm:ss a');
+                        render: function(data, type, timeSheet) {
+                            userLocation = L.latLng(timeSheet.logOnLocation.lat, timeSheet.logOnLocation.lng);
+                            siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
+                            return moment(timeSheet.logOnTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
+                                " | " +
+                                Math.floor(userLocation.distanceTo(siteLocation)) +
+                                " meters from site.";
                         }
                     },
                     {
-                        render: function(data, type, user) {
-                            return moment(user.logOffTime).utcOffset(+10).format('MMMM Do YYYY, h:mm:ss a');
+                        render: function(data, type, timeSheet) {
+                            userLocation = L.latLng(timeSheet.logOffLocation.lat, timeSheet.logOffLocation.lng);
+                            siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
+                            return moment(timeSheet.logOffTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
+                                " | " +
+                                Math.floor(userLocation.distanceTo(siteLocation)) +
+                                " meters from site.";
                         }
                     }
                 ]
