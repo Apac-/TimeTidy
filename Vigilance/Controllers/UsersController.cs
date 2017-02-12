@@ -73,8 +73,10 @@ namespace Vigilance.Controllers
 
             // Remove all roles then add new ones
             var userInManager = await _userManager.FindByIdAsync(user.UserId);
-            await _userManager.RemoveFromRolesAsync(user.UserId, _userManager.GetRoles(user.UserId).ToArray());
-            await _userManager.AddToRolesAsync(user.UserId, user.UserRoles.ToArray());
+            if (userInManager.Roles != null && userInManager.Roles.Count > 0)
+                await _userManager.RemoveFromRolesAsync(user.UserId, _userManager.GetRoles(user.UserId).ToArray());
+            if (user.UserRoles != null && user.UserRoles.Count > 0)
+                await _userManager.AddToRolesAsync(user.UserId, user.UserRoles.ToArray());
             await _userManager.UpdateAsync(userInManager);
 
             _context.SaveChanges();
