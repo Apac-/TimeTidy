@@ -9,6 +9,7 @@
 <table id="workers" class="table table-bordered table-hover">
     <thead>
         <tr>
+            <th>Login</th>
             <th>Name</th>
         </tr>
     </thead>
@@ -29,6 +30,11 @@
                         data: "userName",
                         render: function (data, type, user) {
                             return "<a href='/timeSheets/list/" + user.userId + "'>" + user.userName + "</a>";
+                        }
+                    },
+                    {
+                        render: function(data, type, user) {
+                            return user.lastName + ", " + user.firstName;
                         }
                     }
                 ]
