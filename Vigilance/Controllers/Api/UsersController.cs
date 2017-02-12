@@ -58,6 +58,16 @@ namespace Vigilance.Controllers.Api
             return Ok(user);
         }
 
-        // TODO (Jeff): B. Create Delete and Update
+        // DELETE /api/users/id
+        public IHttpActionResult DeleteUser(string id)
+        {
+            var userInDb = _userManager.FindById(id);
+            if (userInDb == null)
+                return NotFound();
+
+            _userManager.Delete(userInDb);
+
+            return Ok();
+        }
     }
 }
