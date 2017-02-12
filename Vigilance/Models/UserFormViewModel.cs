@@ -7,9 +7,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Vigilance.Models {
     public class UserFormViewModel
     {
-        private ApplicationUser userInDb;
-        private List<IdentityRole> roles;
-
         public string UserId { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
