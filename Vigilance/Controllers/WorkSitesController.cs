@@ -72,6 +72,7 @@ namespace Vigilance.Controllers
             return View();
         }
 
+        [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult List()
         {
             var sites = _context.WorkSites.ToList();
