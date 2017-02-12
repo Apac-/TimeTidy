@@ -79,7 +79,7 @@ namespace Vigilance.Models
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        [RegularExpression(@"^[a-zA-Z0-9._%+-]+(@[mM]orrow.com)$", ErrorMessage = "Registration limited to Morrow accounts only.")]
+        //[RegularExpression(@"^[a-zA-Z0-9._%+-]+(@[mM]orrow.com)$", ErrorMessage = "Registration limited to Morrow accounts only.")]
         public string Email { get; set; }
 
         [Required]
