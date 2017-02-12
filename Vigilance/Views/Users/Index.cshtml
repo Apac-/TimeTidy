@@ -29,6 +29,9 @@
                 columns: [
                     {
                         data: "userName",
+                        render: function(data, type, user) {
+                            return "<a href='/users/edit/" + user.userId + "'>" + data + "</a>";
+                        }
                     },
                     {
                         render: function(data, type, user) {
