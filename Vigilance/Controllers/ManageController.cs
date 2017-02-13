@@ -87,7 +87,15 @@ namespace Vigilance.Controllers
             var viewModel = new UserSelfEditFormViewModel(user);
 
             return View("SelfEdit", viewModel);
-        } 
+        }
+
+        // POST: /Manage/Save
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save()
+        {
+            
+        }
 
         //
         // POST: /Manage/RemoveLogin
