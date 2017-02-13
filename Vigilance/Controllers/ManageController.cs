@@ -92,9 +92,27 @@ namespace Vigilance.Controllers
         // POST: /Manage/Save
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save()
+        public ActionResult Save(UserSelfEditFormViewModel model)
         {
-            
+            if (!ModelState.IsValid)
+            {
+                return View("SelfEdit", model);
+            }
+
+            var userId = User.Identity.GetUserId();
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (user == null)
+                return HttpNotFound();
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+
+            _userManager.Update(user);
+
+            return RedirectToAction("Index");
         }
 
         //
