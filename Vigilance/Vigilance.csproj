@@ -236,6 +236,7 @@
     <Compile Include="Models\TimeLog.cs" />
     <Compile Include="Models\TimeSheet.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserSelfEditFormViewModel.cs" />
     <Compile Include="Models\UserFormViewModel.cs" />
     <Compile Include="Models\UserIdViewModel.cs" />
     <Compile Include="Models\WorkSite.cs" />
