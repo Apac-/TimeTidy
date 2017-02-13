@@ -75,7 +75,7 @@ namespace Vigilance.Controllers
             return View(model);
         }
 
-        // GET: /Manage/EditSelf
+        // GET: /Manage/Edit
         public ActionResult Edit()
         {
             var userId = User.Identity.GetUserId();
@@ -86,7 +86,7 @@ namespace Vigilance.Controllers
 
             var viewModel = new UserSelfEditFormViewModel(user);
 
-            return View("SelfEdit", viewModel);
+            return View("Edit", viewModel);
         }
 
         // POST: /Manage/Save
