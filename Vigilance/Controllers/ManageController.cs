@@ -79,7 +79,7 @@ namespace Vigilance.Controllers
         public ActionResult Edit()
         {
             var userId = User.Identity.GetUserId();
-            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+            var user = UserManager.Users.SingleOrDefault(u => u.Id == userId);
 
             if (user == null)
                 return HttpNotFound();
@@ -96,11 +96,11 @@ namespace Vigilance.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("SelfEdit", model);
+                return View("Edit", model);
             }
 
             var userId = User.Identity.GetUserId();
-            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+            var user = UserManager.Users.SingleOrDefault(u => u.Id == userId);
 
             if (user == null)
                 return HttpNotFound();
@@ -110,7 +110,7 @@ namespace Vigilance.Controllers
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
 
-            _userManager.Update(user);
+            UserManager.Update(user);
 
             return RedirectToAction("Index");
         }

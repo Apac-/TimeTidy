@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -7,9 +8,13 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace Vigilance.Models {
     public class UserSelfEditFormViewModel
     {
+        [Required]
         public string PhoneNumber { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
 
         public UserSelfEditFormViewModel(ApplicationUser user) 
@@ -20,5 +25,9 @@ namespace Vigilance.Models {
             LastName = user.LastName;
         }
 
+        public UserSelfEditFormViewModel()
+        {
+            
+        }
     }
 }
