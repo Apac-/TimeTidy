@@ -75,6 +75,20 @@ namespace Vigilance.Controllers
             return View(model);
         }
 
+        // GET: /Manage/EditSelf
+        public ActionResult Edit()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = _userManager.Users.SingleOrDefault(u => u.Id == userId);
+
+            if (user == null)
+                return HttpNotFound();
+
+            var viewModel = new UserSelfEditFormViewModel(user);
+
+            return View("SelfEdit", viewModel);
+        } 
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
