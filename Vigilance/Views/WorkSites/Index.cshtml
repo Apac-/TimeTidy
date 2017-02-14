@@ -123,6 +123,7 @@
 
                 siteMap.setView([button.attr("data-lat"), button.attr("data-lng")], 13);
                 setSelectedSite(button.text(), button.attr("data-siteId"));
+                $('html,body').animate({scrollTop: 0}, 'fast');
             });
 
             $("#logbtns").on("click", ".js-logon", function () {
