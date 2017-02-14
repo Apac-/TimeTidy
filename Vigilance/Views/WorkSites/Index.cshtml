@@ -60,7 +60,7 @@
         }
 
         function onMarkerClick(e) {
-            setSelectedSite(e.target.title, e.target.id);
+            setSelectedSite(e.target.options.title, e.target.id);
         }
 
         function getWorkSite(sites, siteId) {
@@ -76,7 +76,6 @@
 
         $(document).ready(function () {
             var siteMap = setUpMap();
-            console.log(siteMap);
             geoFindMe(siteMap);
 
             var selectedSite = null;
