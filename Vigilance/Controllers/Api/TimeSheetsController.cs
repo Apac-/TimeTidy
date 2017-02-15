@@ -81,7 +81,7 @@ namespace Vigilance.Controllers.Api
                 SiteName = logonDto.SiteName,
                 SiteLocation = new LatLng(logonDto.SiteLat, logonDto.SiteLng),
                 SiteAddress = logonDto.SiteAddress,
-                LogOnTime = DateTime.Now,
+                LogOnTime = DateTime.UtcNow,
                 LogOnLocation = new LatLng(logonDto.UserLat, logonDto.UserLng)
             };
 
@@ -103,7 +103,7 @@ namespace Vigilance.Controllers.Api
             if (timeSheet.ApplicationUserId != User.Identity.GetUserId())
                 return BadRequest();
 
-            timeSheet.LogOffTime = DateTime.Now;
+            timeSheet.LogOffTime = DateTime.UtcNow;
             timeSheet.LogOffLocation = new LatLng(logoffDto.UserLat, logoffDto.UserLng);
 
             _context.SaveChanges();
