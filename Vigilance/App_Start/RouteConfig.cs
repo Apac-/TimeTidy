@@ -15,7 +15,7 @@ namespace Vigilance {
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "WorkSites", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
