@@ -41,5 +41,15 @@ namespace Vigilance.Controllers
 
             return View(vm);
         }
+
+        public ActionResult Worksite(int id)
+        {
+            var siteInDb = _context.WorkSites.SingleOrDefault(s => s.Id == id);
+
+            if (siteInDb == null)
+                return HttpNotFound();
+
+            return View("worksite", siteInDb);
+        }
     }
 }
