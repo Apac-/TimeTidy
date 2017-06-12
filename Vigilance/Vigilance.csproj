@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -555,6 +556,7 @@
     <Content Include="Views\TimeSheets\List.cshtml" />
     <Content Include="Views\Users\UserForm.cshtml" />
     <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\TimeSheets\Worksite.cshtml" />
     <None Include="Web.Godaddy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
