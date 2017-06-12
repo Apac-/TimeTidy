@@ -182,6 +182,7 @@
     <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="Controllers\Api\UserTimeSheetsController.cs" />
     <Compile Include="Controllers\Api\WorkSitesController.cs" />
+    <Compile Include="Controllers\Api\WorkSiteTimeSheetsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TimeSheetsController.cs" />
