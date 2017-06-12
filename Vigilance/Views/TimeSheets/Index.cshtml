@@ -4,7 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Worker Time Sheets</h2>
+<h2>Site Time Sheets</h2>
+
+<table id="worksites" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<h2>User Time Sheets</h2>
 
 <table id="workers" class="table table-bordered table-hover">
     <thead>
@@ -35,6 +47,25 @@
                     {
                         render: function(data, type, user) {
                             return user.lastName + ", " + user.firstName;
+                        }
+                    }
+                ]
+            });
+
+            var table = $("#worksites").DataTable({
+                ajax: {
+                    url: "/api/worksites",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        render: function (data, type, worksite) {
+                            return "<a href='/timeSheets/worksite/" + worksite.id + "'>" + worksite.name + "</a>";
+                        }
+                    },
+                    {
+                        render: function(data, type, worksite) {
+                            return worksite.streetAddress;
                         }
                     }
                 ]
