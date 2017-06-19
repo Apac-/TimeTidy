@@ -192,4 +192,5 @@ ModelManifest.xml
 Web.Godaddy.config
 
 # Publish profiles
-Properties/PublishProfiles/*
+*.pubxml
+*.publishproj
