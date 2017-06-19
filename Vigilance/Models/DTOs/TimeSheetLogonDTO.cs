@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Vigilance.Models.DTOs {
+namespace TimeTidy.Models.DTOs {
     public class TimeSheetLogonDTO {
         [Required]
         public int WorkSiteId { get; set; }

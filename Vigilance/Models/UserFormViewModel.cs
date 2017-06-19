@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Vigilance.Models {
+namespace TimeTidy.Models {
     public class UserFormViewModel
     {
         public string UserId { get; set; }

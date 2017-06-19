@@ -5,10 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
-using Vigilance.DTOs;
-using Vigilance.Models;
+using TimeTidy.DTOs;
+using TimeTidy.Models;
 
-namespace Vigilance.Controllers.Api
+namespace TimeTidy.Controllers.Api
 {
     public class WorkSitesController : ApiController
     {

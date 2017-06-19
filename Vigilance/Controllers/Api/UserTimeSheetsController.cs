@@ -5,10 +5,10 @@ using System.Net;
 using System.Net.Http;
 using System.Data.Entity;
 using System.Web.Http;
-using Vigilance.Models;
-using Vigilance.Models.DTOs;
+using TimeTidy.Models;
+using TimeTidy.Models.DTOs;
 
-namespace Vigilance.Controllers.Api
+namespace TimeTidy.Controllers.Api
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class UserTimeSheetsController : ApiController

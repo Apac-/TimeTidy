@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Vigilance.DTOs {
+namespace TimeTidy.DTOs {
     public class WorkSiteDTO {
         public int Id { get; set; }
 

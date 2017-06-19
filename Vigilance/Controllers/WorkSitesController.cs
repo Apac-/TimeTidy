@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Vigilance.Models;
+using TimeTidy.Models;
 
-namespace Vigilance.Controllers
+namespace TimeTidy.Controllers
 {
     public class WorkSitesController : Controller
     {

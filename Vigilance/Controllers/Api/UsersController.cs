@@ -6,10 +6,10 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Vigilance.Models;
-using Vigilance.Models.DTOs;
+using TimeTidy.Models;
+using TimeTidy.Models.DTOs;
 
-namespace Vigilance.Controllers.Api
+namespace TimeTidy.Controllers.Api
 {
     [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : ApiController

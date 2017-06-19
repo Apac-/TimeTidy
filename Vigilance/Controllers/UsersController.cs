@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Vigilance.Models;
+using TimeTidy.Models;
 
-namespace Vigilance.Controllers
+namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : Controller

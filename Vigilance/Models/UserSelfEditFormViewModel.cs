@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Vigilance.Models {
+namespace TimeTidy.Models {
     public class UserSelfEditFormViewModel
     {
         [Required]

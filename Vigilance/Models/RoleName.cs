@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Vigilance.Models {
+namespace TimeTidy.Models {
     public static class RoleName
     {
         public const string CanManageWorkSites = "CanManageWorkSites";

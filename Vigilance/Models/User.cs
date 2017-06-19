@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Vigilance.Models {
+namespace TimeTidy.Models {
     public class User {
         [Required]
         public string UserId { get; set; }

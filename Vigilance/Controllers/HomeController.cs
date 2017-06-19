@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Vigilance.Controllers {
+namespace TimeTidy.Controllers {
     public class HomeController : Controller {
         public ActionResult Index() {
             return RedirectToAction("Index", "WorkSites");

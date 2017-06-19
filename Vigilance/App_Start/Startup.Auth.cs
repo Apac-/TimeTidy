@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Vigilance.Models;
+using TimeTidy.Models;
 
-namespace Vigilance
+namespace TimeTidy
 {
     public partial class Startup
     {

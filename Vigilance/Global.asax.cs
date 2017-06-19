@@ -7,9 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
-using Vigilance.App_Start;
+using TimeTidy.App_Start;
 
-namespace Vigilance
+namespace TimeTidy
 {
     public class MvcApplication : System.Web.HttpApplication
     {

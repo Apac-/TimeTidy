@@ -1,4 +1,4 @@
-namespace Vigilance.Migrations
+namespace TimeTidy.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

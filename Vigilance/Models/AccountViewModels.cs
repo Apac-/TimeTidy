@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Vigilance.Models
+namespace TimeTidy.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

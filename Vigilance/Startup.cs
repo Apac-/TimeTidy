@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Vigilance.Startup))]
-namespace Vigilance
+[assembly: OwinStartupAttribute(typeof(TimeTidy.Startup))]
+namespace TimeTidy
 {
     public partial class Startup
     {

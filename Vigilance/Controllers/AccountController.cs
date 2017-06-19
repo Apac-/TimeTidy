@@ -9,9 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Vigilance.Models;
+using TimeTidy.Models;
 
-namespace Vigilance.Controllers
+namespace TimeTidy.Controllers
 {
     [Authorize]
     public class AccountController : Controller

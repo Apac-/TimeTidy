@@ -5,10 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Vigilance.Models;
-using Vigilance.ViewModels;
+using TimeTidy.Models;
+using TimeTidy.ViewModels;
 
-namespace Vigilance.Controllers
+namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class TimeSheetsController : Controller

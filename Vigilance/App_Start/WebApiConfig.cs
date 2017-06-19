@@ -5,7 +5,7 @@ using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Vigilance
+namespace TimeTidy
 {
     public static class WebApiConfig
     {
