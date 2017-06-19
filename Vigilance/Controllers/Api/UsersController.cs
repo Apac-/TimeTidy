@@ -30,7 +30,8 @@ namespace Vigilance.Controllers.Api
         {
             var users = _userManager.Users.ToList();
 
-            var admin = users.First(u => u.UserName.Contains("admin"));
+            // If built in admin account then skip. Prevents del of master account
+            var admin = users.First(u => u.UserName =="admin@timetidy.com");
             if (admin != null)
                 users.Remove(admin);
 
