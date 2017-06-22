@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using TimeTidy.Services;
+using TimeTidy.Controllers;
 
 namespace TimeTidy
 {
@@ -16,6 +17,8 @@ namespace TimeTidy
 
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IDbContextService, DbContextService>();
+
+            container.RegisterType<AccountController>(new InjectionConstructor());
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
