@@ -7,25 +7,26 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
+using TimeTidy.Services;
 
 namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : Controller
     {
-        private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
+        private IDbContextService _context;
+        private IApplicationUserManagerService _userManager;
 
-        public UsersController()
+        public UsersController(IDbContextService contextService, IApplicationUserManagerService userManager)
         {
-            _context = new ApplicationDbContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            _context = contextService;
+            _userManager = userManager;
         }
 
         // GET: Users
         public ActionResult Index()
         {
-            var users = _userManager.Users.ToList();
+            var users = _context.Users();
 
             var admin = users.First(u => u.UserName.Contains("admin"));
             if (admin != null)
@@ -36,12 +37,12 @@ namespace TimeTidy.Controllers
 
         public ActionResult Edit(string id)
         {
-            var userInDb = _userManager.Users.SingleOrDefault(u => u.Id == id);
+            var userInDb = _context.FindUserOrDefault(id);
 
             if (userInDb == null)
                 return HttpNotFound();
 
-            var roles = _context.Roles.ToList();
+            var roles = _context.Roles();
 
             var userRoles = roles.Where(r => userInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
 
@@ -55,11 +56,11 @@ namespace TimeTidy.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var uInDb = _userManager.Users.SingleOrDefault(u => u.Id == user.UserId);
+                var uInDb = _context.FindUserOrDefault(user.UserId);
                 if (uInDb == null)
                     return HttpNotFound();
 
-                var roles = _context.Roles.ToList();
+                var roles = _context.Roles();
                 var userRoles = roles.Where(r => uInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
                 var viewModel = new UserFormViewModel(uInDb, roles, userRoles);
                 return View("UserForm", viewModel);
@@ -67,7 +68,7 @@ namespace TimeTidy.Controllers
 
             // Get user from DB
             // Update with new information
-            var userInDb = _userManager.Users.Single(u => u.Id == user.UserId);
+            var userInDb = _context.FindUser(user.UserId);
             userInDb.FirstName = user.FirstName;
             userInDb.LastName = user.LastName;
             userInDb.PhoneNumber = user.PhoneNumber;
@@ -75,11 +76,11 @@ namespace TimeTidy.Controllers
             userInDb.Email = user.Email;
 
             // Remove all roles then add new ones
-            var userInManager = await _userManager.FindByIdAsync(user.UserId);
+            var userInManager = await _userManager.FindUserByIdAsync(user.UserId);
             if (userInManager.Roles != null && userInManager.Roles.Count > 0)
-                await _userManager.RemoveFromRolesAsync(user.UserId, _userManager.GetRoles(user.UserId).ToArray());
+                await _userManager.RemoveUserFromRolesAsync(user.UserId, _userManager.GetRolesForUser(user.UserId));
             if (user.UserRoles != null && user.UserRoles.Count > 0)
-                await _userManager.AddToRolesAsync(user.UserId, user.UserRoles.ToArray());
+                await _userManager.AddUserToRolesAsync(user.UserId, user.UserRoles.ToArray());
             await _userManager.UpdateAsync(userInManager);
 
             _context.SaveChanges();
