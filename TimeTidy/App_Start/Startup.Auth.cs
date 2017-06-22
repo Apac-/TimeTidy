@@ -8,19 +8,17 @@ using Owin;
 using TimeTidy.Models;
 using Microsoft.Owin.Security.DataProtection;
 using System.Web.Mvc;
+using TimeTidy.App_Start;
+using Microsoft.Practices.Unity;
 
 namespace TimeTidy
 {
     public partial class Startup
     {
-        // Added static ref to directly call rather then going through Owin.
-        internal static IDataProtectionProvider DataProtectionProvider { get; private set; }
-
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            // Used with Unity in luu of going through Owin
-            DataProtectionProvider = app.GetDataProtectionProvider();
+            UnityConfig.GetConfiguredContainer().RegisterInstance(app.GetDataProtectionProvider());
 
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<ApplicationUserManager>());
