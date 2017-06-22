@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TimeTidy.Services
 {
-    interface IAuthManager
+    interface IApplicationUserManagerService
     {
     }
 }
