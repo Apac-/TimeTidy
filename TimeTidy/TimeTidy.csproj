@@ -270,6 +270,7 @@
     <Compile Include="Models\UserIdViewModel.cs" />
     <Compile Include="Models\WorkSite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthManager.cs" />
     <Compile Include="Services\DbContextService.cs" />
     <Compile Include="Services\IAuthManager.cs" />
     <Compile Include="Services\IDbContextService.cs" />
