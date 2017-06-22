@@ -31,5 +31,10 @@ namespace TimeTidy.Services
         {
             return _userManager.RemoveFromRolesAsync(userId, roles);
         }
+
+        public Task<IdentityResult> UpdateAsync(ApplicationUser user)
+        {
+            return _userManager.UpdateAsync(user);
+        }
     }
 }

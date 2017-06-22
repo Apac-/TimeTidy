@@ -8,10 +8,11 @@ using TimeTidy.Models;
 
 namespace TimeTidy.Services
 {
-    interface IApplicationUserManagerService
+    public interface IApplicationUserManagerService
     {
         Task<ApplicationUser> FindUserByIdAsync(string userId);
         Task<IdentityResult> RemoveUserFromRolesAsync(string userId, params string[] roles);
         Task<IdentityResult> AddUserToRolesAsync(string userId, params string[] roles);
+        Task<IdentityResult> UpdateAsync(ApplicationUser user);
     }
 }
