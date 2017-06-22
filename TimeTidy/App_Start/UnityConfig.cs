@@ -27,8 +27,6 @@ namespace TimeTidy
                 new InjectionConstructor(typeof(ApplicationDbContext)));
             container.RegisterType<IAuthenticationManager>(
                 new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
-
-            container.RegisterType<AccountController>(new InjectionConstructor());
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
