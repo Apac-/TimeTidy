@@ -14,5 +14,6 @@ namespace TimeTidy.Services
         Task<IdentityResult> RemoveUserFromRolesAsync(string userId, params string[] roles);
         Task<IdentityResult> AddUserToRolesAsync(string userId, params string[] roles);
         Task<IdentityResult> UpdateAsync(ApplicationUser user);
+        string[] GetRolesForUser(string userId);
     }
 }

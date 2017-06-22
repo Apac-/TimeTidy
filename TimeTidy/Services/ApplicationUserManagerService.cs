@@ -27,6 +27,11 @@ namespace TimeTidy.Services
             return _userManager.FindByIdAsync(userId);
         }
 
+        public string[] GetRolesForUser(string userId)
+        {
+            return _userManager.GetRoles(userId).ToArray();
+        }
+
         public Task<IdentityResult> RemoveUserFromRolesAsync(string userId, params string[] roles)
         {
             return _userManager.RemoveFromRolesAsync(userId, roles);
