@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,11 @@ namespace TimeTidy.Services
 {
     public interface IDbContextService
     {
+        ApplicationUser FindUserOrDefault(string id);
         ApplicationUser FindUser(string id);
         WorkSite FindWorkSite(int id);
+        List<ApplicationUser> Users();
+        List<IdentityRole> Roles();
+        int SaveChanges();
     }
 }
