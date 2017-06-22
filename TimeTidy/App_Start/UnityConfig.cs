@@ -44,6 +44,7 @@ namespace TimeTidy.App_Start
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IDbContextService, DbContextService>();
+            container.RegisterType<IApplicationUserManagerService, ApplicationUserManagerService>();
 
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                 new InjectionConstructor(typeof(ApplicationDbContext)));
