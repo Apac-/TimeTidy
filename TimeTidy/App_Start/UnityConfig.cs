@@ -6,6 +6,8 @@ using TimeTidy.Controllers;
 using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using System.Web;
 
 namespace TimeTidy
 {
@@ -23,6 +25,8 @@ namespace TimeTidy
 
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                 new InjectionConstructor(typeof(ApplicationDbContext)));
+            container.RegisterType<IAuthenticationManager>(
+                new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 
             container.RegisterType<AccountController>(new InjectionConstructor());
             
