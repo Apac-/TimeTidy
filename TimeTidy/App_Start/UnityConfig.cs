@@ -1,6 +1,7 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
+using TimeTidy.Services;
 
 namespace TimeTidy
 {
@@ -9,11 +10,12 @@ namespace TimeTidy
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();
-            
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            
+
             // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<IDbContextService, DbContextService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
