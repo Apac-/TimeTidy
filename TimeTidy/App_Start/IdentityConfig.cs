@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TimeTidy.Models;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace TimeTidy
 {
@@ -74,11 +75,12 @@ namespace TimeTidy
             this.EmailService = new EmailService();
             this.SmsService = new SmsService();
 
-            var dataProtectionProvider = options.DataProtectionProvider;
+            var dataProtectionProvider = Startup.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
+                IDataProtector dataProtector = dataProtectionProvider.Create("ASP.NET Identity");
                 this.UserTokenProvider = 
-                    new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<ApplicationUser>(dataProtector);
             }
         }
     }
