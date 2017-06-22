@@ -7,19 +7,18 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
 using TimeTidy.ViewModels;
+using TimeTidy.Services;
 
 namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class TimeSheetsController : Controller
     {
-        private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
+        private IDbContextService _context;
         
-        public TimeSheetsController()
+        public TimeSheetsController(IDbContextService contextService)
         {
-            _context = new ApplicationDbContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            _context = contextService;
         }
 
 
@@ -31,7 +30,8 @@ namespace TimeTidy.Controllers
 
         public ActionResult List(string id)
         {
-            var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
+            //var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
+            var userInDb = _context.FindUser(id);
 
             var vm = new TimeSheetsListViewModel
             {
@@ -44,7 +44,8 @@ namespace TimeTidy.Controllers
 
         public ActionResult Worksite(int id)
         {
-            var siteInDb = _context.WorkSites.SingleOrDefault(s => s.Id == id);
+            //var siteInDb = _context.WorkSites.SingleOrDefault(s => s.Id == id);
+            var siteInDb = _context.FindWorkSite(id);
 
             if (siteInDb == null)
                 return HttpNotFound();
