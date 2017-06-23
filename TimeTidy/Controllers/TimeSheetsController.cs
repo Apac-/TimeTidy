@@ -44,8 +44,7 @@ namespace TimeTidy.Controllers
 
         public ActionResult Worksite(int id)
         {
-            //var siteInDb = _context.WorkSites.SingleOrDefault(s => s.Id == id);
-            var siteInDb = _context.FindWorkSite(id);
+            var siteInDb = _context.FindWorkSiteOrDefault(id);
 
             if (siteInDb == null)
                 return HttpNotFound();
