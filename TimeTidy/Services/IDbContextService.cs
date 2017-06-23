@@ -14,6 +14,8 @@ namespace TimeTidy.Services
         ApplicationUser FindUser(string id);
         WorkSite FindWorkSiteOrDefault(int id);
         WorkSite FindWorkSite(int id);
+
+        List<WorkSite> WorkSites();
         List<ApplicationUser> Users();
         List<IdentityRole> Roles();
         int SaveChanges();

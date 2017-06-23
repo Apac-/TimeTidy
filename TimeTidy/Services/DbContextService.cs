@@ -55,5 +55,10 @@ namespace TimeTidy.Services
         {
             return _context.Users.ToList();
         }
+
+        public List<WorkSite> WorkSites()
+        {
+            return _context.WorkSites.ToList();
+        }
     }
 }
