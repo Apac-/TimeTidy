@@ -16,6 +16,11 @@ namespace TimeTidy.Services
             _context = new ApplicationDbContext();
         }
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public ApplicationUser FindUser(string id)
         {
             return _context.Users.Single(u => u.Id == id);
@@ -26,7 +31,7 @@ namespace TimeTidy.Services
             return _context.Users.SingleOrDefault(u => u.Id == id);
         }
 
-        public WorkSite FindWorkSite(int id)
+        public WorkSite FindWorkSiteOrDefault(int id)
         {
             return _context.WorkSites.SingleOrDefault(w => w.Id == id);
         }

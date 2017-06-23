@@ -12,9 +12,11 @@ namespace TimeTidy.Services
     {
         ApplicationUser FindUserOrDefault(string id);
         ApplicationUser FindUser(string id);
-        WorkSite FindWorkSite(int id);
+        WorkSite FindWorkSiteOrDefault(int id);
         List<ApplicationUser> Users();
         List<IdentityRole> Roles();
         int SaveChanges();
+
+        void Dispose();
     }
 }

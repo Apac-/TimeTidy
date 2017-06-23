@@ -5,18 +5,23 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
+using TimeTidy.Services;
 
 namespace TimeTidy.Controllers
 {
     public class WorkSitesController : Controller
     {
-        private ApplicationDbContext _context;
+        private IDbContextService _context;
 
-        public WorkSitesController() {
-            _context = new ApplicationDbContext();
+        public WorkSitesController(IDbContextService contextService)
+        {
+            _context = contextService;
+            ApplicationDbContext con = new ApplicationDbContext();
+            con.Dispose();
         }
 
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             _context.Dispose();
             base.Dispose(disposing);
         }
