@@ -16,8 +16,6 @@ namespace TimeTidy.Controllers
         public WorkSitesController(IDbContextService contextService)
         {
             _context = contextService;
-            ApplicationDbContext con = new ApplicationDbContext();
-            con.Dispose();
         }
 
         protected override void Dispose(bool disposing)
@@ -29,7 +27,7 @@ namespace TimeTidy.Controllers
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Edit(int id)
         {
-            var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
+            var worksite = _context.FindWorkSiteOrDefault(id);
 
             if (worksite == null)
                 return HttpNotFound();
@@ -52,11 +50,11 @@ namespace TimeTidy.Controllers
 
             if (worksite.Id == 0)
             {
-                _context.WorkSites.Add(worksite);
+                _context.AddWorkSite(worksite);
             }
             else
             {
-                var worksiteInDb = _context.WorkSites.Single(w => w.Id == worksite.Id);
+                var worksiteInDb = _context.FindWorkSite(worksite.Id);
                 worksiteInDb.Name = worksite.Name;
                 worksiteInDb.Description = worksite.Description;
                 worksiteInDb.StreetAddress = worksite.StreetAddress;
@@ -66,7 +64,6 @@ namespace TimeTidy.Controllers
             }
 
             _context.SaveChanges();
-
 
             return RedirectToAction("List", "WorkSites");
         }
@@ -80,7 +77,7 @@ namespace TimeTidy.Controllers
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult List()
         {
-            var sites = _context.WorkSites.ToList();
+            var sites = _context.WorkSites();
 
             return View(sites);
         }
