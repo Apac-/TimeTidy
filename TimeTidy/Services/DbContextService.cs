@@ -23,7 +23,7 @@ namespace TimeTidy.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
         }
 
         public ApplicationUser FindUser(string id)
