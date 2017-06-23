@@ -31,6 +31,11 @@ namespace TimeTidy.Services
             return _context.Users.SingleOrDefault(u => u.Id == id);
         }
 
+        public WorkSite FindWorkSite(int id)
+        {
+            return _context.WorkSites.Single(w => w.Id == id);
+        }
+
         public WorkSite FindWorkSiteOrDefault(int id)
         {
             return _context.WorkSites.SingleOrDefault(w => w.Id == id);
