@@ -16,6 +16,11 @@ namespace TimeTidy.Services
             _context = new ApplicationDbContext();
         }
 
+        public WorkSite AddWorkSite(WorkSite worksite)
+        {
+            return _context.WorkSites.Add(worksite);
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

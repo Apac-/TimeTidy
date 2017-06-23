@@ -14,6 +14,7 @@ namespace TimeTidy.Services
         ApplicationUser FindUser(string id);
         WorkSite FindWorkSiteOrDefault(int id);
         WorkSite FindWorkSite(int id);
+        WorkSite AddWorkSite(WorkSite worksite);
 
         List<WorkSite> WorkSites();
         List<ApplicationUser> Users();
