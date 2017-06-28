@@ -6,7 +6,7 @@ namespace TimeTidy.Persistance
 {
     public interface IUnitOfWork
     {
-        IWorkSiteRepository WorkSite { get; }
+        IWorkSiteRepository WorkSites { get; }
 
         IApplicationUserRepository Users { get; }
 
