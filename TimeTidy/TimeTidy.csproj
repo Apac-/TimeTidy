@@ -274,7 +274,9 @@
     <Compile Include="Persistance\IUnitOfWork.cs" />
     <Compile Include="Persistance\Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Persistance\Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Persistance\Repositories\ITimeSheetRepository.cs" />
     <Compile Include="Persistance\Repositories\IWorkSiteRepository.cs" />
+    <Compile Include="Persistance\Repositories\TimeSheetRepository.cs" />
     <Compile Include="Persistance\Repositories\WorkSiteRepository.cs" />
     <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
