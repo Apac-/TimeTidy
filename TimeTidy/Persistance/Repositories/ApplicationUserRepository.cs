@@ -17,12 +17,12 @@ namespace TimeTidy.Persistance.Repositories
 
         public ApplicationUser GetUser(string id)
         {
-            throw new NotImplementedException();
+            return _context.Users.Single(u => u.Id == id);
         }
 
         public IEnumerable<ApplicationUser> GetUsers()
         {
-            throw new NotImplementedException();
+            return _context.Users.ToList();
         }
     }
 }
