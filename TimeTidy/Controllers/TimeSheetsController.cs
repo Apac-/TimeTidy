@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
 using TimeTidy.ViewModels;
-using TimeTidy.Services;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class TimeSheetsController : Controller
     {
-        private IDbContextService _context;
-        
-        public TimeSheetsController(IDbContextService contextService)
-        {
-            _context = contextService;
-        }
+        private readonly IUnitOfWork _unitOfWork;
 
+        public TimeSheetsController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
 
         // GET: TimeSheets
         public ActionResult Index()
@@ -31,7 +28,7 @@ namespace TimeTidy.Controllers
         public ActionResult List(string id)
         {
             //var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
-            var userInDb = _context.FindUser(id);
+            var userInDb = _unitOfWork.Users.GetUser(id);
 
             var vm = new TimeSheetsListViewModel
             {
@@ -44,7 +41,7 @@ namespace TimeTidy.Controllers
 
         public ActionResult Worksite(int id)
         {
-            var siteInDb = _context.FindWorkSiteOrDefault(id);
+            var siteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
 
             if (siteInDb == null)
                 return HttpNotFound();

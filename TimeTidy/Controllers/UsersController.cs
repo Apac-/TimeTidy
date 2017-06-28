@@ -8,43 +8,40 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
 using TimeTidy.Services;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers
 {
     [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : Controller
     {
-        private IDbContextService _context;
+        private readonly IUnitOfWork _unitOfWork;
         private IApplicationUserManagerService _userManager;
 
-        public UsersController(IDbContextService contextService, IApplicationUserManagerService userManager)
+        public UsersController(IUnitOfWork unitOfWork, IApplicationUserManagerService userManager)
         {
-            _context = contextService;
+            _unitOfWork = unitOfWork;
             _userManager = userManager;
         }
 
         // GET: Users
         public ActionResult Index()
         {
-            var users = _context.Users();
-
-            var admin = users.First(u => u.UserName.Contains("admin"));
-            if (admin != null)
-                users.Remove(admin);
+            var users = _unitOfWork.Users.GetUsers();
 
             return View("Index", users);
         }
 
         public ActionResult Edit(string id)
         {
-            var userInDb = _context.FindUserOrDefault(id);
+            var userInDb = _unitOfWork.Users.GetUser(id);
 
             if (userInDb == null)
                 return HttpNotFound();
 
-            var roles = _context.Roles();
+            var roles = _unitOfWork.Users.GetRoles();
 
-            var userRoles = roles.Where(r => userInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
+            var userRoles = _unitOfWork.Users.GetRolesForUser(userInDb.Id);
 
             var viewModel = new UserFormViewModel(userInDb, roles, userRoles);
 
@@ -56,11 +53,11 @@ namespace TimeTidy.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var uInDb = _context.FindUserOrDefault(user.UserId);
+                var uInDb = _unitOfWork.Users.GetUser(user.UserId);
                 if (uInDb == null)
                     return HttpNotFound();
 
-                var roles = _context.Roles();
+                var roles = _unitOfWork.Users.GetRoles();
                 var userRoles = roles.Where(r => uInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
                 var viewModel = new UserFormViewModel(uInDb, roles, userRoles);
                 return View("UserForm", viewModel);
@@ -68,7 +65,7 @@ namespace TimeTidy.Controllers
 
             // Get user from DB
             // Update with new information
-            var userInDb = _context.FindUser(user.UserId);
+            var userInDb = _unitOfWork.Users.GetUser(user.UserId);
             userInDb.FirstName = user.FirstName;
             userInDb.LastName = user.LastName;
             userInDb.PhoneNumber = user.PhoneNumber;
@@ -83,7 +80,7 @@ namespace TimeTidy.Controllers
                 await _userManager.AddUserToRolesAsync(user.UserId, user.UserRoles.ToArray());
             await _userManager.UpdateAsync(userInManager);
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return RedirectToAction("Index", "Users");
         }
