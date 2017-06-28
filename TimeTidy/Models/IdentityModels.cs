@@ -25,20 +25,4 @@ namespace TimeTidy.Models
             return userIdentity;
         }
     }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public DbSet<WorkSite> WorkSites { get; set; }
-        public DbSet<TimeSheet> TimeSheets { get; set; }
-
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-    }
 }
