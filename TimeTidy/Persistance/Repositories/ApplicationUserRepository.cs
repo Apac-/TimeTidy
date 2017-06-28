@@ -8,6 +8,13 @@ namespace TimeTidy.Persistance.Repositories
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {
+        private readonly IApplicationDbContext _context;
+
+        public ApplicationUserRepository(IApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public ApplicationUser GetUser(string id)
         {
             throw new NotImplementedException();
