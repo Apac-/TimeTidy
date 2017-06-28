@@ -10,6 +10,8 @@ namespace TimeTidy.Persistance
 
         IApplicationUserRepository Users { get; }
 
+        ITimeSheetRepository TimeSheets { get; }
+
         void Complete();
     }
 }

@@ -15,11 +15,14 @@ namespace TimeTidy.Persistance
 
         public IWorkSiteRepository WorkSites { get; private set; }
 
+        public ITimeSheetRepository TimeSheets { get; private set; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
             Users = new ApplicationUserRepository(context);
             WorkSites = new WorkSiteRepository(context);
+            TimeSheets = new TimeSheetRepository(context);
         }
 
         public void Complete()
