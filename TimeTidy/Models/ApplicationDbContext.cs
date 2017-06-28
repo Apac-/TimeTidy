@@ -11,6 +11,7 @@ namespace TimeTidy.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<WorkSite> WorkSites { get; set; }
+
         public DbSet<TimeSheet> TimeSheets { get; set; }
 
         public ApplicationDbContext()
