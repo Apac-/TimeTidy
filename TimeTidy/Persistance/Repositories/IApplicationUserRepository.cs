@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TimeTidy.Models;
 
 namespace TimeTidy.Persistance.Repositories
 {
-    interface IApplicationUserRepository
+    public interface IApplicationUserRepository
     {
+        ApplicationUser GetUser(string id);
+
+        IEnumerable<ApplicationUser> GetUsers();
     }
 }

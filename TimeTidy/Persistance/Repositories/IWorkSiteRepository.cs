@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using TimeTidy.Models;
 
 namespace TimeTidy.Persistance.Repositories
 {
-    interface IWorkSiteRepository
+    public interface IWorkSiteRepository
     {
+        WorkSite GetWorkSite(int id);
+
+        IEnumerable<WorkSite> GetWorkSites();
+
+        WorkSite AddWorkSite(WorkSite workSite);
     }
 }

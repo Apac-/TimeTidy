@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TimeTidy.Persistance.Repositories;
 
 namespace TimeTidy.Persistance
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        IWorkSiteRepository WorkSite { get; }
+
+        IApplicationUserRepository Users { get; }
+
+        void Complete();
     }
 }
