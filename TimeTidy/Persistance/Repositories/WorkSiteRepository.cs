@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TimeTidy.Persistance.Repositories
 {
-    public class WorkSiteRepository
+    public class WorkSiteRepository : IWorkSiteRepository
     {
     }
 }
