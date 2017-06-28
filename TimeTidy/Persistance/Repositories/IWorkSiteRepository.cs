@@ -9,6 +9,6 @@ namespace TimeTidy.Persistance.Repositories
 
         IEnumerable<WorkSite> GetWorkSites();
 
-        WorkSite AddWorkSite(WorkSite workSite);
+        WorkSite Add(WorkSite workSite);
     }
 }
