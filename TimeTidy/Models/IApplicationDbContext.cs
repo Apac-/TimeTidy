@@ -6,6 +6,9 @@ namespace TimeTidy.Models
     public interface IApplicationDbContext
     {
         DbSet<TimeSheet> TimeSheets { get; set; }
+
         DbSet<WorkSite> WorkSites { get; set; }
+
+        IDbSet<ApplicationUser> Users { get; set; }
     }
 }
