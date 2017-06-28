@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 using TimeTidy.Models;
 
 namespace TimeTidy.Persistance.Repositories
@@ -25,6 +26,15 @@ namespace TimeTidy.Persistance.Repositories
             return _context.TimeSheets.ToList();
         }
 
+        public IEnumerable<TimeSheet> GetTimeSheetsByUser(string id)
+        {
+            return _context.TimeSheets
+                .Include(t => t.SiteLocation)
+                .Include(t => t.LogOnLocation)
+                .Include(t => t.LogOffLocation)
+                .Where(t => t.ApplicationUserId == id).ToList();
+        }
+
         public TimeSheet Add(TimeSheet timeSheet)
         {
             return _context.TimeSheets.Add(timeSheet);
@@ -34,5 +44,6 @@ namespace TimeTidy.Persistance.Repositories
         {
             return _context.TimeSheets.Remove(timeSheet);
         }
+
     }
 }

@@ -11,6 +11,8 @@ namespace TimeTidy.Persistance.Repositories
 
         IEnumerable<TimeSheet> GetTimeSheets();
 
+        IEnumerable<TimeSheet> GetTimeSheetsByUser(string id);
+
         TimeSheet Remove(TimeSheet timeSheet);
     }
 }
