@@ -10,5 +10,7 @@ namespace TimeTidy.Persistance.Repositories
         IEnumerable<WorkSite> GetWorkSites();
 
         WorkSite Add(WorkSite workSite);
+
+        WorkSite Remove(WorkSite workSite);
     }
 }

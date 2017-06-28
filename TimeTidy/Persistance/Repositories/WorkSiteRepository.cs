@@ -29,5 +29,10 @@ namespace TimeTidy.Persistance.Repositories
         {
             return _context.WorkSites.ToList();
         }
+
+        public WorkSite Remove(WorkSite workSite)
+        {
+            return _context.WorkSites.Remove(workSite);
+        }
     }
 }
