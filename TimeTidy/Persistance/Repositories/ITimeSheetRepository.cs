@@ -13,6 +13,8 @@ namespace TimeTidy.Persistance.Repositories
 
         IEnumerable<TimeSheet> GetTimeSheetsByUser(string id);
 
+        IEnumerable<TimeSheet> GetTimeSheetsByWorkSite(int id);
+
         TimeSheet Remove(TimeSheet timeSheet);
     }
 }

@@ -35,6 +35,15 @@ namespace TimeTidy.Persistance.Repositories
                 .Where(t => t.ApplicationUserId == id).ToList();
         }
 
+        public IEnumerable<TimeSheet> GetTimeSheetsByWorkSite(int id)
+        {
+            return _context.TimeSheets
+                .Include(t => t.SiteLocation)
+                .Include(t => t.LogOnLocation)
+                .Include(t => t.LogOffLocation)
+                .Where(t => t.WorkSiteId == id).ToList();
+        }
+
         public TimeSheet Add(TimeSheet timeSheet)
         {
             return _context.TimeSheets.Add(timeSheet);
