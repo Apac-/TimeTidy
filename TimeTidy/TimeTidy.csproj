@@ -274,6 +274,7 @@
     <Compile Include="Persistance\Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Persistance\Repositories\IWorkSiteRepository.cs" />
     <Compile Include="Persistance\Repositories\WorkSiteRepository.cs" />
+    <Compile Include="Persistance\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationUserManagerService.cs" />
     <Compile Include="Services\DbContextService.cs" />
