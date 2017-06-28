@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace TimeTidy.Models
 {
@@ -10,5 +11,7 @@ namespace TimeTidy.Models
         DbSet<WorkSite> WorkSites { get; set; }
 
         IDbSet<ApplicationUser> Users { get; set; }
+
+        IDbSet<IdentityRole> Roles { get; set; }
     }
 }
