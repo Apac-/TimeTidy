@@ -7,6 +7,7 @@ using TimeTidy.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System.Web;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.App_Start
 {
@@ -43,8 +44,8 @@ namespace TimeTidy.App_Start
 
             // TODO: Register your types here
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IDbContextService, DbContextService>();
             container.RegisterType<IApplicationUserManagerService, ApplicationUserManagerService>();
+            container.RegisterType<IUnitOfWork, UnitOfWork>();
 
             container.RegisterType<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>(
                 new InjectionConstructor(typeof(ApplicationDbContext)));
