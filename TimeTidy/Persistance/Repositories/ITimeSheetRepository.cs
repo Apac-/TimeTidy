@@ -16,5 +16,7 @@ namespace TimeTidy.Persistance.Repositories
         IEnumerable<TimeSheet> GetTimeSheetsByWorkSite(int id);
 
         TimeSheet Remove(TimeSheet timeSheet);
+
+        TimeSheet GetMostRecentSheetByUser(string userId, int? workSiteId);
     }
 }

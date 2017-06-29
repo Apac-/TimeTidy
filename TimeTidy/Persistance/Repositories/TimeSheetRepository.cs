@@ -54,5 +54,16 @@ namespace TimeTidy.Persistance.Repositories
             return _context.TimeSheets.Remove(timeSheet);
         }
 
+        public TimeSheet GetMostRecentSheetByUser(string userId, int? workSiteId = null)
+        {
+            var sheets = _context.TimeSheets.Where(s => s.ApplicationUserId == userId);
+
+            if (workSiteId != null)
+                sheets = sheets.Where(s => s.WorkSiteId == workSiteId);
+
+            var sheet = sheets.OrderByDescending(t => t.LogOnTime).FirstOrDefault();
+
+            return sheet;
+        }
     }
 }
