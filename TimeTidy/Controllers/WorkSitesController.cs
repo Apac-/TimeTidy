@@ -3,31 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
-using TimeTidy.Services;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers
 {
     public class WorkSitesController : Controller
     {
-        private IDbContextService _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public WorkSitesController(IDbContextService contextService)
+        public WorkSitesController(IUnitOfWork unitOfWork)
         {
-            _context = contextService;
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-            base.Dispose(disposing);
+            _unitOfWork = unitOfWork;
         }
 
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Edit(int id)
         {
-            var worksite = _context.FindWorkSiteOrDefault(id);
+            var worksite = _unitOfWork.WorkSites.GetWorkSite(id);
 
             if (worksite == null)
                 return HttpNotFound();
@@ -50,11 +43,11 @@ namespace TimeTidy.Controllers
 
             if (worksite.Id == 0)
             {
-                _context.AddWorkSite(worksite);
+                _unitOfWork.WorkSites.Add(worksite);
             }
             else
             {
-                var worksiteInDb = _context.FindWorkSite(worksite.Id);
+                var worksiteInDb = _unitOfWork.WorkSites.GetWorkSite(worksite.Id);
                 worksiteInDb.Name = worksite.Name;
                 worksiteInDb.Description = worksite.Description;
                 worksiteInDb.StreetAddress = worksite.StreetAddress;
@@ -63,7 +56,7 @@ namespace TimeTidy.Controllers
                 worksiteInDb.Radius = worksite.Radius;
             }
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return RedirectToAction("List", "WorkSites");
         }
@@ -77,7 +70,7 @@ namespace TimeTidy.Controllers
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult List()
         {
-            var sites = _context.WorkSites();
+            var sites = _unitOfWork.WorkSites.GetWorkSites();
 
             return View(sites);
         }
