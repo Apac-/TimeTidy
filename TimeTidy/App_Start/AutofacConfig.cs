@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,10 @@ namespace TimeTidy.App_Start
             var builder = new ContainerBuilder();
 
             builder.RegisterType<ApplicationDbContext>().AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<UserStore<ApplicationUser>>().As<IUserStore<ApplicationUser>>().InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationUserManagerService>().As<IApplicationUserManagerService>().InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
