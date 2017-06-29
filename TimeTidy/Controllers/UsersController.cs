@@ -16,12 +16,10 @@ namespace TimeTidy.Controllers
     public class UsersController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private IApplicationUserManagerService _userManager;
 
-        public UsersController(IUnitOfWork unitOfWork, IApplicationUserManagerService userManager)
+        public UsersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
 
         // GET: Users
@@ -54,12 +52,14 @@ namespace TimeTidy.Controllers
             if (!ModelState.IsValid)
             {
                 var uInDb = _unitOfWork.Users.GetUser(user.UserId);
+
                 if (uInDb == null)
                     return HttpNotFound();
 
                 var roles = _unitOfWork.Users.GetRoles();
-                var userRoles = roles.Where(r => uInDb.Roles.Any(u => r.Id == u.RoleId)).ToList();
+                var userRoles = _unitOfWork.Users.GetRolesForUser(uInDb.Id);
                 var viewModel = new UserFormViewModel(uInDb, roles, userRoles);
+
                 return View("UserForm", viewModel);
             }
 
@@ -73,12 +73,15 @@ namespace TimeTidy.Controllers
             userInDb.Email = user.Email;
 
             // Remove all roles then add new ones
-            var userInManager = await _userManager.FindUserByIdAsync(user.UserId);
+            var userInManager = await _unitOfWork.Users.FindUserByIdAsync(user.UserId);
+
             if (userInManager.Roles != null && userInManager.Roles.Count > 0)
-                await _userManager.RemoveUserFromRolesAsync(user.UserId, _userManager.GetRolesForUser(user.UserId));
+                await _unitOfWork.Users.RemoveUserFromRolesAsync(user.UserId, _unitOfWork.Users.GetRolesForUser(user.UserId).ToArray());
+
             if (user.UserRoles != null && user.UserRoles.Count > 0)
-                await _userManager.AddUserToRolesAsync(user.UserId, user.UserRoles.ToArray());
-            await _userManager.UpdateAsync(userInManager);
+                await _unitOfWork.Users.AddUserToRolesAsync(user.UserId, user.UserRoles.ToArray());
+
+            await _unitOfWork.Users.UpdateAsync(userInManager);
 
             _unitOfWork.Complete();
 
