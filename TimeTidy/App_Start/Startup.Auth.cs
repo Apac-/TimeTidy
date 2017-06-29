@@ -14,9 +14,14 @@ namespace TimeTidy
 {
     public partial class Startup
     {
+        // Allow access to DpProvider for use in DI container
+        internal static IDataProtectionProvider DataProtectionProvider { get; private set; }
+
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            DataProtectionProvider = app.GetDataProtectionProvider();
+
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<ApplicationUserManager>());
             app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<ApplicationSignInManager>());
