@@ -9,7 +9,6 @@ using TimeTidy.Models;
 using Microsoft.Owin.Security.DataProtection;
 using System.Web.Mvc;
 using TimeTidy.App_Start;
-using Microsoft.Practices.Unity;
 
 namespace TimeTidy
 {
@@ -18,8 +17,6 @@ namespace TimeTidy
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
-            UnityConfig.GetConfiguredContainer().RegisterInstance(app.GetDataProtectionProvider());
-
             // Configure the db context, user manager and signin manager to use a single instance per request
             app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<ApplicationUserManager>());
             app.CreatePerOwinContext(() => DependencyResolver.Current.GetService<ApplicationSignInManager>());
