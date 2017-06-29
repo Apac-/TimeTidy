@@ -17,10 +17,10 @@ namespace TimeTidy.Persistance
 
         public ITimeSheetRepository TimeSheets { get; private set; }
 
-        public UnitOfWork(ApplicationDbContext context)
+        public UnitOfWork(ApplicationDbContext context, ApplicationUserManager userManager)
         {
             _context = context;
-            Users = new ApplicationUserRepository(context);
+            Users = new ApplicationUserRepository(context, userManager);
             WorkSites = new WorkSiteRepository(context);
             TimeSheets = new TimeSheetRepository(context);
         }
