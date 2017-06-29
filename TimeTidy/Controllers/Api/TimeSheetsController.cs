@@ -1,63 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers.Api
 {
     public class TimeSheetsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TimeSheetsController()
+        public TimeSheetsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
-
-
 
         // GET /api/timesheets/1
         public IHttpActionResult GetTimeSheets(int id)
         {
-            // Get all timeSheets that have to do with siteId
-            // Filter sheets by userId associated
-            // Filter by sheets that don't have a logoff time
-            // if (none found)
-            // return dto with no logon time
-            // else
-            // return dto with logon time
             string userId = User.Identity.GetUserId();
-            var sheets = _context.TimeSheets
-                .Where(s => s.ApplicationUserId == userId)
-                .Where(s => s.WorkSiteId == id)
-                .Where(s => s.LogOffTime == null)
-                .ToList();
 
-            // TODO (Jeff): C. Need a solution to deal with multiple logged on time sheets.
+            // TODO (Jeff): C. Remove code later
+            //var sheets = _context.TimeSheets
+            //    .Where(s => s.ApplicationUserId == userId)
+            //    .Where(s => s.WorkSiteId == id)
+            //    .Where(s => s.LogOffTime == null)
+            //    .ToList();
 
-            // Find most recent time sheet;
-            TimeSheet returnSheet = null;
-            if (sheets.Count > 0) {
-                foreach (var timeSheet in sheets) {
-                    if (returnSheet == null)
-                        returnSheet = timeSheet;
-                    else if (returnSheet.LogOnTime < timeSheet.LogOnTime)
-                        returnSheet = timeSheet;
-                }
-            }
+            var returnSheet = _unitOfWork.TimeSheets.GetMostRecentSheetByUser(userId, id);
 
             DateTime? logonTime = null;
             int? timeSheetId = null;
+
             if (returnSheet != null)
             {
                 logonTime = returnSheet.LogOnTime;
                 timeSheetId = returnSheet.Id;
-
             }
 
             var dto = new LogOnTimeDTO() {
@@ -85,8 +66,9 @@ namespace TimeTidy.Controllers.Api
                 LogOnLocation = new LatLng(logonDto.UserLat, logonDto.UserLng)
             };
 
-            _context.TimeSheets.Add(timeSheet);
-            _context.SaveChanges();
+            _unitOfWork.TimeSheets.Add(timeSheet);
+
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -95,7 +77,7 @@ namespace TimeTidy.Controllers.Api
         [HttpPut]
         public IHttpActionResult UpdateTimeSheet(int id, TimeSheetLogoffDTO logoffDto)
         {
-            var timeSheet = _context.TimeSheets.SingleOrDefault(s => s.Id == id);
+            var timeSheet = _unitOfWork.TimeSheets.GetTimeSheet(id);
 
             if (timeSheet == null)
                 return NotFound();
@@ -106,7 +88,7 @@ namespace TimeTidy.Controllers.Api
             timeSheet.LogOffTime = DateTime.UtcNow;
             timeSheet.LogOffLocation = new LatLng(logoffDto.UserLat, logoffDto.UserLng);
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
