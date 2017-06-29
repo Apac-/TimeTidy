@@ -8,27 +8,24 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers.Api
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class WorkSiteTimeSheetsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public WorkSiteTimeSheetsController()
+        public WorkSiteTimeSheetsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET /api/worksitetimesheets/1
         public IHttpActionResult GetWorkSiteTimeSheets(int id)
         {
-            var timeSheets = _context.TimeSheets
-                .Include(s => s.SiteLocation)
-                .Include(s => s.LogOnLocation)
-                .Include(s => s.LogOffLocation)
-                .Where(s => s.WorkSiteId == id).ToList();
+            var timeSheets = _unitOfWork.TimeSheets.GetTimeSheetsByWorkSite(id);
 
             List<WorkSiteTimeSheetDTO> dto = new List<WorkSiteTimeSheetDTO>();
 

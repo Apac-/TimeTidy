@@ -7,31 +7,28 @@ using System.Data.Entity;
 using System.Web.Http;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers.Api
 {
     [Authorize(Roles = RoleName.CanManageWorkSites)]
     public class UserTimeSheetsController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UserTimeSheetsController()
+        public UserTimeSheetsController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET /api/usertimesheets/user_id
         public IHttpActionResult GetUserTimeSheets(string id)
         {
-            var timeSheets = _context.TimeSheets
-                .Include(s => s.SiteLocation)
-                .Include(s => s.LogOnLocation)
-                .Include(s => s.LogOffLocation)
-                .Where(s => s.ApplicationUserId == id).ToList();
+            var timeSheetsInDb = _unitOfWork.TimeSheets.GetTimeSheetsByUser(id);
 
             List<TimeSheetDTO> dto = new List<TimeSheetDTO>();
 
-            foreach (var sheet in timeSheets)
+            foreach (var sheet in timeSheetsInDb)
             {
                 dto.Add(new TimeSheetDTO(sheet));
             }
@@ -43,13 +40,14 @@ namespace TimeTidy.Controllers.Api
         [HttpDelete]
         public IHttpActionResult DeleteTimeSheet(int id)
         {
-            var sheetInDb = _context.TimeSheets.SingleOrDefault(s => s.Id == id);
+            var sheetInDb = _unitOfWork.TimeSheets.GetTimeSheet(id);
 
             if (sheetInDb == null)
                 return NotFound();
 
-            _context.TimeSheets.Remove(sheetInDb);
-            _context.SaveChanges();
+            _unitOfWork.TimeSheets.Remove(sheetInDb);
+
+            _unitOfWork.Complete();
 
             return Ok();
         }

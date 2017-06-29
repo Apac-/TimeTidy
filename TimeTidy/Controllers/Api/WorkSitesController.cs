@@ -1,40 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using AutoMapper;
 using TimeTidy.DTOs;
 using TimeTidy.Models;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers.Api
 {
     public class WorkSitesController : ApiController
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public WorkSitesController()
+        public WorkSitesController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
+            _unitOfWork = unitOfWork;
         }
 
         // GET /api/worksites
         public IHttpActionResult GetWorkSites()
         {
-            return Ok(_context.WorkSites.ToList());
+            return Ok(_unitOfWork.WorkSites.GetWorkSites());
         }
 
         // GET /api/worksites/1
         public IHttpActionResult GetWorkSite(int id)
         {
-            var worksite = _context.WorkSites.SingleOrDefault(w => w.Id == id);
+            var worksiteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
 
-            if (worksite == null)
+            if (worksiteInDb == null)
                 return NotFound();
 
-            //return Ok(Mapper.Map<WorkSite, WorkSiteDTO>(worksite));
-            return Ok(worksite);
+            return Ok(worksiteInDb);
         }
 
         // POST /api/worksites
@@ -47,8 +43,8 @@ namespace TimeTidy.Controllers.Api
 
             var workSite = Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
 
-            _context.WorkSites.Add(workSite);
-            _context.SaveChanges();
+            _unitOfWork.WorkSites.Add(workSite);
+            _unitOfWork.Complete();
 
             workSiteDto.Id = workSite.Id;
 
@@ -63,14 +59,14 @@ namespace TimeTidy.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var siteInDb = _context.WorkSites.SingleOrDefault(w => w.Id == id);
+            var siteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
 
             if (siteInDb == null)
                 return NotFound();
 
             Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto, siteInDb);
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -80,13 +76,13 @@ namespace TimeTidy.Controllers.Api
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public IHttpActionResult DeleteWorkSite(int id)
         {
-            var siteInDb = _context.WorkSites.SingleOrDefault(w => w.Id == id);
+            var siteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
 
             if (siteInDb == null)
                 return NotFound();
 
-            _context.WorkSites.Remove(siteInDb);
-            _context.SaveChanges();
+            _unitOfWork.WorkSites.Remove(siteInDb);
+            _unitOfWork.Complete();
 
             return Ok();
         }

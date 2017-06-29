@@ -5,39 +5,30 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
+using TimeTidy.Persistance;
 
 namespace TimeTidy.Controllers.Api
 {
     [Authorize(Roles = RoleName.CanManageUsers)]
     public class UsersController : ApiController
     {
-        private ApplicationDbContext _context;
-        private UserManager<ApplicationUser> _userManager;
-        private RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController()
+        public UsersController(IUnitOfWork unitOfWork)
         {
-            _context = new ApplicationDbContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
-            _roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(_context));
+            _unitOfWork = unitOfWork;
         }
 
         // GET /api/users
         public IHttpActionResult GetUsers()
         {
-            var users = _userManager.Users.ToList();
+            var usersInDb = _unitOfWork.Users.GetUsers();
 
-            // If built in admin account then skip. Prevents del of master account
-            var admin = users.First(u => u.UserName =="admin@timetidy.com");
-            if (admin != null)
-                users.Remove(admin);
-
-            var usersDto = users.Select(user => new BasicUsersDTO
+            var usersDto = usersInDb.Select(user => new BasicUsersDTO
             {
-                UserName = user.UserName, 
+                UserName = user.UserName,
                 UserId = user.Id,
                 FirstName = user.FirstName,
                 LastName = user.LastName
@@ -49,24 +40,26 @@ namespace TimeTidy.Controllers.Api
         // Get /api/users/id
         public IHttpActionResult GetUsers(string id)
         {
-            // TODO (Jeff): A. Add in db call once TimeSheets are created.
-            //  Send TimeSheets with a BasicUsersDto, or equivilant
-            var user = _userManager.Users.SingleOrDefault(u => u.Id == id);
+            var userInDb = _unitOfWork.Users.GetUser(id);
 
-            if (user == null)
+            if (userInDb == null)
                 return NotFound();
 
-            return Ok(user);
+            return Ok(userInDb);
         }
 
         // DELETE /api/users/id
         public IHttpActionResult DeleteUser(string id)
         {
-            var userInDb = _userManager.FindById(id);
+            // TODO (Jeff): A. Check to make sure at least 1 account can still manage users!
+
+            var userInDb = _unitOfWork.Users.GetUser(id);
             if (userInDb == null)
                 return NotFound();
 
-            _userManager.Delete(userInDb);
+            _unitOfWork.Users.DeleteUser(userInDb);
+
+            _unitOfWork.Complete();
 
             return Ok();
         }
