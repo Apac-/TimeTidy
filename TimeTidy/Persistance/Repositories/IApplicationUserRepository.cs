@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TimeTidy.Models;
@@ -11,13 +10,11 @@ namespace TimeTidy.Persistance.Repositories
     {
         ApplicationUser GetUser(string id);
 
-        // TODO (Jeff): B. Get rid of IdentityRole which removes using EntityFramework
-        //      Collection of strings should work.
-        IEnumerable<IdentityRole> GetRolesForUser(string id);
+        IEnumerable<string> GetRolesForUser(string id);
+
+        IEnumerable<string> GetRoles();
 
         IEnumerable<ApplicationUser> GetUsers();
-
-        IEnumerable<IdentityRole> GetRoles();
 
         IdentityResult DeleteUser(ApplicationUser user);
 
