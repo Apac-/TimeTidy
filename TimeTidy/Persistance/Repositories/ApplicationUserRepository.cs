@@ -27,12 +27,12 @@ namespace TimeTidy.Persistance.Repositories
 
         public IList<string> GetRolesForUser(string id)
         {
-            var user = GetUser(id);
+            var userRoles = GetUser(id).Roles.Select(r => r.RoleId).ToArray();
 
             var roles = _context.Roles
-                .Where(r => user.Roles.Any(u => r.Id == u.RoleId))
+                .Where(r => userRoles.Any(u => r.Id == u))
                 .Select(r => r.Name)
-                .ToArray();
+                .ToList();
 
             return roles;
         }
