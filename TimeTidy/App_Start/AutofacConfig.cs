@@ -3,6 +3,7 @@ using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -27,12 +28,16 @@ namespace TimeTidy.App_Start
 
             builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<ApplicationSignInManager>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<UserStore<ApplicationUser>>().As<IUserStore<ApplicationUser>>().InstancePerLifetimeScope();
+            builder.Register(c => new UserStore<ApplicationUser>(c.Resolve<ApplicationDbContext>())).AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationUserManagerService>().As<IApplicationUserManagerService>().InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
 
-            builder.Register<IAuthenticationManager>(c => HttpContext.Current.GetOwinContext().Authentication);
+            builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).As<IAuthenticationManager>();
+            builder.Register(c => new IdentityFactoryOptions<ApplicationUserManager>
+            {
+                DataProtectionProvider = new Microsoft.Owin.Security.DataProtection.DpapiDataProtectionProvider("TimeTidy")
+            });
 
             builder.RegisterModule(new AutofacWebTypesModule());
             builder.RegisterFilterProvider();
