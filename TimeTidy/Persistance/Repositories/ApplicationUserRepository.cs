@@ -20,12 +20,12 @@ namespace TimeTidy.Persistance.Repositories
             _userManager = userManager;
         }
 
-        public IEnumerable<string> GetRoles()
+        public IList<string> GetRoles()
         {
             return _context.Roles.Select(r => r.Name).ToArray();
         }
 
-        public IEnumerable<string> GetRolesForUser(string id)
+        public IList<string> GetRolesForUser(string id)
         {
             var user = GetUser(id);
 

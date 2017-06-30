@@ -10,9 +10,9 @@ namespace TimeTidy.Persistance.Repositories
     {
         ApplicationUser GetUser(string id);
 
-        IEnumerable<string> GetRolesForUser(string id);
+        IList<string> GetRolesForUser(string id);
 
-        IEnumerable<string> GetRoles();
+        IList<string> GetRoles();
 
         IEnumerable<ApplicationUser> GetUsers();
 

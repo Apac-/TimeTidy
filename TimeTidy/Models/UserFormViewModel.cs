@@ -11,10 +11,10 @@ namespace TimeTidy.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public IEnumerable<string> UserRoles { get; set; }
-        public IEnumerable<string> AvilableRoles { get; set; }
+        public IList<string> UserRoles { get; set; }
+        public IList<string> AvilableRoles { get; set; }
 
-        public UserFormViewModel(ApplicationUser user, IEnumerable<string> roles, IEnumerable<string> userRoles)
+        public UserFormViewModel(ApplicationUser user, IList<string> roles, IList<string> userRoles)
         {
             UserId = user.Id;
             PhoneNumber = user.PhoneNumber;
