@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.DropDownListFor(m => m.AvilableRoles, new SelectList(Model.AvilableRoles, "Id", "Name"),
+        @Html.DropDownListFor(m => m.AvilableRoles, new SelectList(Model.AvilableRoles), 
             "Roles", new { @class = "form-control" })
     </div>
 
