@@ -23,14 +23,8 @@ namespace TimeTidy.Controllers.Api
         {
             string userId = User.Identity.GetUserId();
 
-            // TODO (Jeff): C. Remove code later
-            //var sheets = _context.TimeSheets
-            //    .Where(s => s.ApplicationUserId == userId)
-            //    .Where(s => s.WorkSiteId == id)
-            //    .Where(s => s.LogOffTime == null)
-            //    .ToList();
 
-            var returnSheet = _unitOfWork.TimeSheets.GetMostRecentSheetByUser(userId, id);
+            var returnSheet = _unitOfWork.TimeSheets.GetCurrentLoggedInSheetForUser(userId, id);
 
             DateTime? logonTime = null;
             int? timeSheetId = null;

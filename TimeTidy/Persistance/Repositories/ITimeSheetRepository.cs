@@ -17,6 +17,6 @@ namespace TimeTidy.Persistance.Repositories
 
         TimeSheet Remove(TimeSheet timeSheet);
 
-        TimeSheet GetMostRecentSheetByUser(string userId, int? workSiteId);
+        TimeSheet GetCurrentLoggedInSheetForUser(string userId, int? workSiteId);
     }
 }
