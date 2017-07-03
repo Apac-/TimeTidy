@@ -5,14 +5,14 @@ namespace TimeTidy.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<TimeTidy.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TimeTidy.Persistence.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(TimeTidy.Models.ApplicationDbContext context)
+        protected override void Seed(TimeTidy.Persistence.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

@@ -225,7 +225,7 @@
     <Compile Include="Migrations\201702100330076_AddFirstAndLastNameToApplicationUser.Designer.cs">
       <DependentUpon>201702100330076_AddFirstAndLastNameToApplicationUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Persistence\ApplicationDbContext.cs" />
     <Compile Include="Models\DTOs\BasicUsersDTO.cs" />
     <Compile Include="Models\DTOs\LogOnTimeDTO.cs" />
     <Compile Include="Models\DTOs\TimeSheetDTO.cs" />
@@ -254,7 +254,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DTOs\WorkSiteTimeSheetDTO.cs" />
-    <Compile Include="Models\IApplicationDbContext.cs" />
+    <Compile Include="Persistence\IApplicationDbContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LatLng.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -266,14 +266,14 @@
     <Compile Include="Models\UserFormViewModel.cs" />
     <Compile Include="Models\UserIdViewModel.cs" />
     <Compile Include="Models\WorkSite.cs" />
-    <Compile Include="Persistance\IUnitOfWork.cs" />
-    <Compile Include="Persistance\Repositories\ApplicationUserRepository.cs" />
-    <Compile Include="Persistance\Repositories\IApplicationUserRepository.cs" />
-    <Compile Include="Persistance\Repositories\ITimeSheetRepository.cs" />
-    <Compile Include="Persistance\Repositories\IWorkSiteRepository.cs" />
-    <Compile Include="Persistance\Repositories\TimeSheetRepository.cs" />
-    <Compile Include="Persistance\Repositories\WorkSiteRepository.cs" />
-    <Compile Include="Persistance\UnitOfWork.cs" />
+    <Compile Include="Persistence\IUnitOfWork.cs" />
+    <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Persistence\Repositories\IApplicationUserRepository.cs" />
+    <Compile Include="Persistence\Repositories\ITimeSheetRepository.cs" />
+    <Compile Include="Persistence\Repositories\IWorkSiteRepository.cs" />
+    <Compile Include="Persistence\Repositories\TimeSheetRepository.cs" />
+    <Compile Include="Persistence\Repositories\WorkSiteRepository.cs" />
+    <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationUserManagerService.cs" />
     <Compile Include="Services\IApplicationUserManagerService.cs" />

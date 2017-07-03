@@ -3,7 +3,7 @@ using System.Web.Http;
 using AutoMapper;
 using TimeTidy.DTOs;
 using TimeTidy.Models;
-using TimeTidy.Persistance;
+using TimeTidy.Persistence;
 
 namespace TimeTidy.Controllers.Api
 {

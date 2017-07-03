@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using TimeTidy.Models;
+using TimeTidy.Persistence;
 
-namespace TimeTidy.Persistance.Repositories
+namespace TimeTidy.Persistence.Repositories
 {
     public class TimeSheetRepository : ITimeSheetRepository
     {

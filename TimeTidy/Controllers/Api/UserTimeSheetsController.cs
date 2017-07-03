@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Web.Http;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
-using TimeTidy.Persistance;
+using TimeTidy.Persistence;
 
 namespace TimeTidy.Controllers.Api
 {

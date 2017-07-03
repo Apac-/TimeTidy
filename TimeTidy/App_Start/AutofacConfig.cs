@@ -13,7 +13,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using TimeTidy.Models;
-using TimeTidy.Persistance;
+using TimeTidy.Persistence;
 using TimeTidy.Services;
 
 namespace TimeTidy.App_Start

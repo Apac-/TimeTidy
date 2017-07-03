@@ -4,10 +4,10 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using TimeTidy.Models;
 
-namespace TimeTidy.Models
+namespace TimeTidy.Persistence
 {
-    // TODO (Jeff): B. Move to presistance folder
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
     {
         public DbSet<WorkSite> WorkSites { get; set; }

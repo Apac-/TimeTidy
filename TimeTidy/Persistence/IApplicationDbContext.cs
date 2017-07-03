@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
+using TimeTidy.Models;
 
-namespace TimeTidy.Models
+namespace TimeTidy.Persistence
 {
-    // TODO (Jeff): B. Move to presistance folder
     public interface IApplicationDbContext
     {
         DbSet<TimeSheet> TimeSheets { get; set; }

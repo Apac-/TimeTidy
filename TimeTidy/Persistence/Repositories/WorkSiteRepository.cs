@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using TimeTidy.Models;
 
-namespace TimeTidy.Persistance.Repositories
+namespace TimeTidy.Persistence.Repositories
 {
     public class WorkSiteRepository : IWorkSiteRepository
     {

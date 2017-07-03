@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TimeTidy.Models;
 using TimeTidy.ViewModels;
-using TimeTidy.Persistance;
+using TimeTidy.Persistence;
 
 namespace TimeTidy.Controllers
 {

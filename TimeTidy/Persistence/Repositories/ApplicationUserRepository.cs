@@ -6,8 +6,9 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
+using TimeTidy.Persistence;
 
-namespace TimeTidy.Persistance.Repositories
+namespace TimeTidy.Persistence.Repositories
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {

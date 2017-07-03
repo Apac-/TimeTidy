@@ -8,7 +8,7 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using TimeTidy.Models;
 using TimeTidy.Models.DTOs;
-using TimeTidy.Persistance;
+using TimeTidy.Persistence;
 
 namespace TimeTidy.Controllers.Api
 {

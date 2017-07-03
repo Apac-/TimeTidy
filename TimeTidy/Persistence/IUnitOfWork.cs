@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using TimeTidy.Persistance.Repositories;
+using TimeTidy.Persistence.Repositories;
 
-namespace TimeTidy.Persistance
+namespace TimeTidy.Persistence
 {
     public interface IUnitOfWork
     {

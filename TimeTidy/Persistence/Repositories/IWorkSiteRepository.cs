@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TimeTidy.Models;
 
-namespace TimeTidy.Persistance.Repositories
+namespace TimeTidy.Persistence.Repositories
 {
     public interface IWorkSiteRepository
     {

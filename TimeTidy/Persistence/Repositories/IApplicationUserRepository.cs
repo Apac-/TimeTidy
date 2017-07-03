@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TimeTidy.Models;
 
-namespace TimeTidy.Persistance.Repositories
+namespace TimeTidy.Persistence.Repositories
 {
     public interface IApplicationUserRepository
     {
