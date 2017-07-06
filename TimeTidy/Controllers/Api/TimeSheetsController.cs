@@ -23,7 +23,6 @@ namespace TimeTidy.Controllers.Api
         {
             string userId = User.Identity.GetUserId();
 
-
             var returnSheet = _unitOfWork.TimeSheets.GetCurrentLoggedInSheetForUser(userId, id);
 
             DateTime? logonTime = null;
@@ -48,6 +47,18 @@ namespace TimeTidy.Controllers.Api
         public IHttpActionResult CreateTimeSheet(TimeSheetLogonDTO logonDto)
         {
             string userId = User.Identity.GetUserId();
+
+            if (logonDto.WorkSiteId == 0)
+                return BadRequest("No Worksite ID given.");
+
+            if (string.IsNullOrEmpty(logonDto.SiteName))
+                return BadRequest("No site name given.");
+
+            if (logonDto.SiteLat == 0.0f || logonDto.SiteLng == 0.0f)
+                return BadRequest("No site location given.");
+
+            if (logonDto.UserLat == 0.0f || logonDto.UserLng == 0.0f)
+                return BadRequest("No user location given.");
 
             var timeSheet = new TimeSheet()
             {
@@ -77,6 +88,9 @@ namespace TimeTidy.Controllers.Api
                 return NotFound();
 
             if (timeSheet.ApplicationUserId != User.Identity.GetUserId())
+                return BadRequest();
+
+            if (logoffDto.UserLat == 0.0f || logoffDto.UserLng == 0.0f)
                 return BadRequest();
 
             timeSheet.LogOffTime = DateTime.UtcNow;
