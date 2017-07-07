@@ -106,7 +106,8 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\Api\UsersControllerTests.cs" />
-    <Compile Include="Controllers\Api\UserTimeSheetsCoontrollerTest.cs" />
+    <Compile Include="Controllers\Api\UserTimeSheetsCoontrollerTests.cs" />
+    <Compile Include="Controllers\Api\WorkSitesControllerTests.cs" />
     <Compile Include="Extensions\ApiControllerExtensions.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

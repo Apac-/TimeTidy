@@ -14,7 +14,7 @@ using System.Web.Http.Results;
 namespace TimeTidy.Tests.Controllers.Api
 {
 	[TestFixture]
-	public class UserTimeSheetsCoontrollerTest
+	public class UserTimeSheetsCoontrollerTests
 	{
         private UserTimeSheetsController _controller;
         private Mock<ITimeSheetRepository> _mockTimeSheetRepo;
