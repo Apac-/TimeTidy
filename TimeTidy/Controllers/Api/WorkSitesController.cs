@@ -10,10 +10,12 @@ namespace TimeTidy.Controllers.Api
     public class WorkSitesController : ApiController
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public WorkSitesController(IUnitOfWork unitOfWork)
+        public WorkSitesController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         // GET /api/worksites
@@ -41,7 +43,11 @@ namespace TimeTidy.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var workSite = Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
+            if (string.IsNullOrEmpty(workSiteDto.Name)
+                || workSiteDto.Lat == 0 || workSiteDto.Lng == 0)
+                return BadRequest();
+
+            var workSite = _mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
 
             _unitOfWork.WorkSites.Add(workSite);
             _unitOfWork.Complete();
@@ -64,7 +70,7 @@ namespace TimeTidy.Controllers.Api
             if (siteInDb == null)
                 return NotFound();
 
-            Mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto, siteInDb);
+            siteInDb = _mapper.Map<WorkSite>(workSiteDto);
 
             _unitOfWork.Complete();
 
