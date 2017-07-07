@@ -38,29 +38,29 @@ namespace TimeTidy.Controllers.Api
         // POST /api/worksites
         [HttpPost]
         [Authorize(Roles = RoleName.CanManageWorkSites)]
-        public IHttpActionResult CreateWorkSite(WorkSiteDTO workSiteDto)
+        public IHttpActionResult CreateWorkSite(WorkSiteDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (string.IsNullOrEmpty(workSiteDto.Name)
-                || workSiteDto.Lat == 0 || workSiteDto.Lng == 0)
+            if (string.IsNullOrEmpty(dto.Name)
+                || dto.Lat == 0 || dto.Lng == 0)
                 return BadRequest();
 
-            var workSite = _mapper.Map<WorkSiteDTO, WorkSite>(workSiteDto);
+            var workSite = _mapper.Map<WorkSiteDTO, WorkSite>(dto);
 
             _unitOfWork.WorkSites.Add(workSite);
             _unitOfWork.Complete();
 
-            workSiteDto.Id = workSite.Id;
+            dto.Id = workSite.Id;
 
-            return Created(new Uri(Request.RequestUri + "/" + workSite.Id), workSiteDto);
+            return Created(new Uri(Request.RequestUri + "/" + workSite.Id), dto);
         }
 
         // PUT /api/worksites/1
         [HttpPut]
         [Authorize(Roles = RoleName.CanManageWorkSites)]
-        public IHttpActionResult UpdateWorkSite(int id, WorkSiteDTO workSiteDto)
+        public IHttpActionResult UpdateWorkSite(int id, WorkSiteDTO dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
@@ -70,7 +70,7 @@ namespace TimeTidy.Controllers.Api
             if (siteInDb == null)
                 return NotFound();
 
-            siteInDb = _mapper.Map<WorkSite>(workSiteDto);
+            siteInDb = _mapper.Map<WorkSite>(dto);
 
             _unitOfWork.Complete();
 
