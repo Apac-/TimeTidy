@@ -65,6 +65,10 @@ namespace TimeTidy.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (string.IsNullOrEmpty(dto.Name)
+                || dto.Lat == 0 || dto.Lng == 0)
+                return BadRequest();
+
             var siteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
 
             if (siteInDb == null)
