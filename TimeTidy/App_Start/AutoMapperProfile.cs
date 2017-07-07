@@ -7,12 +7,12 @@ using TimeTidy.DTOs;
 using TimeTidy.Models;
 
 namespace TimeTidy.App_Start {
-    public class MappingProfile : Profile
+    public class AutoMapperProfile : Profile
     {
-        public MappingProfile()
+        public AutoMapperProfile()
         {
-            Mapper.CreateMap<WorkSite, WorkSiteDTO>();
-            Mapper.CreateMap<WorkSiteDTO, WorkSite>();
+            CreateMap<WorkSite, WorkSiteDTO>();
+            CreateMap<WorkSiteDTO, WorkSite>();
         }
     }
 }
