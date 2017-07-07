@@ -33,24 +33,5 @@ namespace TimeTidy.Models.DTOs {
             LogOffTime = sheet.LogOffTime;
             LogOffLocation = sheet.LogOffLocation;
         }
-
-        public override bool Equals(object obj)
-        {
-            TimeSheetDTO dto = obj as TimeSheetDTO;
-
-            if (dto == null)
-                return false;
-
-            if (dto.Id == Id && dto.SiteName == SiteName && dto.SiteLocation == SiteLocation
-                && dto.SiteAddress == SiteAddress && dto.LogOnTime == LogOnTime && dto.LogOnLocation == LogOnLocation
-                && dto.LogOffTime == LogOffTime && dto.LogOffLocation == LogOffLocation)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }
