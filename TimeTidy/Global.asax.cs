@@ -15,7 +15,6 @@ namespace TimeTidy
     {
         protected void Application_Start()
         {
-            Mapper.Initialize(c => c.AddProfile<AutoMapperProfile>());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
