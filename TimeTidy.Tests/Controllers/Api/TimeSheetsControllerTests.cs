@@ -47,7 +47,7 @@ namespace TimeTidy.Tests.Controllers.Api
             var contentResult = result as OkNegotiatedContentResult<LogOnTimeDTO>;
 
             result.Should().BeOfType<OkNegotiatedContentResult<LogOnTimeDTO>>()
-                .Which.Content.Should().Be(expectedReturnDto);
+                .Which.Content.ShouldBeEquivalentTo(expectedReturnDto);
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace TimeTidy.Tests.Controllers.Api
             var contentResult = result as OkNegotiatedContentResult<LogOnTimeDTO>;
 
             result.Should().BeOfType<OkNegotiatedContentResult<LogOnTimeDTO>>()
-                .Which.Content.Should().Be(expectedReturnDto);
+                .Which.Content.ShouldBeEquivalentTo(expectedReturnDto);
         }
 
         #endregion

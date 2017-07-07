@@ -77,7 +77,7 @@ namespace TimeTidy.Tests.Controllers.Api
             var result = _controller.GetUsers();
 
             result.Should().BeOfType<OkNegotiatedContentResult<List<BasicUsersDTO>>>()
-                .Which.Content.Should().BeEquivalentTo(expectedResult);
+                .Which.Content.ShouldBeEquivalentTo(expectedResult);
         }
         #endregion
 

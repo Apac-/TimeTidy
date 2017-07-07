@@ -65,7 +65,7 @@ namespace TimeTidy.Tests.Controllers.Api
             var result = _controller.GetUserTimeSheets(_userId);
 
             result.Should().BeOfType<OkNegotiatedContentResult<List<TimeSheetDTO>>>()
-                .Which.Content.Should().BeEquivalentTo(expectedResult);
+                .Which.Content.ShouldBeEquivalentTo(expectedResult);
         }
         #endregion
 
