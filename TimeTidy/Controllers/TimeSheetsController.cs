@@ -34,6 +34,9 @@ namespace TimeTidy.Controllers
         {
             var userInDb = _unitOfWork.Users.GetUser(id);
 
+            if (userInDb == null)
+                return HttpNotFound();
+
             var vm = new TimeSheetsListViewModel
             {
                 UserId = id,
