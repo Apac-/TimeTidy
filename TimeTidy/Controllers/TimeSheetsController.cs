@@ -46,6 +46,11 @@ namespace TimeTidy.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// Show time sheets for worksite with given id.
+        /// </summary>
+        /// <param name="id">WorkSite id</param>
+        /// <returns>View 'worksite' and found site</returns>
         public ActionResult Worksite(int id)
         {
             var siteInDb = _unitOfWork.WorkSites.GetWorkSite(id);
