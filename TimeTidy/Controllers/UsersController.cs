@@ -79,6 +79,10 @@ namespace TimeTidy.Controllers
             // Get user from DB
             // Update with new information
             var userInDb = _unitOfWork.Users.GetUser(user.UserId);
+
+            if (userInDb == null)
+                return HttpNotFound();
+
             userInDb.FirstName = user.FirstName;
             userInDb.LastName = user.LastName;
             userInDb.PhoneNumber = user.PhoneNumber;
