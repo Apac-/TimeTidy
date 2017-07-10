@@ -22,7 +22,11 @@ namespace TimeTidy.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        // GET: Users
+        /// <summary>
+        /// Get: Users
+        /// Returns all users in context
+        /// </summary>
+        /// <returns>All users in context</returns>
         public ActionResult Index()
         {
             var users = _unitOfWork.Users.GetUsers();
@@ -30,6 +34,10 @@ namespace TimeTidy.Controllers
             return View("Index", users);
         }
 
+        /// <summary>
+        /// Shows page to edit user of given id.
+        /// </summary>
+        /// <param name="id">User Id</param>
         public ActionResult Edit(string id)
         {
             var userInDb = _unitOfWork.Users.GetUser(id);
@@ -46,6 +54,11 @@ namespace TimeTidy.Controllers
             return View("UserForm", viewModel);
         }
 
+        /// <summary>
+        /// Update user details for given User
+        /// </summary>
+        /// <param name="user">Given user</param>
+        /// <returns>Redirect to user index</returns>
         [HttpPost]
         public async Task<ActionResult> Save(User user)
         {
