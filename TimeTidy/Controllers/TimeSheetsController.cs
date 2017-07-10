@@ -25,9 +25,13 @@ namespace TimeTidy.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Returns ViewResult of user id and name for given user by Id.
+        /// </summary>
+        /// <param name="id">User ID</param>
+        /// <returns>ViewResult of userId and Name</returns>
         public ActionResult List(string id)
         {
-            //var userInDb = _context.Users.SingleOrDefault(u => u.Id == id);
             var userInDb = _unitOfWork.Users.GetUser(id);
 
             var vm = new TimeSheetsListViewModel
