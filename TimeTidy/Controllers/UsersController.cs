@@ -90,15 +90,13 @@ namespace TimeTidy.Controllers
             userInDb.Email = user.Email;
 
             // Remove all roles then add new ones
-            var userInManager = await _unitOfWork.Users.FindUserByIdAsync(user.UserId);
-
-            if (userInManager.Roles != null && userInManager.Roles.Count > 0)
+            if (userInDb.Roles != null && userInDb.Roles.Count > 0)
                 await _unitOfWork.Users.RemoveUserFromRolesAsync(user.UserId, _unitOfWork.Users.GetRolesForUser(user.UserId).ToArray());
 
             if (user.UserRoles != null && user.UserRoles.Count > 0)
                 await _unitOfWork.Users.AddUserToRolesAsync(user.UserId, user.UserRoles.ToArray());
 
-            await _unitOfWork.Users.UpdateAsync(userInManager);
+            await _unitOfWork.Users.UpdateAsync(userInDb);
 
             _unitOfWork.Complete();
 
