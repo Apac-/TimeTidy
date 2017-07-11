@@ -17,6 +17,11 @@ namespace TimeTidy.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        /// <summary>
+        /// Get populate worksite form for editing of given worksite by id.
+        /// </summary>
+        /// <param name="id">WorkSite Id</param>
+        /// <returns>WorkSite edit form and given worksite by id</returns>
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Edit(int id)
         {
@@ -35,6 +40,11 @@ namespace TimeTidy.Controllers
             return View("WorkSiteForm", workSite);
         }
 
+        /// <summary>
+        /// Saves given worksite's changes to database.
+        /// </summary>
+        /// <param name="worksite">Worksite with changes made</param>
+        /// <returns>Redirect to list of worksites.</returns>
         [HttpPost]
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult Save(WorkSite worksite) {
@@ -67,6 +77,10 @@ namespace TimeTidy.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Gets and returns a list of all WorkSites in DB.
+        /// </summary>
+        /// <returns>List view with all found WorkSites</returns>
         [Authorize(Roles = RoleName.CanManageWorkSites)]
         public ActionResult List()
         {
