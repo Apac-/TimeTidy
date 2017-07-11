@@ -149,6 +149,7 @@
     <Compile Include="Extensions\ApiControllerExtensions.cs" />
     <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
+    <Compile Include="Persistence\Repositories\ApplicationUserRepositoryTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -164,9 +165,7 @@
       <Name>TimeTidy</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Persistence\Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
