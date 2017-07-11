@@ -51,6 +51,14 @@ namespace TimeTidy.Controllers
             if (!ModelState.IsValid)
                 return View("WorkSiteForm", worksite);
 
+            if (string.IsNullOrEmpty(worksite.Name) ||
+                string.IsNullOrEmpty(worksite.StreetAddress) ||
+                worksite.Lat == 0 || worksite.Lng == 0)
+            {
+                ModelState.AddModelError("Error", "Required Worksite info not supplied.");
+                return View("WorkSiteForm", worksite);
+            }
+
             if (worksite.Id == 0)
             {
                 _unitOfWork.WorkSites.Add(worksite);
