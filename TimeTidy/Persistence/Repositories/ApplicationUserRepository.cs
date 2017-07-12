@@ -21,11 +21,20 @@ namespace TimeTidy.Persistence.Repositories
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Get all role names in context.
+        /// </summary>
+        /// <returns>Role names</returns>
         public IList<string> GetRoles()
         {
             return _context.Roles.Select(r => r.Name).ToArray();
         }
 
+        /// <summary>
+        /// Get all roles on given user by id.
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>List of all roles attached to user.</returns>
         public IList<string> GetRolesForUser(string id)
         {
             var userRoles = GetUser(id).Roles.Select(r => r.RoleId).ToArray();
@@ -38,11 +47,20 @@ namespace TimeTidy.Persistence.Repositories
             return roles;
         }
 
+        /// <summary>
+        /// Get user by given id.
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>ApplicationUser for given id</returns>
         public ApplicationUser GetUser(string id)
         {
             return _context.Users.Single(u => u.Id == id);
         }
 
+        /// <summary>
+        /// Get all users.
+        /// </summary>
+        /// <returns>Enumerabe of ApplicationUsers</returns>
         public IEnumerable<ApplicationUser> GetUsers()
         {
             return _context.Users.ToList();
