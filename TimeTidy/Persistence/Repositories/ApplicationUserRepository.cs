@@ -37,7 +37,11 @@ namespace TimeTidy.Persistence.Repositories
         /// <returns>List of all roles attached to user.</returns>
         public IList<string> GetRolesForUser(string id)
         {
-            var userRoles = GetUser(id).Roles.Select(r => r.RoleId).ToArray();
+            var user = GetUser(id);
+            if (user == null)
+                return null;
+
+            var userRoles = user.Roles.Select(r => r.RoleId).ToArray();
 
             var roles = _context.Roles
                 .Where(r => userRoles.Any(u => r.Id == u))
@@ -54,7 +58,7 @@ namespace TimeTidy.Persistence.Repositories
         /// <returns>ApplicationUser for given id</returns>
         public ApplicationUser GetUser(string id)
         {
-            return _context.Users.Single(u => u.Id == id);
+            return _context.Users.SingleOrDefault(u => u.Id == id);
         }
 
         /// <summary>
