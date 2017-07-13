@@ -97,11 +97,14 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\TimeSheetsControllerTests.cs" />
     <Compile Include="GlobalSetUp.cs" />
     <Compile Include="Isolated.cs" />
     <Compile Include="UnitTest1.cs" />
@@ -112,6 +115,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TimeTidy.Extensions\TimeTidy.Extensions.csproj">
+      <Project>{45a12acb-4a75-483f-9667-64606b5fcc72}</Project>
+      <Name>TimeTidy.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TimeTidy\TimeTidy.csproj">
       <Project>{3e90330a-45a6-490a-9be3-6a55290b5594}</Project>
       <Name>TimeTidy</Name>
