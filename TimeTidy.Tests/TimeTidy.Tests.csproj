@@ -146,8 +146,6 @@
     <Compile Include="Controllers\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\UsersControllerTests.cs" />
     <Compile Include="Controllers\WorkSitesControllerTests.cs" />
-    <Compile Include="Extensions\ApiControllerExtensions.cs" />
-    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\MockDbSetExtensions.cs" />
     <Compile Include="Persistence\Repositories\ApplicationUserRepositoryTests.cs" />
     <Compile Include="Persistence\Repositories\TimeSheetRepositoryTests.cs" />
@@ -161,6 +159,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TimeTidy.Extensions\TimeTidy.Extensions.csproj">
+      <Project>{45a12acb-4a75-483f-9667-64606b5fcc72}</Project>
+      <Name>TimeTidy.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TimeTidy\TimeTidy.csproj">
       <Project>{3E90330A-45A6-490A-9BE3-6A55290B5594}</Project>
       <Name>TimeTidy</Name>

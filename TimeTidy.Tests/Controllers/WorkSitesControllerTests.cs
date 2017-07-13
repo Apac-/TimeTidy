@@ -1,14 +1,13 @@
 ﻿using FluentAssertions;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using TimeTidy.Controllers;
 using TimeTidy.Models;
 using TimeTidy.Persistence;
 using TimeTidy.Persistence.Repositories;
-using TimeTidy.Tests.Extensions;
+using TimeTidy.Extensions;
 
 namespace TimeTidy.Tests.Controllers
 {

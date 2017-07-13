@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Moq;
 using TimeTidy.Persistence;
 using TimeTidy.Persistence.Repositories;
@@ -10,7 +9,6 @@ using TimeTidy.Tests.Extensions;
 using FluentAssertions;
 using System.Collections.Generic;
 using Microsoft.AspNet.Identity;
-using System.Linq;
 
 namespace TimeTidy.Tests.Persistence.Repositories
 {

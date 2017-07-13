@@ -6,8 +6,8 @@ using TimeTidy.Controllers;
 using TimeTidy.Models;
 using TimeTidy.Persistence;
 using TimeTidy.Persistence.Repositories;
-using TimeTidy.Tests.Extensions;
 using TimeTidy.ViewModels;
+using TimeTidy.Extensions;
 
 namespace TimeTidy.Tests.Controllers
 {

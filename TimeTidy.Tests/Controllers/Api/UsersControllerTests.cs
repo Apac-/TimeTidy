@@ -1,12 +1,10 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Moq;
 using TimeTidy.Persistence.Repositories;
 using TimeTidy.Persistence;
 using TimeTidy.Controllers.Api;
-using TimeTidy.Tests.Extensions;
 using TimeTidy.Models;
+using TimeTidy.Extensions;
 using System.Collections.Generic;
 using FluentAssertions;
 using System.Web.Http.Results;
