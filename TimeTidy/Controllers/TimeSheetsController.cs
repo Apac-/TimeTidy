@@ -27,6 +27,7 @@ namespace TimeTidy.Controllers
 
         /// <summary>
         /// Returns ViewResult of user id and name for given user by Id.
+        /// This is used by Ajax in the view.
         /// </summary>
         /// <param name="id">User ID</param>
         /// <returns>ViewResult of userId and Name</returns>
