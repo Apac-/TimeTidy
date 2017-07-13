@@ -18,6 +18,10 @@ namespace TimeTidy.Tests.Extensions
             mockSet.As<IQueryable<T>>().Setup(m => m.Expression).Returns(data.Expression);
             mockSet.As<IQueryable<T>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<T>>().Setup(m => m.GetEnumerator()).Returns(() => data.GetEnumerator());
+
+            mockSet.Setup(m => m.Include(It.IsAny<string>())).Returns(mockSet.Object);
+            mockSet.Setup(m => m.Add(It.IsAny<T>())).Returns((T a) => { source.Add(a); return a; });
+            mockSet.Setup(m => m.Remove(It.IsAny<T>())).Returns((T a) => { source.Remove(a); return a; });
         }
     }
 }
