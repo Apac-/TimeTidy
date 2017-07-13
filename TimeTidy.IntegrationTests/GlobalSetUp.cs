@@ -1,9 +1,6 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Data.Entity.Migrations;
 using TimeTidy.Persistence;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTidy.Models;
 using System.Linq;
 
