@@ -6,10 +6,10 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
+using System.Web;
 
-namespace TimeTidy.Tests.Extensions
+namespace TimeTidy.Extensions
 {
     public static class ControllerExtensions
     {
