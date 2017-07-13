@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTidy", "TimeTidy\TimeTi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTidy.Tests", "TimeTidy.Tests\TimeTidy.Tests.csproj", "{53035A0C-57BB-4122-96F9-8C0BC19F8707}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeTidy.IntegrationTests", "TimeTidy.IntegrationTests\TimeTidy.IntegrationTests.csproj", "{D82E81B2-069E-40D8-9109-AC18448E54E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,12 @@ Global
 		{53035A0C-57BB-4122-96F9-8C0BC19F8707}.Godaddy|Any CPU.Build.0 = Release|Any CPU
 		{53035A0C-57BB-4122-96F9-8C0BC19F8707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53035A0C-57BB-4122-96F9-8C0BC19F8707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Godaddy|Any CPU.ActiveCfg = Release|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Godaddy|Any CPU.Build.0 = Release|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82E81B2-069E-40D8-9109-AC18448E54E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
