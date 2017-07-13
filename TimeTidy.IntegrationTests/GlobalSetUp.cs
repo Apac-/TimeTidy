@@ -24,7 +24,7 @@ namespace TimeTidy.IntegrationTests
         {
             var context = new ApplicationDbContext();
 
-            if (context.Users.Any())
+            if (context.Users.Count() > 1)
                 return;
 
             context.Users.Add(new ApplicationUser { UserName = "user1", FirstName = "User", LastName = "One", Email = "user1@domain.com", PasswordHash = "-" });
