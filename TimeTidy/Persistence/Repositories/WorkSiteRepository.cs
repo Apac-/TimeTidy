@@ -20,6 +20,11 @@ namespace TimeTidy.Persistence.Repositories
             return _context.WorkSites.Add(workSite);
         }
 
+        /// <summary>
+        /// Get worksite by Id.
+        /// </summary>
+        /// <param name="id">Work Site Id</param>
+        /// <returns>Found site or Null</returns>
         public WorkSite GetWorkSite(int id)
         {
             return _context.WorkSites.SingleOrDefault(w => w.Id == id);
