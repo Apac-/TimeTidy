@@ -23,7 +23,8 @@ namespace TimeTidy.IntegrationTests
 
         public void BeforeTest(ITest test)
         {
-            _transactionScope = new TransactionScope();
+            // Async flow option needs to be enabled so awaits won't hang.
+            _transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }
 
         public void AfterTest(ITest test)
