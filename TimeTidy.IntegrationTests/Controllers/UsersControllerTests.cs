@@ -26,6 +26,12 @@ namespace TimeTidy.IntegrationTests.Controllers
             _controller = new UsersController(new UnitOfWork(_context, userManager));
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Dispose();
+        }
+
         #region Index()
         [Test]
         public void Index_ValidCall_ShouldReturnViewResultWithAllUsersInDb()

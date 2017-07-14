@@ -24,6 +24,12 @@ namespace TimeTidy.IntegrationTests.Controllers
             _controller = new WorkSitesController(new UnitOfWork(_context, userManager));
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Dispose();
+        }
+
         #region Edit(id)
         [Test]
         public void Edit_WorkSiteNotFoundInDb_ShouldReturnHttpNotFound()
