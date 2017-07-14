@@ -3,6 +3,7 @@ using System.Data.Entity.Migrations;
 using TimeTidy.Persistence;
 using TimeTidy.Models;
 using System.Linq;
+using System;
 
 namespace TimeTidy.IntegrationTests
 {
@@ -21,6 +22,24 @@ namespace TimeTidy.IntegrationTests
         {
             var context = new ApplicationDbContext();
 
+            SeedUsers(context);
+
+            SeedWorkSites(context);
+        }
+
+        private void SeedWorkSites(ApplicationDbContext context)
+        {
+            if (context.WorkSites.Count() > 1)
+                return;
+
+            context.WorkSites.Add(new WorkSite { Name = "Site one", StreetAddress = "1 street", Lat = 1.0f, Lng = 1.0f });
+            context.WorkSites.Add(new WorkSite { Name = "Site Two", StreetAddress = "2 street", Lat = 2.0f, Lng = 2.0f });
+
+            context.SaveChanges();
+        }
+
+        private void SeedUsers(ApplicationDbContext context)
+        {
             if (context.Users.Count() > 1)
                 return;
 
