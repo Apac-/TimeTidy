@@ -128,6 +128,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Controllers\Api\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\UsersControllerTests.cs" />
     <Compile Include="Controllers\WorkSitesControllerTests.cs" />
@@ -153,9 +154,7 @@
       <Name>TimeTidy</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controllers\Api\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
