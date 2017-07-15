@@ -48,6 +48,9 @@ namespace TimeTidy.Controllers.Api
         {
             string userId = User.Identity.GetUserId();
 
+            if (string.IsNullOrEmpty(userId))
+                return NotFound();
+
             if (logonDto.WorkSiteId == 0)
                 return BadRequest("No Worksite ID given.");
 
