@@ -42,7 +42,7 @@ namespace TimeTidy.Tests.Controllers.Api
             // Populate requests for CreateWorkSite(WorkSiteDTO)
             _controller.Request = new HttpRequestMessage();
             _controller.Request.SetConfiguration(new HttpConfiguration());
-            _controller.Request.RequestUri = new Uri("http://domain.com", false);
+            _controller.Request.RequestUri = new Uri("http://domain.com");
         }
 
         #region GetWorkSites
