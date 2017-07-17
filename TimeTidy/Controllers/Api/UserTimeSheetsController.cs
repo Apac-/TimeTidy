@@ -36,7 +36,7 @@ namespace TimeTidy.Controllers.Api
             return Ok(dto);
         }
 
-        // DELET /api/userTimeSheets/sheet_id
+        // DELETE /api/userTimeSheets/sheet_id
         [HttpDelete]
         public IHttpActionResult DeleteTimeSheet(int id)
         {
