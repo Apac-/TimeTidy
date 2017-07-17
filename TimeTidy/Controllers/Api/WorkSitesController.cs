@@ -74,7 +74,11 @@ namespace TimeTidy.Controllers.Api
             if (siteInDb == null)
                 return NotFound();
 
-            siteInDb = _mapper.Map<WorkSite>(dto);
+            siteInDb.Name = dto.Name;
+            siteInDb.Description = dto.Description;
+            siteInDb.Lat = dto.Lat;
+            siteInDb.Lng = dto.Lng;
+            siteInDb.Radius = dto.Radius;
 
             _unitOfWork.Complete();
 
