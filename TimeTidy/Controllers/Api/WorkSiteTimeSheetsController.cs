@@ -23,6 +23,7 @@ namespace TimeTidy.Controllers.Api
         }
 
         // GET /api/worksitetimesheets/1
+        // <param name="id">WorkSite id</param>
         public IHttpActionResult GetWorkSiteTimeSheets(int id)
         {
             var timeSheets = _unitOfWork.TimeSheets.GetTimeSheetsByWorkSite(id);
