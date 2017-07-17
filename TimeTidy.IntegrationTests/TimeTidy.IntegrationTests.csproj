@@ -130,6 +130,7 @@
   <ItemGroup>
     <Compile Include="Controllers\Api\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\Api\UsersControllerTests.cs" />
+    <Compile Include="Controllers\Api\UserTimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\UsersControllerTests.cs" />
     <Compile Include="Controllers\WorkSitesControllerTests.cs" />
