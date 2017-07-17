@@ -136,6 +136,7 @@
     <Compile Include="Controllers\Api\UsersControllerTests.cs" />
     <Compile Include="Controllers\Api\UserTimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\Api\WorkSitesControllerTests.cs" />
+    <Compile Include="Controllers\Api\WorkSiteTimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\TimeSheetsControllerTests.cs" />
     <Compile Include="Controllers\UsersControllerTests.cs" />
     <Compile Include="Controllers\WorkSitesControllerTests.cs" />
