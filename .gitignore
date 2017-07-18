@@ -196,4 +196,4 @@ Web.Godaddy.config
 *.publishproj
 
 # Mapbox key
-Scripts/leaflet-basics.js
+leaflet-basics.js
