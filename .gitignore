@@ -194,3 +194,6 @@ Web.Godaddy.config
 # Publish profiles
 *.pubxml
 *.publishproj
+
+# Mapbox key
+Scripts/leaflet-basics.js
