@@ -194,3 +194,4 @@ Web.Godaddy.config
 # Publish profiles
 *.pubxml
 *.publishproj
+/TimeTidy/Scripts/App/mapboxApiToken.js
