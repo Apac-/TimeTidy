@@ -1,4 +1,4 @@
-﻿function geoLocationService() {
+﻿function GeoLocationService() {
     var getCurrentPosition = function (success, fail) {
         if (!navigator.geolocation) {
             fail("Geolocation is not supported by your browser")

@@ -1,4 +1,4 @@
-﻿var mapboxService = function (mapboxApiToken) {
+﻿var MapboxService = function (mapboxApiToken) {
     var createSiteMap = function () {
         // TODO: Pass in mapid object?
         var siteMap = L.map("mapid");
