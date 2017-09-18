@@ -445,6 +445,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\App\mapboxApiToken.js" />
     <Content Include="Scripts\App\mapboxService.js" />
+    <Content Include="Scripts\App\worksitesIndexController.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
