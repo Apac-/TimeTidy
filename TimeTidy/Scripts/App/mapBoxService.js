@@ -19,4 +19,4 @@
     return {
         createSiteMap: createSiteMap
     };
-}(mapboxApiToken);
+}(MapboxApiToken);

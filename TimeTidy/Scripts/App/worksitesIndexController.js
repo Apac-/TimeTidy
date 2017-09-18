@@ -31,4 +31,4 @@ var worksitesIndexController = function (mapboxService, geoLocationService) {
     return {
         init: init
     };
-}();
+}(MapboxService, GeoLocationService);
