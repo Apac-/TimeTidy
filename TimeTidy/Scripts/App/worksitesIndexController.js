@@ -17,11 +17,21 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
         $.when(tableLoaded, mapLoaded).done(function () {
             viewControll.populateSitesTable(tableLoaded.responseJSON);
 
-            $.each(tableLoaded.responseJSON, function (index, element) {
-                mapboxService.addMarkersToMap()
-            });
+            mapboxService.addMarkersToMap(siteMap, tableLoaded.responseJSON, onMarkerClick);
         });
 
+    };
+
+    var onMarkerClick = function (e) {
+        setSelectedSite(e.target.options.title, e.target.id);
+    };
+
+    var setSelectedSite = function (siteName, siteId) {
+        viewControll.setSite(siteName);
+
+        $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
+            
+        });
     };
 
     var setUpSiteMap = function (deferObj) {
