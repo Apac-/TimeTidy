@@ -31,8 +31,13 @@ var WorksitesIndexView = function () {
         };
     };
 
+    var setSite = function (siteName) {
+        $('#nearestSite').text(`Selected: ${siteName}`);
+    };
+
     return {
         populateSitesTable: populateSitesTable,
         setLogButton: setLogButton,
+        setSite: setSite,
     };
 }();
