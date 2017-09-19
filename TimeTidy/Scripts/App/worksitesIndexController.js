@@ -25,6 +25,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
             mapboxService.addMarkersToMap(siteMap, workSites, onMarkerClick);
 
             let closestSite = findClosestSite(workSites, currentCenter);
+            setSelectedSite(closestSite);
         });
     };
 
@@ -52,7 +53,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
     };
 
     var onMarkerClick = function (e) {
-        setSelectedSite(e.target.options.title, e.target.id);
+        setSelectedSiteById(e.target.options.title, e.target.id);
         setSelectedTimeSheet(e.target.id)
     };
 
@@ -80,7 +81,13 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
         });
     };
 
-    var setSelectedSite = function (siteName, siteId) {
+    var setSelectedSite = function (site) {
+        viewControll.setSite(site.name);
+
+        selectedSite = site;
+    };
+
+    var setSelectedSiteById = function (siteName, siteId) {
         viewControll.setSite(siteName);
 
         selectedSite = getWorkSite(workSites, siteId);
