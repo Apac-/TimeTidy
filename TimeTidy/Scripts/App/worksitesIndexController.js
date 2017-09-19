@@ -3,32 +3,87 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
     let siteMap;
     let currentCenter;
 
+    let workSites;
+    let selectedSite;
+    let currentTimeSheetId
+
     var init = function () {
+        selectedSite = null;
+        currentTimeSheetId = null;
+
         let mapLoaded = setUpSiteMap(siteMap);
 
         let tableLoaded = $.getJSON("/api/worksites", { get_param: 'value' });
 
         geoLocationService.getCurrentPosition(success, fail);
 
-
         $.when(tableLoaded, mapLoaded).done(function () {
-            viewControll.populateSitesTable(tableLoaded.responseJSON);
+            workSites = tableLoaded.responseJSON;
 
-            mapboxService.addMarkersToMap(siteMap, tableLoaded.responseJSON, onMarkerClick);
+            viewControll.populateSitesTable(workSites);
+
+            mapboxService.addMarkersToMap(siteMap, workSites, onMarkerClick);
+
+            let closestSite = findClosestSite(workSites, currentCenter);
+        });
+    };
+
+    var findClosestSite = function (sites, currentPosition) {
+        let shorestDistance = 0;
+        let closeSite = null;
+        let siteLoc;
+        let dist;
+
+        $.each(sites, function (index, element) {
+            siteLoc = L.latLng(element.lat, element.lng);
+            dist = currentPosition.distanceTo(siteLoc);
+            if (shorestDistance == 0) {
+                shorestDistance = dist;
+                closeSite = element;
+            } else {
+                if (dist < shorestDistance) {
+                    shorestDistance = dist;
+                    closeSite = element;
+                };
+            };
         });
 
+        return closeSite;
     };
 
     var onMarkerClick = function (e) {
         setSelectedSite(e.target.options.title, e.target.id);
+        setSelectedTimeSheet(e.target.id)
+    };
+
+    var getWorkSite = function(sites, siteId){
+        let matchedSite = null;
+
+        $.each(sites, function (index, element) {
+            if (element.id == siteId) {
+                matchedSite = element;
+            }
+        });
+
+        return matchedSite;
+    };
+
+    var setSelectedTimeSheet = function (siteId) {
+        $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
+            currentTimeSheetId = jsonData.timeSheetId;
+
+            if (jsonData.dateTime === null) {
+                viewControll.setLogButton(false);
+            } else {
+                viewControll.setLogButton(true);
+            };
+        });
     };
 
     var setSelectedSite = function (siteName, siteId) {
         viewControll.setSite(siteName);
 
-        $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
-            
-        });
+        selectedSite = getWorkSite(workSites, siteId);
     };
 
     var setUpSiteMap = function (siteMap) {
