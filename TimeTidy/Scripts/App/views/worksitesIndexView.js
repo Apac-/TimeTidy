@@ -1,5 +1,5 @@
 ﻿"use strict";
-var worksitesIndexView = function () {
+var WorksitesIndexView = function () {
     var populateSitesTable = function (jsonData) {
         $('#sites').DataTable({
             data: jsonData,

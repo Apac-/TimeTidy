@@ -1,5 +1,5 @@
 ﻿
-var worksitesIndexController = function (mapboxService, geoLocationService, viewControll) {
+var WorksitesIndexController = function (mapboxService, geoLocationService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -53,4 +53,4 @@ var worksitesIndexController = function (mapboxService, geoLocationService, view
     return {
         init: init
     };
-}(MapboxService, GeoLocationService, worksitesIndexView);
+}(MapboxService, GeoLocationService, WorksitesIndexView);
