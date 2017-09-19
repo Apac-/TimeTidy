@@ -13,9 +13,24 @@
             }).addTo(siteMap);
 
         return siteMap;
-    }
+    };
+
+    var addMarkerToMap = function (mapLayerGroup, lat, lng, title, id, message, clickEvent) {
+        let marker
+
+        if (clickEvent) {
+            marker = L.marker([lat, lng], { title: title }).bindPopup(message).on('click', clickEvent);
+        }
+        else {
+            marker = L.marker([lat, lng], { title: title }).bindPopup(message);
+        };
+
+        marker.id = id;
+        mapLayerGroup.addLayer(marker);
+    };
 
     return {
-        createSiteMap: createSiteMap
+        createSiteMap: createSiteMap,
+        addMarkerToMap: addMarkerToMap,
     };
 }(MapboxApiToken);
