@@ -1,10 +1,26 @@
 ﻿
 var worksitesIndexController = function (mapboxService, geoLocationService) {
-    var siteMap;
+    let siteMap;
+    let currentCenter;
+
+    let mapLoaded = $.Deferred();
+    let tableLoaded;
 
     var init = function () {
-        siteMap = mapboxService.createSiteMap();
+        setUpSiteMap();
+
         geoLocationService.getCurrentPosition(success, fail);
+
+        let tableLoaded = $.getJSON("/api/worksites", { get_param: 'value' });
+    };
+
+    var setUpSiteMap = function () {
+        siteMap = mapboxService.createSiteMap();
+
+        siteMap.on('load', function (e) {
+            currentCenter = e.target.getCenter();
+            mapLoaded.resolve();
+        });
     };
 
     var success = function () {
