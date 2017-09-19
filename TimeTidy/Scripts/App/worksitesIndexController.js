@@ -16,6 +16,10 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
 
         $.when(tableLoaded, mapLoaded).done(function () {
             viewControll.populateSitesTable(tableLoaded.responseJSON);
+
+            $.each(tableLoaded.responseJSON, function (index, element) {
+                mapboxService.addMarkersToMap()
+            });
         });
 
     };
