@@ -17,7 +17,22 @@ var WorksitesIndexView = function () {
         });
     };
 
+    var setLogButton = function (isLoggedOn) {
+        if (isLoggedOn) {
+            $('#logbtn').prop({
+                'value': 'Logon',
+                'class': 'btn btn-success js-logon'
+            }).show();
+        } else {
+            $('#logbtn').prop({
+                'value': 'Logoff',
+                'class': 'btn btn-warning js-logoff'
+            }).show();
+        };
+    };
+
     return {
         populateSitesTable: populateSitesTable,
+        setLogButton: setLogButton,
     };
 }();
