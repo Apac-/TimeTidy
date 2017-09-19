@@ -1,5 +1,5 @@
 ﻿
-var worksitesIndexController = function (mapboxService, geoLocationService) {
+var worksitesIndexController = function (mapboxService, geoLocationService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -7,19 +7,25 @@ var worksitesIndexController = function (mapboxService, geoLocationService) {
     let tableLoaded;
 
     var init = function () {
-        setUpSiteMap();
+        setUpSiteMap(mapLoaded);
 
         geoLocationService.getCurrentPosition(success, fail);
 
         let tableLoaded = $.getJSON("/api/worksites", { get_param: 'value' });
+
+
+        $.when(tableLoaded, mapLoaded).done(function () {
+            viewControll.populateSitesTable(tableLoaded.responseJSON);
+        });
+
     };
 
-    var setUpSiteMap = function () {
+    var setUpSiteMap = function (deferObj) {
         siteMap = mapboxService.createSiteMap("mapid");
 
         siteMap.on('load', function (e) {
             currentCenter = e.target.getCenter();
-            mapLoaded.resolve();
+            deferObj.resolve();
         });
     };
 
@@ -47,4 +53,4 @@ var worksitesIndexController = function (mapboxService, geoLocationService) {
     return {
         init: init
     };
-}(MapboxService, GeoLocationService);
+}(MapboxService, GeoLocationService, worksitesIndexView);
