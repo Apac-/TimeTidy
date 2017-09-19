@@ -15,7 +15,7 @@ var worksitesIndexController = function (mapboxService, geoLocationService) {
     };
 
     var setUpSiteMap = function () {
-        siteMap = mapboxService.createSiteMap();
+        siteMap = mapboxService.createSiteMap("mapid");
 
         siteMap.on('load', function (e) {
             currentCenter = e.target.getCenter();

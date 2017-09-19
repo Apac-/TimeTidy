@@ -1,7 +1,6 @@
 ﻿var MapboxService = function (mapboxApiToken) {
-    var createSiteMap = function () {
-        // TODO: Pass in mapid object?
-        var siteMap = L.map("mapid");
+    var createSiteMap = function (mapRef) {
+        var siteMap = L.map(mapRef);
         L
             .tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?" + mapboxApiToken.token,
             {
