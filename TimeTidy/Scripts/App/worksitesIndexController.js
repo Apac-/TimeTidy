@@ -18,7 +18,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
 
         let tableLoaded = $.getJSON('/api/worksites', { get_param: 'value' });
 
-        geoLocationService.getCurrentPosition(success, fail);
+        geoLocationService.getCurrentPosition(getPositionSuccess, getPositionFail);
 
         $('#sites').on('click', '.js-select', onSiteClick);
         $('#logbtns').on('click', '.js-logon', onLogonButtonClick);
@@ -144,7 +144,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         };
     };
 
-    var success = function () {
+    var getPositionSuccess = function () {
         let output = $("#out");
 
         userLatitude = position.coords.latitude;
@@ -153,7 +153,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         mapboxService.setMapView(siteMap, userLatitude, userLongitude);
     };
 
-    var fail = function (message) {
+    var getPositionFail = function (message) {
         let output = $("#out");
 
         if (message) { output.append(`<p>${message}</p>`) }
