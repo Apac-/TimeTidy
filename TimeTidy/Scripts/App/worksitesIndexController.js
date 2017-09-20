@@ -53,14 +53,14 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
     };
 
     var onMarkerClick = function (e) {
-        setSelectedSiteById(e.target.options.title, e.target.id);
+        setSelectedSite(getWorkSite(e.target.id));
         setSelectedTimeSheet(e.target.id)
     };
 
-    var getWorkSite = function(sites, siteId){
+    var getWorkSite = function(siteId){
         let matchedSite = null;
 
-        $.each(sites, function (index, element) {
+        $.each(workSites, function (index, element) {
             if (element.id == siteId) {
                 matchedSite = element;
             }
@@ -85,12 +85,6 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
         viewControll.setSite(site.name);
 
         selectedSite = site;
-    };
-
-    var setSelectedSiteById = function (siteName, siteId) {
-        viewControll.setSite(siteName);
-
-        selectedSite = getWorkSite(workSites, siteId);
     };
 
     var setUpSiteMap = function (siteMap) {
