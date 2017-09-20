@@ -37,9 +37,14 @@
         });
     };
 
+    var setMapView = function(map, latLng, zoom){
+        map.setView(latLng, zoom);
+    };
+
     return {
         createSiteMap: createSiteMap,
         addMarkerToMap: addMarkerToMap,
         addMarkersToMap: addMarkersToMap,
+        setMapView: setMapView,
     };
 }(MapboxApiToken);
