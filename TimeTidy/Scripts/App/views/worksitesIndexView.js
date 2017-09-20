@@ -33,11 +33,18 @@ var WorksitesIndexView = function () {
 
     var setSite = function (siteName) {
         $('#nearestSite').text(`Selected: ${siteName}`);
+        $('html,body').animate({ scrollTop: 0 }, 'fast');
+    };
+
+    var loggingButtonClicked = function (button) {
+        $(button).hide();
+        $('#overlay').css('width', '100%');
     };
 
     return {
         populateSitesTable: populateSitesTable,
         setLogButton: setLogButton,
         setSite: setSite,
+        loggingButtonClicked: loggingButtonClicked
     };
 }();
