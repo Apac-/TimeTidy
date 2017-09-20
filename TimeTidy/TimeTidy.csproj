@@ -444,10 +444,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\App\mapboxApiToken.js" />
-    <Content Include="Scripts\App\mapboxService.js" />
+    <Content Include="Scripts\App\services\mapboxService.js" />
     <Content Include="Scripts\App\services\userLoggingService.js" />
     <Content Include="Scripts\App\views\worksitesIndexView.js" />
-    <Content Include="Scripts\App\worksitesIndexController.js" />
+    <Content Include="Scripts\App\controllers\worksitesIndexController.js" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -541,7 +541,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\leaflet-0.7.3.js" />
     <Content Include="Scripts\leaflet-0.7.3.min.js" />
-    <Content Include="Scripts\App\geoLocationService.js" />
+    <Content Include="Scripts\App\services\geoLocationService.js" />
     <Content Include="Scripts\LeafletGeoCoder\Control.Geocoder.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment-with-locales.js" />
