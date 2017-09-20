@@ -29,7 +29,7 @@ var UserLoggingService = function () {
             url: "/api/timeSheets/" + sheetId,
             method: "put",
             data: logoffDto
-        }).done(success).fail(fail);
+        }).done(success).fail(fail(sheetId));
     };
 
     return {
