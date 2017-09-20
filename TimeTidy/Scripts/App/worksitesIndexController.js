@@ -1,5 +1,5 @@
 ﻿
-var WorksitesIndexController = function (mapboxService, geoLocationService, viewControll) {
+var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -7,15 +7,22 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
     let selectedSite;
     let currentTimeSheetId
 
+    let userLatitude;
+    let userLongitude;
+
     var init = function () {
         selectedSite = null;
         currentTimeSheetId = null;
 
         let mapLoaded = setUpSiteMap(siteMap);
 
-        let tableLoaded = $.getJSON("/api/worksites", { get_param: 'value' });
+        let tableLoaded = $.getJSON('/api/worksites', { get_param: 'value' });
 
         geoLocationService.getCurrentPosition(success, fail);
+
+        $('#sites').on('click', '.js-select', onSiteClick);
+        $('#logbtns').on('click', '.js-logon', onLogonButtonClick);
+        $('#logbtns').on('click', '.js-logoff', onLogoffButtonClick);
 
         $.when(tableLoaded, mapLoaded).done(function () {
             workSites = tableLoaded.responseJSON;
@@ -26,7 +33,37 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
 
             let closestSite = findClosestSite(workSites, currentCenter);
             setSelectedSite(closestSite);
+
+            mapboxService.setMapView(siteMap, selectedSite.lat, selectedSite.lng);
         });
+    };
+
+    var onSiteClick = function (e) {
+        let button = $(e.target);
+
+        mapboxService.setMapView(siteMap, button.attr('data-lat'), button.attr('data-lng'));
+        setSelectedSite(getWorkSite(button.attr('data-siteId')));
+    };
+
+    var onLogonButtonClick = function (e) {
+        viewControll.loggingButtonClicked(e.target)
+
+        let site = getWorkSite($(e.target).attr('data-siteId'));
+
+        userLoggingService.userLogonToSite(site, userLatitude, userLongitude, logSuccess, logFailure);
+    };
+
+    var onLogoffButtonClick = function (e) {
+        viewControll.loggingButtonClicked(e.target)
+
+        userLoggingService.userLogoffOfSite(currentTimeSheetId,
+                                            userLatitude, userLongitude,
+                                            logSuccess, logFailure);
+    };
+
+    var onMarkerClick = function (e) {
+        setSelectedSite(getWorkSite(e.target.id));
+        setSelectedTimeSheet(e.target.id)
     };
 
     var findClosestSite = function (sites, currentPosition) {
@@ -50,11 +87,6 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
         });
 
         return closeSite;
-    };
-
-    var onMarkerClick = function (e) {
-        setSelectedSite(getWorkSite(e.target.id));
-        setSelectedTimeSheet(e.target.id)
     };
 
     var getWorkSite = function(siteId){
@@ -100,15 +132,25 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
         return deferObj;
     };
 
+    var logSuccess = function(){
+        setTimeout(function () { location.reload(true); }, 2000);
+    };
+
+    var logFailure = function(sheetId){
+        if (sheetId) {
+            alert(`Failed to log off from site. Reload and try again. SheetID: ${sheetId}`)
+        } else {
+            alert("Failed to log on to site. Reload and try again.");
+        };
+    };
+
     var success = function () {
         let output = $("#out");
 
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
+        userLatitude = position.coords.latitude;
+        userLongitude = position.coords.longitude;
 
-        output.attr("userLat", latitude);
-        output.attr("userLng", longitude);
-        siteMap.setView([latitude, longitude], 13);
+        mapboxService.setMapView(siteMap, userLatitude, userLongitude);
     };
 
     var fail = function (message) {
@@ -124,4 +166,4 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, view
     return {
         init: init
     };
-}(MapboxService, GeoLocationService, WorksitesIndexView);
+}(MapboxService, GeoLocationService, UserLoggingService, WorksitesIndexView);
