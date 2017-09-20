@@ -39,8 +39,8 @@
         });
     };
 
-    var setMapView = function(map, latLng){
-        map.setView(latLng, zoom);
+    var setMapView = function(map, lat, lng){
+        map.setView([lat, lng], zoom);
     };
 
     return {
