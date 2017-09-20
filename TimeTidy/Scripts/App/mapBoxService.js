@@ -1,4 +1,6 @@
 ﻿var MapboxService = function (mapboxApiToken) {
+    const zoom = 13;
+
     var createSiteMap = function (mapRef) {
         var siteMap = L.map(mapRef);
         L
@@ -37,7 +39,7 @@
         });
     };
 
-    var setMapView = function(map, latLng, zoom){
+    var setMapView = function(map, latLng){
         map.setView(latLng, zoom);
     };
 
