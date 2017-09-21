@@ -120,7 +120,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
     };
 
     var setUpSiteMap = function (siteMap) {
-        let deferObj = $.Deferred;
+        let deferObj = $.Deferred();
 
         siteMap = mapboxService.createSiteMap("mapid");
 
@@ -129,7 +129,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
             deferObj.resolve();
         });
 
-        return deferObj;
+        return deferObj.promise();
     };
 
     var logSuccess = function(){
