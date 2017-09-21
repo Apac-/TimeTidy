@@ -443,7 +443,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\App\controllers\workSitesListController.js" />
+    <Content Include="Scripts\App\controllers\worksitesListController.js" />
     <Content Include="Scripts\App\mapboxApiToken.js" />
     <Content Include="Scripts\App\services\mapboxService.js" />
     <Content Include="Scripts\App\services\timeSheetsService.js" />
