@@ -14,7 +14,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         selectedSite = null;
         currentTimeSheetId = null;
 
-        let mapLoaded = setUpSiteMap(siteMap);
+        let mapLoaded = setUpSiteMap();
 
         let tableLoaded = $.getJSON('/api/worksites', { get_param: 'value' });
 
@@ -32,9 +32,11 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
             mapboxService.addMarkersToMap(siteMap, workSites, onMarkerClick);
 
             let closestSite = findClosestSite(workSites, currentCenter);
-            setSelectedSite(closestSite);
+            if (closestSite) {
+                setSelectedSite(closestSite);
 
-            mapboxService.setMapView(siteMap, selectedSite.lat, selectedSite.lng);
+                mapboxService.setMapView(siteMap, selectedSite.lat, selectedSite.lng);
+            }
         });
     };
 
@@ -119,7 +121,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         selectedSite = site;
     };
 
-    var setUpSiteMap = function (siteMap) {
+    var setUpSiteMap = function () {
         let deferObj = $.Deferred();
 
         siteMap = mapboxService.createSiteMap("mapid");
@@ -144,9 +146,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         };
     };
 
-    var getPositionSuccess = function () {
-        let output = $("#out");
-
+    var getPositionSuccess = function (position) {
         userLatitude = position.coords.latitude;
         userLongitude = position.coords.longitude;
 
