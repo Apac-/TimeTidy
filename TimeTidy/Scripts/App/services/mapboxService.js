@@ -4,7 +4,7 @@
     var createSiteMap = function (mapRef) {
         var siteMap = L.map(mapRef);
         L
-            .tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?" + mapboxApiToken.token,
+            .tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=" + mapboxApiToken.token,
             {
                 attribution:
                     'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
