@@ -1,5 +1,5 @@
 ﻿
-var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, timeSheetsService, viewControll) {
+var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, timeSheetsService, worksitesService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -16,7 +16,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
 
         let mapLoaded = setUpSiteMap();
 
-        let tableLoaded = $.getJSON('/api/worksites', { get_param: 'value' });
+        let tableLoaded = worksitesService.getWorksites();
 
         geoLocationService.getCurrentPosition(getPositionSuccess, getPositionFail);
 
@@ -172,4 +172,4 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
     return {
         init: init
     };
-}(MapboxService, GeoLocationService, UserLoggingService, TimeSheetsService, WorksitesIndexView);
+}(MapboxService, GeoLocationService, UserLoggingService, TimeSheetsService, WorksitesService, WorksitesIndexView);
