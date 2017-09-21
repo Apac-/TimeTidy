@@ -8,8 +8,11 @@ namespace TimeTidy {
         {
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
                 "~/Scripts/App/mapboxApiToken.js",
-                "~/Scripts/App/services/*.js"
-                ));
+                "~/Scripts/App/services/*.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/workSites").Include(
+                "~/Scripts/App/views/worksitesIndexView.js",
+                "~/Scripts/App/controllers/worksitesIndexController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                 "~/Scripts/jquery-{version}.js",
