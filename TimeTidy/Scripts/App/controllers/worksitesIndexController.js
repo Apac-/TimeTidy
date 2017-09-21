@@ -1,5 +1,5 @@
 ﻿
-var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, viewControll) {
+var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, timeSheetsService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -104,15 +104,21 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
     };
 
     var setSelectedTimeSheet = function (siteId) {
-        $.getJSON("/api/timesheets/" + siteId, function (jsonData) {
-            currentTimeSheetId = jsonData.timeSheetId;
+        let success = function (data) {
+            currentTimeSheetId = data.timeSheetId;
 
-            if (jsonData.dateTime === null) {
+            if (data.dateTime === null) {
                 viewControll.setLogButton(false);
             } else {
                 viewControll.setLogButton(true);
             };
-        });
+        };
+
+        let fail = function () {
+
+        };
+
+        timeSheetsService.getTimeSheet(siteId, success, fail);
     };
 
     var setSelectedSite = function (site) {
@@ -166,4 +172,4 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
     return {
         init: init
     };
-}(MapboxService, GeoLocationService, UserLoggingService, WorksitesIndexView);
+}(MapboxService, GeoLocationService, UserLoggingService, TimeSheetsService, WorksitesIndexView);
