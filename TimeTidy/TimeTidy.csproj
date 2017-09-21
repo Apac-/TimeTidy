@@ -448,6 +448,7 @@
     <Content Include="Scripts\App\services\mapboxService.js" />
     <Content Include="Scripts\App\services\timeSheetsService.js" />
     <Content Include="Scripts\App\services\userLoggingService.js" />
+    <Content Include="Scripts\App\services\worksitesService.js" />
     <Content Include="Scripts\App\views\worksitesIndexView.js" />
     <Content Include="Scripts\App\controllers\worksitesIndexController.js" />
     <Content Include="Scripts\bootbox.js" />
