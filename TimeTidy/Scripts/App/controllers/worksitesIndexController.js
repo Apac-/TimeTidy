@@ -115,7 +115,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
         };
 
         let fail = function () {
-
+            viewControll.reportError('Timesheet was not found for given: Try reloading the page')
         };
 
         timeSheetsService.getTimeSheet(siteId, success, fail);

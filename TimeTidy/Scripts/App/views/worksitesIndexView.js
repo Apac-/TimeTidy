@@ -17,6 +17,10 @@ var WorksitesIndexView = function () {
         });
     };
 
+    var reportError = function (message) {
+        alert(message);
+    };
+
     var setLogButton = function (isLoggedOn) {
         if (isLoggedOn) {
             $('#logbtn').prop({
@@ -43,6 +47,7 @@ var WorksitesIndexView = function () {
 
     return {
         populateSitesTable: populateSitesTable,
+        reportError: reportError,
         setLogButton: setLogButton,
         setSite: setSite,
         loggingButtonClicked: loggingButtonClicked
