@@ -1,6 +1,6 @@
 ﻿"use strict";
 
-var WorksitesListController = function (mapboxService, worksitesService, geoLocationService, worksitesListView) {
+var WorksitesListController = function (mapboxService, worksitesService, geoLocationService, viewControll) {
     let siteMap;
 
     let mapLayerGroup;
@@ -13,6 +13,33 @@ var WorksitesListController = function (mapboxService, worksitesService, geoLoca
         mapLayerGroup = L.layerGroup().addTo(siteMap);
 
         worksitesService.getWorksites(sucess, fail);
+
+        $("#sites").on('click', '.js-delete', onDeleteClick);
+    };
+
+    var onDeleteClick = function () {
+        let button = $(this);
+        let siteName = button.attr('data-worksite-name');
+        let siteId = button.attr('data-worksite-id')
+
+        let deleteSuccess = function ($button, siteName) {
+            table.row($($button).parents('tr')).remove().draw();
+            mapLayerGroup.eachLayer(function (layer) {
+                if (layer.id == siteName) {
+                    mapLayerGroup.removeLayer(layer);
+                };
+            });
+        };
+
+        bootbox.confirm({
+            title: "Delete: " + siteName,
+            message: "Are you sure you want to delete this work site?",
+            callback: function (result) {
+                if (result) {
+                    worksitesService.deleteSite(siteId, deleteSuccess);
+                }
+            }
+        });
     };
 
     var success = function (data) {
@@ -24,9 +51,13 @@ var WorksitesListController = function (mapboxService, worksitesService, geoLoca
             });
         };
 
-        table = worksitesListView.populateWorksitesTable(data);
+        table = viewControll.populateWorksitesTable(data);
 
         addSiteMarkersToMap(data);
+    };
+
+    var fail = function () {
+        viewControll.reportError("Failed to retrive worksites from server. Try reloading.")
     };
 
     var addSiteMarkersToMap = function (data) {
@@ -36,10 +67,6 @@ var WorksitesListController = function (mapboxService, worksitesService, geoLoca
                                              element.name, element.name,
                                              `<b>${element.name}</b><br>${element.streetAddress}`)
         });
-    };
-
-    var fail = function () {
-        worksitesListView.reportError("Failed to retrive worksites from server. Try reloading.")
     };
 
     return {
