@@ -35,7 +35,7 @@
             let userLocation = null;
             let siteLocation = null;
             let table = $('#timeSheets').DataTable({
-                data: TimeSheetsService.getTimeSheet($('#userId').val()),
+                data: UserTimeSheetsService.getUserTimeSheets($('#userId').val()),
                 columns: [
                     {
                         data: "siteName"
@@ -85,7 +85,7 @@
                         message: "Are you sure you want to delete this sheet entry?",
                         callback: function (result) {
                             if (result) {
-                                TimeSheetsService.deleteTimeSheet(
+                                UserTimeSheetsService.deleteUserTimeSheet(
                                     button.attr("data-sheet-id"),
                                     function () {
                                         table.row(button.parents("tr")).remove().draw();
