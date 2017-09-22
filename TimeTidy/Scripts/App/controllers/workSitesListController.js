@@ -23,7 +23,7 @@ var WorksitesListController = function (mapboxService, worksitesService, geoLoca
         let siteId = button.attr('data-worksite-id')
 
         let deleteSuccess = function ($button, siteName) {
-            table.row($($button).parents('tr')).remove().draw();
+            viewControll.removeTableRowWithButton(table, $button);
             mapLayerGroup.eachLayer(function (layer) {
                 if (layer.id == siteName) {
                     mapLayerGroup.removeLayer(layer);

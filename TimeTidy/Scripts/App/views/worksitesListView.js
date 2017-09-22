@@ -7,7 +7,7 @@ var WorksitesListView = function () {
             columns: [
                 {
                     data: "name",
-                    render: function(data, type, worksite) {
+                    render: function (data, type, worksite) {
                         return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
                     }
                 },
@@ -16,8 +16,8 @@ var WorksitesListView = function () {
                 },
                 {
                     data: "id",
-                    render: function(data, type, worksite) {
-                        return "<button class='btn-link js-delete' data-worksite-id=" + data 
+                    render: function (data, type, worksite) {
+                        return "<button class='btn-link js-delete' data-worksite-id=" + data
                             + " data-worksite-name='" + worksite.name + "'>Delete</button>";
                     }
                 }
@@ -31,8 +31,13 @@ var WorksitesListView = function () {
         alert(message);
     };
 
+    var removeTableRowWithButton = function (table, $button) {
+        table.row($($button).parents('tr')).remove().draw();
+    };
+
     return {
         populateWorksitesTable: populateWorksitesTable,
         reportError: reportError,
+        removeTableRowWithButton: removeTableRowWithButton,
     };
 }();
