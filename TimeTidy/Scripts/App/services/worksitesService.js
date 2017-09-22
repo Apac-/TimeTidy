@@ -3,10 +3,10 @@
 var WorksitesService = function () {
     var getWorksites = function (done, fail) {
         return $.getJSON(
-                    "/api/worksites",
-                    { get_param: 'value' })
-                    .done(done(data))
-                    .fail(fail);
+            "/api/worksites",
+            { get_param: 'value' })
+            .done(done(data))
+            .fail(fail);
     };
 
     var deleteSite = function(siteId, success){

@@ -4,9 +4,9 @@ var UsersService = function () {
 
     var getUsers = function (done, fail) {
         return $.getJSON(
-                    "/api/users")
-                    .done(done(data))
-                    .fail(fail);
+            "/api/users")
+            .done(done(data))
+            .fail(fail);
     };
 
     var deleteUser = function (userId, success, fail) {
