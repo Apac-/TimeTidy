@@ -10,7 +10,7 @@ var TimeSheetsService = function () {
 
     var deleteTimeSheet = function (sheetId, done, fail) {
         return $.ajax({
-            url: "/api/usertimesheets/" + button.attr("data-sheet-id"),
+            url: "/api/timesheets/" + sheetId,
             method: "DELETE",
             success: done,
             error: fail
