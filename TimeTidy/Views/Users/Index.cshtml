@@ -18,15 +18,12 @@
 
 @section scripts
 {
+    @Scripts.Render("~/bundles/app");
     <script>
 
         $(document).ready(function() {
-
             var table = $("#usersTable").DataTable({
-                ajax: {
-                    url: "/api/users",
-                    dataSrc: ""
-                },
+                data: UsersService.getUsers(),
                 columns: [
                     {
                         data: "userName",
@@ -53,13 +50,13 @@
 
                 bootbox.confirm("Are you sure you want to delete user: " + button.attr("data-user-email"), function(result) {
                     if (result) {
-                        $.ajax({
-                            url: "/api/users/" + button.attr("data-user-id"),
-                            method: "DELETE",
-                            success: function() {
+                        UsersService.deleteUser(button.attr("data-user-id"),
+                            function () {
                                 table.row(button.parents("tr")).remove().draw();
-                            }
-                        });
+                            },
+                            function () {
+                                alert("User failed to be deleted! Attempt again after reloading page.")
+                            });
                     }
                 });
             });
