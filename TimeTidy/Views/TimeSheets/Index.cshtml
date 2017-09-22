@@ -29,14 +29,12 @@
 </table>
 
 @section scripts{
+    @Scripts.Render("~/bundles/app");
     <script>
         $(document).ready(function() {
 
             var table = $("#workers").DataTable({
-                ajax: {
-                    url: "/api/users",
-                    dataSrc: ""
-                },
+                data: UsersService.getUsers(),
                 columns: [
                     {
                         data: "userName",
@@ -53,10 +51,7 @@
             });
 
             var table = $("#worksites").DataTable({
-                ajax: {
-                    url: "/api/worksites",
-                    dataSrc: ""
-                },
+                data: WorksitesService.getWorksites(),
                 columns: [
                     {
                         render: function (data, type, worksite) {
