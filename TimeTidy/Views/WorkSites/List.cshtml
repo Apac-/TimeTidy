@@ -26,83 +26,11 @@
 <div id="testjax"></div>
 
 @section scripts{
-    @Scripts.Render("~/Scripts/leaflet-basics.js");
+    @Scripts.Render("~/bundles/app");
+    @Scripts.Render("~/bundles/workSites");
     <script>
         $(document).ready(function () {
-            var siteMap = setUpMap();
-
-            var mapLayerGroup = L.layerGroup().addTo(siteMap);
-
-            var table = null;
-
-            $.getJSON("/api/worksites", { get_param: 'value'}, function(jsonData) {
-                if (jsonData.length != 0) {
-                    siteMap.setView([jsonData[0].lat, jsonData[0].lng], 13);
-                } else {
-                    geoFindMe(siteMap);
-                }
-
-
-                table = $('#sites').DataTable({
-                    data: jsonData,
-                    columns: [
-                        {
-                            data: "name",
-                            render: function(data, type, worksite) {
-                                return "<a href='/worksites/edit/" + worksite.id + "'>" + worksite.name + "</a>";
-                            }
-                        },
-                        {
-                            data: "streetAddress"
-                        },
-                        {
-                            data: "id",
-                            render: function(data, type, worksite) {
-                                return "<button class='btn-link js-delete' data-worksite-id=" + data 
-                                    + " data-worksite-name='" + worksite.name + "'>Delete</button>";
-                            }
-                        }
-                    ]
-                });
-
-                $.each(jsonData,
-                    function (index, element) {
-                        var marker = L.marker([element.lat, element.lng],
-                            { title: element.name })
-                            .bindPopup("<b>" + element.name + "</b><br>" + element.streetAddress);
-                        marker.id = element.name;
-                        mapLayerGroup.addLayer(marker);
-                    });
-            });
-
-            $("#sites").on('click', '.js-delete', function () {
-                var button = $(this);
-
-                var siteName = button.attr("data-worksite-name");
-                bootbox.confirm({
-                    title: "Delete: " + siteName,
-                    message: "Are you sure you want to delete this work site?",
-                    callback: function (result) {
-                        if (result) {
-                            $.ajax({
-                                url: "/api/worksites/" + button.attr("data-worksite-id"),
-                                method: "DELETE",
-                                success: function() {
-                                    table.row(button.parents("tr")).remove().draw();
-                                    mapLayerGroup.eachLayer(function (layer) {
-                                        if (layer.id == siteName) {
-                                            mapLayerGroup.removeLayer(layer);
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-
-
-
+            WorksitesListController.init();
         });
     </script>
 }
