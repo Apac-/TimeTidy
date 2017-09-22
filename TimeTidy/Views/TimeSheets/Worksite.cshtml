@@ -26,7 +26,7 @@
 @Html.Hidden("siteId", @Model.Id)
 
 @section scripts{
-    @Scripts.Render("~/Scripts/leaflet-basics.js");
+    @Scripts.Render("~/bundles/app");
     @Scripts.Render("~/Scripts/Moment.js");
     <script src="//cdn.datatables.net/plug-ins/1.10.13/dataRender/datetime.js"></script>
 
@@ -36,10 +36,7 @@
             var userLocation = null;
             var siteLocation = null;
             var table = $("#timeSheets").DataTable({
-                ajax: {
-                    url: "/api/workSiteTimeSheets/" + $("#siteId").val(),
-                    dataSrc: ""
-                },
+                data: WorkSiteTimeSheetService.getWorkSiteTimeSheets($("#siteId").val()),
                 columns: [
                     {
                         data: "userLogin"
@@ -92,18 +89,15 @@
                         message: "Are you sure you want to delete this sheet entry?",
                         callback: function(result) {
                             if (result) {
-                                $.ajax({
-                                    url: "/api/usertimesheets/" + button.attr("data-sheet-id"),
-                                    method: "DELETE",
-                                    success: function() {
+                                UserTimeSheetsService.deleteUserTimeSheet(
+                                    button.attr("data-sheet-id"),
+                                    function () {
                                         table.row(button.parents("tr")).remove().draw();
-                                    }
-                                });
+                                    });
                             }
                         }
                     });
                 });
-
         });
     </script>
 }
