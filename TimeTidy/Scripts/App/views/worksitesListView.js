@@ -33,6 +33,6 @@ var WorksitesListView = function () {
 
     return {
         populateWorksitesTable: populateWorksitesTable,
-        error: error,
+        reportError: reportError,
     };
 }();
