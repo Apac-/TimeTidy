@@ -8,17 +8,40 @@ var TimeSheetsService = function () {
             .fail(fail);
     };
 
-    var deleteTimeSheet = function (sheetId, done, fail) {
-        return $.ajax({
-            url: "/api/timesheets/" + sheetId,
-            method: "DELETE",
-            success: done,
-            error: fail
-        });
+    var userLogonToSite = function (site, userLat, userLng, success, fail) {
+        let logonDto = {
+            workSiteId: site.id,
+            siteName: site.name,
+            siteLat: site.lat,
+            siteLng: site.lng,
+            siteAddress: site.streetAddress,
+            userLat: userLat,
+            userLng: userLng
+        };
+
+        $.ajax({
+            url: "/api/timeSheets",
+            method: "post",
+            data: logonDto
+        }).done(success).fail(fail);
+    };
+
+    var userLogoffOfSite = function (sheetId, userLat, userLng, success, fail) {
+        let logoffDto = {
+            userLat: userLat,
+            userLng: userLng
+        };
+
+        $.ajax({
+            url: "/api/timeSheets/" + sheetId,
+            method: "put",
+            data: logoffDto
+        }).done(success).fail(fail(sheetId));
     };
 
     return {
         getTimeSheet: getTimeSheet,
-        deleteTimeSheet: deleteTimeSheet,
+        userLogonToSite: userLogonToSite,
+        userLogoffOfSite: userLogoffOfSite,
     };
 }();

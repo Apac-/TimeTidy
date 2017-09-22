@@ -447,7 +447,6 @@
     <Content Include="Scripts\App\mapboxApiToken.js" />
     <Content Include="Scripts\App\services\mapboxService.js" />
     <Content Include="Scripts\App\services\timeSheetsService.js" />
-    <Content Include="Scripts\App\services\userLoggingService.js" />
     <Content Include="Scripts\App\services\usersService.js" />
     <Content Include="Scripts\App\services\worksitesService.js" />
     <Content Include="Scripts\App\views\worksitesIndexView.js" />
