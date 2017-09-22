@@ -1,5 +1,5 @@
 ﻿
-var WorksitesIndexController = function (mapboxService, geoLocationService, userLoggingService, timeSheetsService, worksitesService, viewControll) {
+var WorksitesIndexController = function (mapboxService, geoLocationService, timeSheetsService, worksitesService, viewControll) {
     let siteMap;
     let currentCenter;
 
@@ -52,13 +52,13 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
 
         let site = getWorkSite($(e.target).attr('data-siteId'));
 
-        userLoggingService.userLogonToSite(site, userLatitude, userLongitude, logSuccess, logFailure);
+        timeSheetsService.userLogonToSite(site, userLatitude, userLongitude, logSuccess, logFailure);
     };
 
     var onLogoffButtonClick = function (e) {
         viewControll.loggingButtonClicked(e.target)
 
-        userLoggingService.userLogoffOfSite(currentTimeSheetId,
+        timeSheetsService.userLogoffOfSite(currentTimeSheetId,
                                             userLatitude, userLongitude,
                                             logSuccess, logFailure);
     };
@@ -172,4 +172,4 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, user
     return {
         init: init
     };
-}(MapboxService, GeoLocationService, UserLoggingService, TimeSheetsService, WorksitesService, WorksitesIndexView);
+}(MapboxService, GeoLocationService, TimeSheetsService, WorksitesService, WorksitesIndexView);
