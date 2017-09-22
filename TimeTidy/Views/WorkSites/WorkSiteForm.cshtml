@@ -44,31 +44,46 @@ else {
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/leaflet-basics.js")
+    @Scripts.Render("~/bundles/app");
     <script>
-        function onMapClick(e) {
-            var popup = L.popup();
+        let onMapClick = function(e) {
+            let popup = L.popup();
             popup
                 .setLatLng(e.latlng)
                 .setContent("Clicked on map at: " + e.latlng.toString())
                 .openOn(e.target);
         }
 
+        let success = function (postion) {
+            userLatitude = position.coords.latitude;
+            userLongitude = position.coords.longitude;
+
+            MapboxService.setMapView(siteMap, userLatitude, userLongitude);
+        };
+
+        let fail = function () {
+            alert("fail in geo location service. Try reloading.")
+        };
+
         $(document).ready(function () {
-            var siteMap = setUpMap();
+            let userLatitude;
+            let userLongitude;
+
+            let siteMap = MapboxService.createSiteMap('mapid');
             siteMap.on('click', onMapClick);
 
+
             if ($("#Id").val() == 0) {
-                geoFindMe(siteMap);
+                GeoLocationService.getCurrentPosition(success, fail);
             } else {
-                var lat = $('#latitude').val();
-                var lng = $('#longitude').val();
-                siteMap.setView([lat, lng], 13);
+                let lat = $('#latitude').val();
+                let lng = $('#longitude').val();
+                MapboxService.setMapView(siteMap, lat, lng);
                 L.marker([lat, lng]).addTo(siteMap);
             }
 
-            var googleGeocoder = L.Control.Geocoder.google("AIzaSyAruk8JN7nsmslgDvDMqC6BcqkBKUZ7KEA");
-            var geocoder = L.Control.geocoder({
+            let googleGeocoder = L.Control.Geocoder.google("AIzaSyAruk8JN7nsmslgDvDMqC6BcqkBKUZ7KEA");
+            let geocoder = L.Control.geocoder({
                 collapsed: false,
                 geocoder: googleGeocoder
             }).on('markgeocode', function (e) {
