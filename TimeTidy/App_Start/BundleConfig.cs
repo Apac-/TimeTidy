@@ -12,7 +12,9 @@ namespace TimeTidy {
 
             bundles.Add(new ScriptBundle("~/bundles/workSites").Include(
                 "~/Scripts/App/views/worksitesIndexView.js",
-                "~/Scripts/App/controllers/worksitesIndexController.js"));
+                "~/Scripts/App/views/worksitesListView.js",
+                "~/Scripts/App/controllers/worksitesIndexController.js",
+                "~/Scripts/App/controllers/worksitesListController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                 "~/Scripts/jquery-{version}.js",
