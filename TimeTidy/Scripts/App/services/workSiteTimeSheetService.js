@@ -2,7 +2,13 @@
 
 var WorkSiteTimeSheetService = function () {
 
-    return {
+    var getWorkSiteTimeSheets = function (siteId, done, fail) {
+        return $.getJSON("/api/workSiteTimeSheets/" + siteId)
+            .done(done)
+            .fail(fail);
+    };
 
+    return {
+        getWorkSiteTimeSheets: getWorkSiteTimeSheets, 
     };
 }();
