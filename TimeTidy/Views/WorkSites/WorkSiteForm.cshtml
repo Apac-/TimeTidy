@@ -54,16 +54,6 @@ else {
                 .openOn(e.target);
         }
 
-        let success = function (postion) {
-            userLatitude = position.coords.latitude;
-            userLongitude = position.coords.longitude;
-
-            MapboxService.setMapView(siteMap, userLatitude, userLongitude);
-        };
-
-        let fail = function () {
-            alert("fail in geo location service. Try reloading.")
-        };
 
         $(document).ready(function () {
             let userLatitude;
@@ -71,6 +61,17 @@ else {
 
             let siteMap = MapboxService.createSiteMap('mapid');
             siteMap.on('click', onMapClick);
+
+            let success = function (position) {
+                userLatitude = position.coords.latitude;
+                userLongitude = position.coords.longitude;
+
+                MapboxService.setMapView(siteMap, userLatitude, userLongitude);
+            };
+
+            let fail = function () {
+                alert("fail in geo location service. Try reloading.")
+            };
 
 
             if ($("#Id").val() == 0) {
