@@ -3,7 +3,7 @@
 var TimeSheetsService = function () {
     var getTimeSheet = function (sheetId, done, fail) {
         return $.getJSON(
-            "/api/timesheets/" + siteId)
+            "/api/timesheets/" + sheetId)
             .done(done)
             .fail(fail);
     };
@@ -36,7 +36,8 @@ var TimeSheetsService = function () {
             url: "/api/timeSheets/" + sheetId,
             method: "put",
             data: logoffDto
-        }).done(success).fail(fail(sheetId));
+        }).done(success).fail(fail);
+        //}).done(success).fail(fail(sheetId));
     };
 
     return {

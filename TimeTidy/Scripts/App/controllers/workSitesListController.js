@@ -12,7 +12,7 @@ var WorksitesListController = function (mapboxService, worksitesService, geoLoca
 
         mapLayerGroup = L.layerGroup().addTo(siteMap);
 
-        worksitesService.getWorksites(sucess, fail);
+        worksitesService.getWorksites(success, fail);
 
         $("#sites").on('click', '.js-delete', onDeleteClick);
     };

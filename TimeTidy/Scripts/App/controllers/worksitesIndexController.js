@@ -33,7 +33,7 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, time
 
             let closestSite = findClosestSite(workSites, currentCenter);
             if (closestSite) {
-                setSelectedSite(closestSite);
+                setSelectedSite(closestSite.id);
 
                 mapboxService.setMapView(siteMap, selectedSite.lat, selectedSite.lng);
             }
@@ -44,15 +44,17 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, time
         let button = $(e.target);
 
         mapboxService.setMapView(siteMap, button.attr('data-lat'), button.attr('data-lng'));
-        setSelectedSite(getWorkSite(button.attr('data-siteId')));
+        setSelectedSite(button.attr('data-siteId'));
+    };
+
+    var onMarkerClick = function (e) {
+        setSelectedSite(e.target.id);
     };
 
     var onLogonButtonClick = function (e) {
         viewControll.loggingButtonClicked(e.target)
 
-        let site = getWorkSite($(e.target).attr('data-siteId'));
-
-        timeSheetsService.userLogonToSite(site, userLatitude, userLongitude, logSuccess, logFailure);
+        timeSheetsService.userLogonToSite(selectedSite, userLatitude, userLongitude, logSuccess, logFailure);
     };
 
     var onLogoffButtonClick = function (e) {
@@ -61,11 +63,6 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, time
         timeSheetsService.userLogoffOfSite(currentTimeSheetId,
                                             userLatitude, userLongitude,
                                             logSuccess, logFailure);
-    };
-
-    var onMarkerClick = function (e) {
-        setSelectedSite(getWorkSite(e.target.id));
-        setSelectedTimeSheet(e.target.id)
     };
 
     var findClosestSite = function (sites, currentPosition) {
@@ -115,16 +112,23 @@ var WorksitesIndexController = function (mapboxService, geoLocationService, time
         };
 
         let fail = function () {
-            viewControll.reportError('Timesheet was not found for given: Try reloading the page')
+            viewControll.reportError('Timesheet was not found for given site: Try reloading the page')
         };
 
         timeSheetsService.getTimeSheet(siteId, success, fail);
     };
 
-    var setSelectedSite = function (site) {
-        viewControll.setSite(site.name);
+    var setSelectedSite = function (siteId) {
+        selectedSite = getWorkSite(siteId)
 
-        selectedSite = site;
+        if (selectedSite === null) {
+            viewControll.reportError(`Unable to find site by id: ${siteId}.`)
+            return;
+        }
+
+        setSelectedTimeSheet(siteId)
+
+        viewControll.setSite(selectedSite.name);
     };
 
     var setUpSiteMap = function () {

@@ -22,7 +22,7 @@ var WorksitesIndexView = function () {
     };
 
     var setLogButton = function (isLoggedOn) {
-        if (isLoggedOn) {
+        if (!isLoggedOn) {
             $('#logbtn').prop({
                 'value': 'Logon',
                 'class': 'btn btn-success js-logon'

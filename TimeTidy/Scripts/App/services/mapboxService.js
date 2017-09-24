@@ -35,7 +35,7 @@
         let mapLayerGroup = L.layerGroup().addTo(map);
         $.each(data, function (index, element) {
             let message = `<b>${element.name}</b><br>${element.streetAddress}`;
-            addMarkerToMap(mapLayergroup, element.lat, element.lng, element.name, element.id, message, clickEvent);
+            addMarkerToMap(mapLayerGroup, element.lat, element.lng, element.name, element.id, message, clickEvent);
         });
     };
 
