@@ -33,9 +33,9 @@
     <script>
         $(document).ready(function() {
 
-            var userLocation = null;
-            var siteLocation = null;
-            var table = $("#timeSheets").DataTable({
+            let userLocation = null;
+            let siteLocation = null;
+            let table = $("#timeSheets").DataTable({
                 data: WorkSiteTimeSheetService.getWorkSiteTimeSheets($("#siteId").val()),
                 columns: [
                     {
@@ -71,9 +71,7 @@
                     {
                         data: "id",
                         render: function(data, type, sheet) {
-                            return "<button class='btn-link js-delete' data-sheet-id=" +
-                                data +
-                                ">Delete</button>";
+                            return "<button class='btn-link js-delete' data-sheet-id=" + data + ">Delete</button>";
                         }
                     }
                 ]
@@ -82,7 +80,7 @@
             $("#timeSheets").on('click',
                 '.js-delete',
                 function() {
-                    var button = $(this);
+                    let button = $(this);
 
                     bootbox.confirm({
                         title: "Delete entry?",
