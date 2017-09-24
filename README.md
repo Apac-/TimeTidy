@@ -8,9 +8,9 @@ Minimalist, browser based, remote client time-sheet logger with geo location ser
 ```
 Update-Database
 ```
-2. Create account at MapBox and put your access token in Scripts>leaflet-basics.js (Replace "ENTER_MAPBOX_KEY_HERE")
+2. Create account at MapBox and put your access token in Scripts/App/services/mapboxService.js (Replace "mapboxApiToken.token")
 ```
-https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=ENTER_MAPBOX_KEY_HERE
+"https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=" + YOUR_API_TOKEN
 ```
 
 ## Deployment
