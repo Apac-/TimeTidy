@@ -35,46 +35,50 @@
 
             let userLocation = null;
             let siteLocation = null;
-            let table = $("#timeSheets").DataTable({
-                data: WorkSiteTimeSheetService.getWorkSiteTimeSheets($("#siteId").val()),
-                columns: [
-                    {
-                        data: "userLogin"
-                    },
-                    {
-                        data: "userName"
-                    },
-                    {
-                        render: function(data, type, timeSheet) {
-                            userLocation = L.latLng(timeSheet.logOnLocation.lat, timeSheet.logOnLocation.lng);
-                            siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
-                            return moment.utc(timeSheet.logOnTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
-                                " | " +
-                                Math.floor(userLocation.distanceTo(siteLocation)) +
-                                " meters from site.";
-                        }
-                    },
-                    {
-                        render: function(data, type, timeSheet) {
-                            if (timeSheet.logOffLocation != null) {
-                                userLocation = L.latLng(timeSheet.logOffLocation.lat, timeSheet.logOffLocation.lng);
+            let table = null 
+
+            WorkSiteTimeSheetService.getWorkSiteTimeSheets($("#siteId").val(), function(data){
+                table = $("#timeSheets").DataTable({
+                    data: data,
+                    columns: [
+                        {
+                            data: "userLogin"
+                        },
+                        {
+                            data: "userName"
+                        },
+                        {
+                            render: function(data, type, timeSheet) {
+                                userLocation = L.latLng(timeSheet.logOnLocation.lat, timeSheet.logOnLocation.lng);
                                 siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
-                                return moment.utc(timeSheet.logOffTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
+                                return moment.utc(timeSheet.logOnTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
                                     " | " +
                                     Math.floor(userLocation.distanceTo(siteLocation)) +
                                     " meters from site.";
-                            } else {
-                                return "Has not logged off site.";
+                            }
+                        },
+                        {
+                            render: function(data, type, timeSheet) {
+                                if (timeSheet.logOffLocation != null) {
+                                    userLocation = L.latLng(timeSheet.logOffLocation.lat, timeSheet.logOffLocation.lng);
+                                    siteLocation = L.latLng(timeSheet.siteLocation.lat, timeSheet.siteLocation.lng);
+                                    return moment.utc(timeSheet.logOffTime).utcOffset(+10).format('DD/MM/YY, h:mm a') +
+                                        " | " +
+                                        Math.floor(userLocation.distanceTo(siteLocation)) +
+                                        " meters from site.";
+                                } else {
+                                    return "Has not logged off site.";
+                                }
+                            }
+                        },
+                        {
+                            data: "id",
+                            render: function(data, type, sheet) {
+                                return "<button class='btn-link js-delete' data-sheet-id=" + data + ">Delete</button>";
                             }
                         }
-                    },
-                    {
-                        data: "id",
-                        render: function(data, type, sheet) {
-                            return "<button class='btn-link js-delete' data-sheet-id=" + data + ">Delete</button>";
-                        }
-                    }
-                ]
+                    ]
+                });
             });
 
             $("#timeSheets").on('click',

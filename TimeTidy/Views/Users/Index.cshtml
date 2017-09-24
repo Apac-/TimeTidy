@@ -22,27 +22,31 @@
     <script>
 
         $(document).ready(function() {
-            var table = $("#usersTable").DataTable({
-                data: UsersService.getUsers(),
-                columns: [
-                    {
-                        data: "userName",
-                        render: function(data, type, user) {
-                            return "<a href='/users/edit/" + user.userId + "'>" + data + "</a>";
+            let table = null;
+
+            UsersService.getUsers(function (data) {
+                table = $("#usersTable").DataTable({
+                    data: data,
+                    columns: [
+                        {
+                            data: "userName",
+                            render: function(data, type, user) {
+                                return "<a href='/users/edit/" + user.userId + "'>" + data + "</a>";
+                            }
+                        },
+                        {
+                            render: function(data, type, user) {
+                                return (user.lastName !== "") ? user.lastName + ", " + user.firstName : "";
+                            }
+                        },
+                        {
+                            data: "userId",
+                            render: function(data, type, user) {
+                                return "<button class='btn-link js-delete' data-user-email=" + user.userName + " data-user-id=" + data + ">Delete</button>";
+                            }
                         }
-                    },
-                    {
-                        render: function(data, type, user) {
-                            return (user.lastName !== "") ? user.lastName + ", " + user.firstName : "";
-                        }
-                    },
-                    {
-                        data: "userId",
-                        render: function(data, type, user) {
-                            return "<button class='btn-link js-delete' data-user-email=" + user.userName + " data-user-id=" + data + ">Delete</button>";
-                        }
-                    }
-                ]
+                    ]
+                });
             });
 
             $("#usersTable").on("click", ".js-delete", function() {
