@@ -5,7 +5,7 @@ var WorksitesService = function () {
         return $.getJSON(
             "/api/worksites",
             { get_param: 'value' })
-            .done(done(data))
+            .done(done)
             .fail(fail);
     };
 

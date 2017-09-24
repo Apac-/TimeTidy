@@ -4,7 +4,7 @@ var UserTimeSheetsService = function () {
     var getUserTimeSheets = function (userId, done, fail) {
         return $.getJSON(
             "/api/userTimeSheets/" + userId)
-            .done(done(data))
+            .done(done)
             .fail(fail);
     };
 

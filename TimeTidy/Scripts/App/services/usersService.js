@@ -5,7 +5,7 @@ var UsersService = function () {
     var getUsers = function (done, fail) {
         return $.getJSON(
             "/api/users")
-            .done(done(data))
+            .done(done)
             .fail(fail);
     };
 

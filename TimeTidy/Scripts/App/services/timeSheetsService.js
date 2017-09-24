@@ -4,7 +4,7 @@ var TimeSheetsService = function () {
     var getTimeSheet = function (sheetId, done, fail) {
         return $.getJSON(
             "/api/timesheets/" + siteId)
-            .done(done(data))
+            .done(done)
             .fail(fail);
     };
 
